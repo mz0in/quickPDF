@@ -1,0 +1,165 @@
+/* Class names prefixes */
+$prefix: 'gjs-' !default;
+/* Main color */
+$mainColor: #936a9b;
+
+:root {
+  --border-color: rgba(0, 0, 0, 0.15);
+  --background-color: #3c4a49;
+
+  --background-box-title: #263332;
+}
+
+.tm-input {
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 11px 15px;
+  min-width: 300px;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(120, 130, 152, 0.25);
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  margin: 20px 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  &:active,
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 0 2px $mainColor;
+  }
+
+  &.sm {
+    width: 100%;
+    min-width: 0;
+    font-size: 12px;
+    margin: 10px 0;
+    padding: 8px 10px;
+  }
+}
+
+.pages-wrp,
+.pages {
+  display: flex;
+  flex-direction: column;
+}
+
+.pages-wrp {
+  padding: 5px;
+}
+
+.pages-title {
+  padding: 5px;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.add-page {
+  background: $mainColor;
+  color: white;
+  font-size: 12px;
+  padding: 8px 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.page {
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 0 0 rgb(0, 0, 0, 0.15);
+  transition: all 0.2s ease 0s;
+  transition-property: box-shadow, color;
+  cursor: pointer;
+
+  &:hover {
+    color: $mainColor;
+    box-shadow: 0 3px 4px 0 rgb(0, 0, 0, 0.15);
+  }
+
+  &.selected {
+    color: $mainColor;
+    border: 1px solid $mainColor;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.page-edit,
+.page-close {
+  opacity: 0.5;
+  float: right;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 17px;
+  width: 17px;
+  text-align: center;
+  border-radius: 3px;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.page-edit {
+  margin-right: 5px;
+}
+
+.group {
+  margin-bottom: 15px;
+
+  input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+
+    &:checked + label:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 9px;
+      width: 6px;
+      height: 14px;
+      border: solid $mainColor;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  label {
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      content: '';
+      background-color: transparent;
+      border: 2px solid $mainColor;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

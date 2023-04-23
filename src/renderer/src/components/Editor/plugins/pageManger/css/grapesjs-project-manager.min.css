@@ -1,0 +1,140 @@
+:root {
+  --border-color: rgba(0, 0, 0, 0.15);
+  --background-color: #3c4a49;
+  --background-box-title: #263332;
+}
+.tm-input {
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 11px 15px;
+  min-width: 300px;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(120, 130, 152, 0.25);
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  margin: 20px 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.tm-input:active,
+.tm-input:focus,
+.tm-input:hover {
+  box-shadow: 0 0 0 2px #936a9b;
+}
+.tm-input.sm {
+  width: 100%;
+  min-width: 0;
+  font-size: 12px;
+  margin: 10px 0;
+  padding: 8px 10px;
+}
+.pages-wrp,
+.pages {
+  display: flex;
+  flex-direction: column;
+}
+.pages-wrp {
+  padding: 5px;
+}
+.pages-title {
+  padding: 5px;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.add-page {
+  background: #936a9b;
+  color: #fff;
+  font-size: 12px;
+  padding: 8px 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+.page {
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease 0s;
+  transition-property: box-shadow, color;
+  cursor: pointer;
+}
+.page:hover {
+  color: #936a9b;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.15);
+}
+.page.selected {
+  color: #936a9b;
+  border: 1px solid #936a9b;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.page-edit,
+.page-close {
+  opacity: 0.5;
+  float: right;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 17px;
+  width: 17px;
+  text-align: center;
+  border-radius: 3px;
+}
+.page-edit:hover,
+.page-close:hover {
+  opacity: 1;
+}
+.page-edit {
+  margin-right: 5px;
+}
+.group {
+  margin-bottom: 15px;
+}
+.group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+.group input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #936a9b;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.group label {
+  position: relative;
+  cursor: pointer;
+}
+.group label:before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #936a9b;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} /*# sourceMappingURL=grapesjs-project-manager.min.css.map */
