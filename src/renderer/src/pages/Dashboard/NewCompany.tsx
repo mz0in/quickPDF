@@ -12,7 +12,7 @@ import {
   Button
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { fireStore, storage } from '@renderer/services/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 import { ref, uploadString } from 'firebase/storage'
@@ -20,6 +20,7 @@ import { spaceToDash } from '@renderer/services/utils'
 import { IconLoader3, IconCheck } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 import { notifications } from '@mantine/notifications'
+import { useAdminChecker } from '@renderer/services/hooks'
 
 interface FormValues {
   name: string
@@ -31,7 +32,7 @@ interface FormValues {
 
 export default function NewCompany() {
   const [image, setImage] = useState<string>('')
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+ const [isAdmin] = useAdminChecker()
   const [isLoading, setIsLogin] = useState<boolean>(false)
   const navigate = useNavigate()
 
@@ -86,14 +87,6 @@ export default function NewCompany() {
       console.log('saved')
     })
   }
-
-  // check for if user is admin or not
-  useEffect(()=> {
-    let user = JSON.parse(localStorage.getItem('user') as string);
-    if(user.admin === true){
-      setIsAdmin(true);
-    }
-  })
 
   if (isAdmin === false){
     return (

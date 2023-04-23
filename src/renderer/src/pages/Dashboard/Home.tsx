@@ -10,10 +10,12 @@ import { AppDispatch } from '../../store'
 import { setData, getData } from '@renderer/services/database'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
+import { useAdminChecker } from '@renderer/services/hooks'
 
 export default function Home() {
   const allCompnay = useSelector((state: RootState) => state.companies.companies)
   const dispatch = useDispatch<AppDispatch>()
+  const [isAdmin] = useAdminChecker()
 
   const syncAllCompany = () => {
     dispatch(fetchCompanies())
@@ -32,7 +34,9 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getDataFromIdbStorage()
+    getDataFromIdbStorage();
+    
+    //checking for admin user;
   }, [])
 
   return (
@@ -53,7 +57,7 @@ export default function Home() {
         </Group>
       </Flex>
       <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>
-        <AddButton url="/company" />
+        {isAdmin ? (<AddButton url="/company" />) : null}
 
         {allCompnay !== undefined
           ? Object.values(allCompnay).map((company: any) => {
