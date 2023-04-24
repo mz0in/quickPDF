@@ -5,7 +5,7 @@ import Dashboard from '@renderer/pages/Dashboard'
 import { LoadingOverlay } from '@mantine/core'
 
 export default function App(): JSX.Element {
-  const [isLogin, setIsLogin] = useState<boolean | string >('')
+  const [isLogin, setIsLogin] = useState<boolean | string>('')
 
   useEffect(() => {
     auth.onAuthStateChanged((user: any) => {
@@ -25,7 +25,7 @@ export default function App(): JSX.Element {
     return <Dashboard />
   }
 
-  if (isLogin as boolean !== true) {
+  if ((isLogin as boolean) !== true) {
     return <LoginPage />
   }
 

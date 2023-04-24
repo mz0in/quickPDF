@@ -32,7 +32,7 @@ interface FormValues {
 
 export default function NewCompany() {
   const [image, setImage] = useState<string>('')
- const [isAdmin] = useAdminChecker()
+  const [isAdmin] = useAdminChecker()
   const [isLoading, setIsLogin] = useState<boolean>(false)
   const navigate = useNavigate()
 
@@ -88,7 +88,7 @@ export default function NewCompany() {
     })
   }
 
-  if (isAdmin === false){
+  if (isAdmin === false) {
     return (
       <Center>
         <p>you don't have access to add compines</p>

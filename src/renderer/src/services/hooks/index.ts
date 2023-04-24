@@ -1,5 +1,3 @@
-import { useAdminChecker } from "./useAdminChecker"
+import { useAdminChecker } from './useAdminChecker'
 
-export {
-    useAdminChecker
-}
+export { useAdminChecker }

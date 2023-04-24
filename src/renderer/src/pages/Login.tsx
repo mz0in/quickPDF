@@ -23,7 +23,7 @@ export default function LoginPage() {
         let user = userCredential.user
         console.log(user)
         // seting for admin or not
-        if(user.phoneNumber !== null ){
+        if (user.phoneNumber !== null) {
           // it is a admin user
           window.localStorage.setItem(
             'user',

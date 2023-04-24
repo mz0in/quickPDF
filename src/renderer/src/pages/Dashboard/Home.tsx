@@ -22,6 +22,7 @@ export default function Home() {
       .then(unwrapResult)
       .then((res) => {
         setData('company', 'companies', res)
+        window?.DB?.setData('company', 'companies', res)
       })
   }
 
@@ -34,8 +35,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getDataFromIdbStorage();
-    
+    getDataFromIdbStorage()
+
     //checking for admin user;
   }, [])
 
@@ -57,7 +58,7 @@ export default function Home() {
         </Group>
       </Flex>
       <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>
-        {isAdmin ? (<AddButton url="/company" />) : null}
+        {isAdmin ? <AddButton url="/company" /> : null}
 
         {allCompnay !== undefined
           ? Object.values(allCompnay).map((company: any) => {
