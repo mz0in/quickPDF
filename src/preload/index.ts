@@ -6,8 +6,8 @@ const api = {}
 
 // Custom DataBase Handler APIs
 const DB = {
-  setData: (storeName: string, key: string, data: any) => ipcRenderer.send('setDB'),
-  getData: (storeName: string, key: string) => ipcRenderer.send('getDB', { storeName, key })
+  setData: (storeName: string, key: string, value: any) => ipcRenderer.invoke("setDB", {storeName, key, value}),
+  getData: (storeName: string, key: string) => ipcRenderer.invoke('getDB', { storeName, key })
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

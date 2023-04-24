@@ -7,7 +7,6 @@ import type { RootState } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCompanies, addCompany } from '@renderer/services/redux/allCompanies'
 import { AppDispatch } from '../../store'
-import { setData, getData } from '@renderer/services/database'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useEffect } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
@@ -20,14 +19,13 @@ export default function Home() {
   const syncAllCompany = () => {
     dispatch(fetchCompanies())
       .then(unwrapResult)
-      .then((res) => {
-        setData('company', 'companies', res)
-        window?.DB?.setData('company', 'companies', res)
+      .then(async (res) => {
+        await window?.DB?.setData('company', 'companies', res)
       })
   }
 
   const getDataFromIdbStorage = async () => {
-    let data: any = await getData('company', 'companies')
+    let data: any = await window?.DB?.getData('company', 'companies')
     console.log(data)
     if (data !== null) {
       dispatch(addCompany(data))

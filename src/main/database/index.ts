@@ -8,16 +8,15 @@ import { ipcMain } from 'electron';
 const store = new Store()
 
 export const setDB = (): void => {
-  ipcMain.on('setDB', (event, data) => {
-    store.set(data.storeName, data.key, data.value)
-    console.log("data in server", data)
+  ipcMain.handle('setDB', (event, args) => {
+    store.set(args.storeName, args.key, args.value)
   })
 };
 
 export const getDB = (): void => {
-  ipcMain.on('getDB', (event, data) => {
-    let result = store.get(data.storeName, data.key)
-    console.log('geting data', data)
-    return "result"
+  ipcMain.handle('getDB', (event, args) => {
+    let result = store.get(args.storeName, args.key)
+    // console.log(args);
+    return result
   })
 };
