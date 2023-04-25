@@ -1,4 +1,4 @@
-import Layout from '@renderer/components/layouts'
+import { Layout } from '@renderer/components/layouts'
 import { Flex, Input, SimpleGrid, ActionIcon, Group } from '@mantine/core'
 import { IconFolderSearch, IconReload } from '@tabler/icons-react'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'

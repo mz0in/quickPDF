@@ -1,6 +1,7 @@
 import { Container } from '@mantine/core'
 import { ReactNode } from 'react'
 import Header from './Header'
+import FormLayout from './FormLayout'
 
 interface props {
   children: ReactNode
@@ -8,7 +9,7 @@ interface props {
   isBack?: boolean
 }
 
-export default function Layout({ children, size = 'xl', isBack = false }: props) {
+export function Layout({ children, size = 'xl', isBack = false }: props) {
   return (
     <>
       <Header isBack={isBack} />
@@ -16,3 +17,5 @@ export default function Layout({ children, size = 'xl', isBack = false }: props)
     </>
   )
 }
+
+export { FormLayout }

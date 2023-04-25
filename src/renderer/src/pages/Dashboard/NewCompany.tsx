@@ -1,4 +1,4 @@
-import Layout from '@renderer/components/layouts'
+import { Layout, FormLayout } from '@renderer/components/layouts'
 import {
   Paper,
   TextInput,
@@ -98,15 +98,7 @@ export default function NewCompany() {
 
   return (
     <Layout size="sm" isBack>
-      <Title
-        align="center"
-        sx={{
-          fontWeight: 900
-        }}
-      >
-        New Company!
-      </Title>
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+      <FormLayout title="New Company!">
         <form onSubmit={form.onSubmit((values) => save(values))}>
           <Center>
             <Avatar size={100} radius="lg" src={image} />
@@ -158,7 +150,7 @@ export default function NewCompany() {
             </Button>
           </Stack>
         </form>
-      </Paper>
+      </FormLayout>
     </Layout>
   )
 }

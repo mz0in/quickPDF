@@ -4,6 +4,7 @@ import NewCompany from './NewCompany'
 import NewDesign from './NewDesign'
 import NewPDF from './NewPDF'
 import Company from './Company'
+import UserAdd from './userAdd'
 
 export default function Dashboard(): JSX.Element {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ export default function Dashboard(): JSX.Element {
     {
       path: '/new-pdf/:companyName',
       element: <NewPDF />
+    },
+    {
+      path: '/user-add',
+      element: <UserAdd />
     }
   ])
 

@@ -1,5 +1,5 @@
 import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
-import Layout from '@renderer/components/layouts'
+import { Layout } from '@renderer/components/layouts'
 import { IconReload, IconCalendar } from '@tabler/icons-react'
 import { useParams } from 'react-router-dom'
 import { DashToSpace } from '@renderer/services/utils'

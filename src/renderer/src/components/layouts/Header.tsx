@@ -6,12 +6,14 @@ import {
   rem,
   Avatar,
   ActionIcon,
-  Group
+  Group,
+  Menu
 } from '@mantine/core'
-import { IconArrowLeft } from '@tabler/icons-react'
+import { useAdminChecker } from '@renderer/services/hooks'
+import { IconArrowLeft, IconUserPlus } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   inner: {
     height: rem(56),
     display: 'flex',
@@ -23,6 +25,7 @@ const useStyles = createStyles((theme) => ({
 export default function HeaderComponent({ isBack = false }) {
   const { classes } = useStyles()
   const navigate = useNavigate()
+  const [isAdmin] = useAdminChecker()
 
   return (
     <Header height={56} mb={30}>
@@ -36,7 +39,20 @@ export default function HeaderComponent({ isBack = false }) {
             ) : null}
             <Text>QuickPDF</Text>
           </Group>
-          <Avatar color={'dark'} radius="xl" />
+          {isAdmin ? (
+            <Menu shadow="md" width={150}>
+              <Menu.Target>
+                <Avatar color={'dark'} radius="xl" />
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item icon={<IconUserPlus size={14} />} onClick={() => navigate('/user-add')}>
+                  add user
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          ) : (
+            <Avatar color={'dark'} radius="xl" />
+          )}
         </div>
       </Container>
     </Header>
