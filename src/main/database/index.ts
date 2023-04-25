@@ -1,5 +1,5 @@
 import Store from './store'
-import { ipcMain } from 'electron';
+import { ipcMain } from 'electron'
 
 /**
  * direct bindings for DataBase
@@ -11,7 +11,7 @@ export const setDB = (): void => {
   ipcMain.handle('setDB', (event, args) => {
     store.set(args.storeName, args.key, args.value)
   })
-};
+}
 
 export const getDB = (): void => {
   ipcMain.handle('getDB', (event, args) => {
@@ -19,4 +19,4 @@ export const getDB = (): void => {
     // console.log(args);
     return result
   })
-};
+}

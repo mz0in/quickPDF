@@ -1,22 +1,21 @@
-import type { PageSize } from "@renderer/components/Editor";
+import type { PageSize } from '@renderer/components/Editor'
 
 function createAndDownloadBlobFile(body) {
-  const blob = new Blob([body]);
-  const fileName = `$test.pdf`;
-    const link = document.createElement('a');
-    // Browsers that support HTML5 download attribute
-    if (link.download !== undefined) {
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      // link.setAttribute('download', fileName);
-      link.setAttribute('download', fileName);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+  const blob = new Blob([body])
+  const fileName = `$test.pdf`
+  const link = document.createElement('a')
+  // Browsers that support HTML5 download attribute
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob)
+    link.setAttribute('href', url)
+    // link.setAttribute('download', fileName);
+    link.setAttribute('download', fileName)
+    link.style.visibility = 'hidden'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 }
-
 
 export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, size: PageSize) {
   let html = `<!DOCTYPE html>
@@ -33,7 +32,7 @@ export async function saveAsPDF(allCss: string, allHtml: string, pageHead: strin
     ${allHtml}
     </html>`
 
-    console.log(html)
+  console.log(html)
 
   let html2pdfConfig = `let opt = {
       margin: 0,
@@ -44,7 +43,7 @@ export async function saveAsPDF(allCss: string, allHtml: string, pageHead: strin
   }
   var worker = html2pdf().from(document.body).set(opt).save();
   `
-  let generatedPDFBuffer = await window.api.generatePDF(size, html);
+  let generatedPDFBuffer = await window.api.generatePDF(size, html)
   console.log(generatedPDFBuffer)
-  createAndDownloadBlobFile(generatedPDFBuffer);
+  createAndDownloadBlobFile(generatedPDFBuffer)
 }

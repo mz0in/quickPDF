@@ -104,7 +104,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
             }
           }) as htmlObject[]
 
-          let pageHead = editor.Canvas.getDocument().head.innerHTML;
+          let pageHead = editor.Canvas.getDocument().head.innerHTML
           let pageSize = {
             width: canvasSize.width,
             height: canvasSize.height

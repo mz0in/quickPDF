@@ -7,12 +7,12 @@ class Store {
   private userDataPath: string
 
   constructor() {
-    this.userDataPath = app.getPath('userData');
+    this.userDataPath = app.getPath('userData')
   }
 
   get(storeName: String, key: string): any {
-    const filePath = path.join(this.userDataPath, storeName + '.json');
-    try { 
+    const filePath = path.join(this.userDataPath, storeName + '.json')
+    try {
       this.data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
     } catch (e) {
       this.data = {}

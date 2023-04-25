@@ -8,8 +8,8 @@ export interface htmlObject {
 }
 
 export interface PageSize {
-  width: number; 
-  height: number 
+  width: number
+  height: number
 }
 
 export { PaperEditor, TemplateEditor }
