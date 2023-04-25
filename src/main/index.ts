@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import {setDB, getDB} from "./database"
+import { setDB, getDB } from "./database"
 
 global.share = { ipcMain }
 
@@ -74,3 +74,24 @@ app.on('window-all-closed', () => {
 // code. You can also put them in separate files and require them here.
 getDB()
 setDB()
+
+ipcMain.handle('generatePDF', async (event, args) => {
+  let printableWindow = new BrowserWindow({show: false, webPreferences: {webSecurity: false}});
+  printableWindow.loadURL('data:text/html;base64,' + Buffer.from(args.html).toString('base64'));
+    let customPageSize = { width: args.size.width, height: args.size.height };
+    console.log(customPageSize);
+    let option = {
+      landscape: false,
+      printBackground: true,
+      pageSize: customPageSize,
+    }
+    let pdfBuffer: Buffer | undefined;
+
+    await new Promise<void>((resolve) => {
+      printableWindow.webContents.on('did-finish-load', async () => {
+        pdfBuffer = await printableWindow.webContents.printToPDF(option);
+        resolve();
+      });
+    });
+    return pdfBuffer
+})

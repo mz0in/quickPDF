@@ -5,7 +5,7 @@ import { DatePickerInput } from '@mantine/dates'
 import { useForm } from '@mantine/form'
 import { useState } from 'react'
 import { saveAsPDF } from '@renderer/services/utils'
-import type { htmlObject } from '@renderer/components/Editor'
+import type { htmlObject, PageSize } from '@renderer/components/Editor'
 
 interface defaultFormValue {
   date: Date
@@ -25,7 +25,7 @@ export default function NewPage(): JSX.Element {
     }
   })
 
-  const handleSave = (htmlStrings: htmlObject[]) => {
+  const handleSave = (htmlStrings: htmlObject[], pageHead: string, size: PageSize) => {
     console.log(htmlStrings)
     let allCss = ''
     let allHtml = ''
@@ -35,7 +35,7 @@ export default function NewPage(): JSX.Element {
       allCss = allCss.concat(htmlStrings[i].css)
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
     }
-    saveAsPDF(allCss, allHtml)
+    saveAsPDF(allCss, allHtml, pageHead, size)
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {

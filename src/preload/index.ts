@@ -2,7 +2,15 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+
+interface Size {
+  width: number,
+  height: number
+}
+
+const api = {
+  generatePDF: (size: Size, html: string) => ipcRenderer.invoke("generatePDF", {size, html})
+}
 
 // Custom DataBase Handler APIs
 const DB = {
