@@ -8,6 +8,7 @@ export default function App(): JSX.Element {
   const [isLogin, setIsLogin] = useState<boolean | string>('')
 
   useEffect(() => {
+    console.log(auth.currentUser)
     auth.onAuthStateChanged((user: any) => {
       if (user) {
         setIsLogin(true)

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fireStore } from '@renderer/services/firebase'
+import { fireStore, auth } from '@renderer/services/firebase'
 import { collection, query, getDocs } from 'firebase/firestore'
 
 export interface Company {
@@ -24,7 +24,7 @@ export const fetchCompanies = createAsyncThunk<Company[], void, { rejectValue: s
   'companies/fetchCompanies',
   async (_, { rejectWithValue }) => {
     try {
-      const companiesCollection = query(collection(fireStore, 'company'))
+      const companiesCollection = query(collection(fireStore, `users/${auth.currentUser?.uid}`))
       const snapshot = await getDocs(companiesCollection)
       const companies = snapshot.docs.map((doc) => ({
         id: doc.id,

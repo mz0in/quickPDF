@@ -2,8 +2,8 @@ hide new company pages from users [X]
 repalce indexedDB with sqllite3 [X]
 resitred compay page route [X]
 replace html2pdf with pdf generation in electron js [X]
-add feature to spacific for users
-add a page to add more users in the applications only for admins
+add feature to spacific for users [X]
+add a page to add more users in the applications only for admins [X]
 update database for users spacfic.
 write components for grapesjs
 write scrapping function
@@ -11,3 +11,5 @@ add users fileds in compaies pages
 imporve ipc connections in main folder
 add generated html to a list that can be fatched in companies page
 desgin templates & save templates
+create a not access page
+update useAdminChecker function 
