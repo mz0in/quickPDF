@@ -1,8 +1,6 @@
 import { Layout, FormLayout } from '@renderer/components/layouts'
 import {
-  Paper,
   TextInput,
-  Title,
   FileInput,
   Avatar,
   Center,
@@ -12,9 +10,9 @@ import {
   Button
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fireStore, storage } from '@renderer/services/firebase'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { ref, uploadString } from 'firebase/storage'
 import { spaceToDash } from '@renderer/services/utils'
 import { IconLoader3, IconCheck } from '@tabler/icons-react'
@@ -28,12 +26,14 @@ interface FormValues {
   owner: string
   mobileNumber: number
   address: string
+  creator: string
 }
 
 export default function NewCompany() {
   const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
   const [isLoading, setIsLogin] = useState<boolean>(false)
+  const [users, setUsers] = useState([{ value: 'daily', label: 'Daily' }])
   const navigate = useNavigate()
 
   const form = useForm<FormValues>({
@@ -42,9 +42,32 @@ export default function NewCompany() {
       type: '',
       owner: '',
       mobileNumber: 0,
-      address: ''
+      address: '',
+      creator: ''
     }
   })
+
+  const getAllUsers = async () => {
+    const docSnap = await getDoc(doc(fireStore, 'company', 'allUsers'))
+    if (docSnap.exists()) {
+      console.log('Document data:', docSnap.data().users)
+      let updatedData = docSnap.data().users.map((user) => {
+        return {
+          value: user.uid,
+          label: user.name
+        }
+      })
+      setUsers(updatedData)
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log('No such document!')
+    }
+  }
+
+  // fetrching all users
+  useEffect(() => {
+    getAllUsers()
+  }, [])
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader()
@@ -59,9 +82,9 @@ export default function NewCompany() {
     let nameInSpaceToDash = spaceToDash(values.name)
     // save the image with company-name
     const storageRef = ref(storage, `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`)
-    // uploading image
+    //1. uploading image
     uploadString(storageRef, image, 'data_url').then(async () => {
-      // saving the document
+      //2. saving paper
       notifications.show({
         id: 'load-data',
         loading: true,
@@ -70,17 +93,26 @@ export default function NewCompany() {
         autoClose: false,
         withCloseButton: false
       })
-      await setDoc(doc(fireStore, 'company', `${nameInSpaceToDash}`), {
-        ...values,
+      await setDoc(doc(fireStore, `papers`, `${nameInSpaceToDash}`), {
+        name: values.name,
+        type: values.type,
+        owner: values.owner,
+        mobileNumber: values.mobileNumber,
+        address: values.address,
         logo: `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`
       }).then(() => {
-        notifications.update({
-          id: 'load-data',
-          color: 'teal',
-          title: 'Saved',
-          message: 'data now saved on the server.',
-          icon: <IconCheck size="1rem" />,
-          autoClose: 2000
+        //3. assing paper to user
+        updateDoc(doc(fireStore, 'users', values.creator), {
+          papers: arrayUnion(nameInSpaceToDash)
+        }).then(() => {
+          notifications.update({
+            id: 'load-data',
+            color: 'teal',
+            title: 'Saved',
+            message: 'data now saved on the server.',
+            icon: <IconCheck size="1rem" />,
+            autoClose: 2000
+          })
         })
       })
       navigate('/')
@@ -144,6 +176,14 @@ export default function NewCompany() {
               label="Full Address"
               withAsterisk
               {...form.getInputProps('address')}
+            />
+            <Select
+              data={users}
+              placeholder="Pick one"
+              label="Creator"
+              withAsterisk
+              {...form.getInputProps('creator')}
+              maxDropdownHeight={160}
             />
             <Button fullWidth type="submit" rightIcon={isLoading ? <IconLoader3 /> : null}>
               Save
