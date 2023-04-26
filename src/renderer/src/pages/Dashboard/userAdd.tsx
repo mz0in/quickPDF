@@ -1,21 +1,40 @@
 import { Layout, FormLayout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import { TextInput, PasswordInput, Button } from '@mantine/core'
+import { TextInput, PasswordInput, Button, MultiSelect } from '@mantine/core'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth } from '@renderer/services/firebase'
+import { arrayUnion, doc, updateDoc, query, collection, getDocs, setDoc } from 'firebase/firestore'
+import { auth, fireStore } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
 import { IconCross } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export default function UserAdd(): JSX.Element {
+  const [papers, setPapers] = useState(['test'])
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
       name: '',
       emailAddress: '',
-      password: ''
+      password: '',
+      papers: []
     }
   })
+
+  const getAllPapers = async () => {
+    const q = query(collection(fireStore, 'papers'))
+    const querySnapshot = await getDocs(q)
+    let allPapers: string[] = []
+    querySnapshot.forEach((doc) => {
+      allPapers.push(doc.id)
+    })
+    console.log(allPapers)
+    setPapers(allPapers)
+  }
+
+  useEffect(() => {
+    getAllPapers()
+  }, [])
 
   const save = (values: typeof form.values) => {
     // saving user
@@ -29,21 +48,37 @@ export default function UserAdd(): JSX.Element {
     })
     createUserWithEmailAndPassword(auth, values.emailAddress, values.password)
       .then((userCredential) => {
-        // Signed in
+        // 1. registered user
         const user = userCredential.user
         updateProfile(user, {
+          //2. updating name
           displayName: values.name
         }).then(() => {
-          notifications.update({
-            id: 'load-data',
-            color: 'teal',
-            title: 'Saved ' + values.name,
-            message: 'user is saved on the server',
-            icon: <IconCross size="1rem" />,
-            autoClose: 2000
+          //3. adding in compnay employ list
+          const userRef = doc(fireStore, 'company', 'allUsers')
+          updateDoc(userRef, {
+            users: arrayUnion({
+              name: user.displayName,
+              uid: user.uid
+            })
+          }).then(() => {
+            //4. giving user there company
+            setDoc(doc(fireStore, `users/${user.uid}`), {
+              isAdmin: false,
+              papers: values.papers
+            }).then(() => {
+              //5. updating notification
+              notifications.update({
+                id: 'load-data',
+                color: 'teal',
+                title: 'Saved ' + values.name,
+                message: 'user is saved on the server',
+                icon: <IconCross size="1rem" />,
+                autoClose: 2000
+              })
+              navigate('/')
+            })
           })
-
-          navigate('/')
         })
       })
       .catch((error) => {
@@ -72,14 +107,28 @@ export default function UserAdd(): JSX.Element {
             withAsterisk
           />
           <TextInput
+            my={10}
             label="Email"
             placeholder="his email"
             {...form.getInputProps('emailAddress')}
             withAsterisk
           />
-          <PasswordInput my={20} placeholder="Password" label="Password"
-          {...form.getInputProps('password')}
-           withAsterisk />
+          <PasswordInput
+            my={10}
+            placeholder="Password"
+            label="Password"
+            {...form.getInputProps('password')}
+            withAsterisk
+          />
+          <MultiSelect
+            my={20}
+            data={papers}
+            label="Papers that he will work on"
+            placeholder="Pick all that you like"
+            clearButtonProps={{ 'aria-label': 'Clear selection' }}
+            {...form.getInputProps('papers')}
+            clearable
+          />
           <Button fullWidth type="submit">
             Save
           </Button>
