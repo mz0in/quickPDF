@@ -24,7 +24,7 @@ export const fetchCompanies = createAsyncThunk<Company[], void, { rejectValue: s
   'companies/fetchCompanies',
   async (_, { rejectWithValue }) => {
     try {
-      const companiesCollection = query(collection(fireStore, `users/${auth.currentUser?.uid}`))
+      const companiesCollection = query(collection(fireStore, 'papers'))
       const snapshot = await getDocs(companiesCollection)
       const companies = snapshot.docs.map((doc) => ({
         id: doc.id,

@@ -1,11 +1,17 @@
 import { TextInput, PasswordInput, Paper, Title, Container, Button } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '@renderer/services/firebase'
+import { auth, fireStore } from '@renderer/services/firebase'
+import { doc, getDoc } from 'firebase/firestore'
 import { notifications } from '@mantine/notifications'
 import { IconCross, IconDiscountCheckFilled } from '@tabler/icons-react'
+import { Dispatch } from 'react'
 
-export default function LoginPage() {
+interface props {
+  loginHook: Dispatch<React.SetStateAction<string | boolean>>
+}
+
+export default function LoginPage({loginHook}: props) {
   const [emailValue, setEmailValue] = useInputState<string>('')
   const [passwordValue, setPasswordValue] = useInputState<string>('')
 
@@ -19,28 +25,22 @@ export default function LoginPage() {
       withCloseButton: false
     })
     signInWithEmailAndPassword(auth, emailValue, passwordValue)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         let user = userCredential.user
         console.log(user)
-        // seting for admin or not
-        if (user.phoneNumber !== null) {
-          // it is a admin user
-          window.localStorage.setItem(
-            'user',
-            JSON.stringify({
-              login: true,
-              admin: true
-            })
-          )
-        } else {
-          window.localStorage.setItem(
-            'user',
-            JSON.stringify({
-              login: true,
-              admin: false
-            })
-          )
-        }
+        const docRef = doc(fireStore, 'users', user.uid)
+        const docSnap = await getDoc(docRef)
+
+        window.localStorage.setItem(
+          'user',
+          JSON.stringify({
+            login: true,
+            admin: (docSnap.data()?.isAdmin ? true : false)
+          })
+        )
+
+        loginHook(true) // hook to reload App.tsx
+        
         notifications.update({
           id: 'login-data',
           color: 'green',
