@@ -4,7 +4,8 @@ import NewCompany from './NewCompany'
 import NewDesign from './NewDesign'
 import NewPDF from './NewPDF'
 import Company from './Company'
-import UserAdd from './userAdd'
+import AddUser from './AddUser'
+import EditUser from "./EditUser"
 
 export default function Dashboard(): JSX.Element {
   const router = createBrowserRouter([
@@ -30,7 +31,11 @@ export default function Dashboard(): JSX.Element {
     },
     {
       path: '/user-add',
-      element: <UserAdd />
+      element: <AddUser />
+    },
+    {
+      path: '/user-edit',
+      element: <EditUser />
     }
   ])
 

@@ -1,6 +1,6 @@
 import { Layout, FormLayout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import { TextInput, PasswordInput, Button, MultiSelect } from '@mantine/core'
+import { TextInput, PasswordInput, Button, MultiSelect, NumberInput } from '@mantine/core'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { arrayUnion, doc, updateDoc, query, collection, getDocs, setDoc } from 'firebase/firestore'
 import { auth, fireStore } from '@renderer/services/firebase'
@@ -13,12 +13,13 @@ import NotFoundTitle from '@renderer/components/page/Access'
 
 export default function UserAdd(): JSX.Element {
   const [papers, setPapers] = useState(['test'])
-  const [isAdmin] = useAdminChecker();
+  const [isAdmin] = useAdminChecker()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
       name: '',
       emailAddress: '',
+      number: 0,
       password: '',
       papers: []
     }
@@ -68,6 +69,7 @@ export default function UserAdd(): JSX.Element {
             //4. giving user there company
             setDoc(doc(fireStore, `users/${user.uid}`), {
               isAdmin: false,
+              number: values.number,
               papers: values.papers
             }).then(() => {
               //5. updating notification
@@ -100,9 +102,7 @@ export default function UserAdd(): JSX.Element {
   }
 
   if (isAdmin === false) {
-    return (
-      <NotFoundTitle/>
-    )
+    return <NotFoundTitle />
   }
 
   return (
@@ -121,6 +121,14 @@ export default function UserAdd(): JSX.Element {
             placeholder="his email"
             {...form.getInputProps('emailAddress')}
             withAsterisk
+          />
+          <NumberInput
+            my={10}
+            placeholder="His Number"
+            label="Number"
+            withAsterisk
+            {...form.getInputProps('number')}
+            hideControls
           />
           <PasswordInput
             my={10}

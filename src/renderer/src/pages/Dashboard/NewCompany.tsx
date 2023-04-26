@@ -33,7 +33,6 @@ interface FormValues {
 export default function NewCompany() {
   const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
-  const [isLoading, setIsLogin] = useState<boolean>(false)
   const [users, setUsers] = useState([{ value: 'daily', label: 'Daily' }])
   const navigate = useNavigate()
 
@@ -79,21 +78,20 @@ export default function NewCompany() {
   }
 
   const save = async (values: typeof form.values) => {
-    setIsLogin(true)
+    notifications.show({
+      id: 'load-data',
+      loading: true,
+      title: 'Saving Company',
+      message: 'Data is saving on the server please wait.',
+      autoClose: false,
+      withCloseButton: false
+    })
     let nameInSpaceToDash = spaceToDash(values.name)
     // save the image with company-name
     const storageRef = ref(storage, `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`)
     //1. uploading image
     uploadString(storageRef, image, 'data_url').then(async () => {
       //2. saving paper
-      notifications.show({
-        id: 'load-data',
-        loading: true,
-        title: 'Saving Company',
-        message: 'Data is saving on the server please wait.',
-        autoClose: false,
-        withCloseButton: false
-      })
       await setDoc(doc(fireStore, `papers`, `${nameInSpaceToDash}`), {
         name: values.name,
         type: values.type,
@@ -184,7 +182,7 @@ export default function NewCompany() {
               {...form.getInputProps('creator')}
               maxDropdownHeight={160}
             />
-            <Button fullWidth type="submit" rightIcon={isLoading ? <IconLoader3 /> : null}>
+            <Button fullWidth type="submit">
               Save
             </Button>
           </Stack>

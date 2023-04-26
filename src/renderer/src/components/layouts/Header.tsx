@@ -10,7 +10,7 @@ import {
   Menu
 } from '@mantine/core'
 import { useAdminChecker } from '@renderer/services/hooks'
-import { IconArrowLeft, IconUserPlus } from '@tabler/icons-react'
+import { IconArrowLeft, IconUserPlus, IconUserEdit } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles(() => ({
@@ -47,6 +47,9 @@ export default function HeaderComponent({ isBack = false }) {
               <Menu.Dropdown>
                 <Menu.Item icon={<IconUserPlus size={14} />} onClick={() => navigate('/user-add')}>
                   add user
+                </Menu.Item>
+                <Menu.Item icon={<IconUserEdit size={14} />} onClick={() => navigate('/user-edit')}>
+                  Edit User
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
