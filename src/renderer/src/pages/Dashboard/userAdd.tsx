@@ -8,9 +8,12 @@ import { notifications } from '@mantine/notifications'
 import { IconCross } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useAdminChecker } from '@renderer/services/hooks'
+import NotFoundTitle from '@renderer/components/page/Access'
 
 export default function UserAdd(): JSX.Element {
   const [papers, setPapers] = useState(['test'])
+  const [isAdmin] = useAdminChecker();
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
@@ -94,6 +97,12 @@ export default function UserAdd(): JSX.Element {
           autoClose: 2000
         })
       })
+  }
+
+  if (isAdmin === false) {
+    return (
+      <NotFoundTitle/>
+    )
   }
 
   return (

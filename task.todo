@@ -6,12 +6,13 @@ add feature to spacific for users [X]
 add a page to add more users in the applications only for admins [X]
 update database for users spacfic.[x]
 add users fileds in compaies pages [x]
+update useAdminChecker function [X]
 write components for grapesjs
 write scrapping function
 imporve ipc connections in main folder
 add generated html to a list that can be fatched in companies page
 desgin templates & save templates
-create a not access page
-update useAdminChecker function 
+create a not access page[X]
 add a page to edit users
 fix async hell with chatgpt
+add slider for zoom in and out 

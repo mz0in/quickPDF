@@ -19,6 +19,7 @@ import { IconLoader3, IconCheck } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 import { notifications } from '@mantine/notifications'
 import { useAdminChecker } from '@renderer/services/hooks'
+import NotFoundTitle from '@renderer/components/page/Access'
 
 interface FormValues {
   name: string
@@ -122,9 +123,7 @@ export default function NewCompany() {
 
   if (isAdmin === false) {
     return (
-      <Center>
-        <p>you don't have access to add compines</p>
-      </Center>
+      <NotFoundTitle/>
     )
   }
 
