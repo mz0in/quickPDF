@@ -11,12 +11,12 @@ import grapesjsFontPlugin from './plugins/grapesjsFonts'
 import grapesjsPageManagerPlugin from './plugins/pageManger'
 import '@renderer/styles/designer.css'
 import './plugins/pageManger/css/grapesjs-project-manager.min.css'
-import type { htmlObject, PageSize } from '.'
+import type { htmlObject } from '.'
 
 interface GrapesJSProps {
   id: string
   config?: any
-  onSave?: (htmlObjects: htmlObject[], pageHead: string, pageSize: PageSize) => void
+  onSave?: (htmlObjects: htmlObject[], pageHead: string) => void
   canvasSize: {
     height: number
     width: number
@@ -105,12 +105,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           }) as htmlObject[]
 
           let pageHead = editor.Canvas.getDocument().head.innerHTML
-          let pageSize = {
-            width: canvasSize.width,
-            height: canvasSize.height
-          }
 
-          onSave(htmlStrings, pageHead, pageSize)
+          onSave(htmlStrings, pageHead)
         }
       })
     }

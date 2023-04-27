@@ -2,12 +2,35 @@ import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
 import { IconReload, IconCalendar } from '@tabler/icons-react'
 import { useParams } from 'react-router-dom'
-import { DashToSpace } from '@renderer/services/utils'
+import { DashToSpace, monthsOfYear } from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
-import { AddButton } from '@renderer/components/Button/ActionButtons'
+import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
+import { useState } from 'react'
+
+interface paperType {
+  date: number,
+  month: string
+}
 
 export default function Company() {
   let { companyName } = useParams()
+  const [newspapers, setNewspapers] = useState<paperType[]>([{
+    date: 1,
+    month: 'january'
+  }])
+
+  const getAllPapers = async() => {
+    let papers = await window.api.getPapers(companyName);
+    let data = Object.keys(papers).map((value)=> {
+      let date = new Date(value)
+      return {
+        date: date.getDate(),
+        month: monthsOfYear[date.getMonth()]
+      }
+    })
+    setNewspapers(data);
+  }
+
   return (
     <Layout isBack>
       <Flex justify="center" align="center" direction="column">
@@ -24,7 +47,7 @@ export default function Company() {
             // value={value}
             // onChange={setValue}
           />
-          <ActionIcon size="lg" variant={'gradient'}>
+          <ActionIcon size="lg" variant={'gradient'} onClick={getAllPapers}>
             <IconReload />
           </ActionIcon>
         </Group>
@@ -40,6 +63,11 @@ export default function Company() {
         </Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-pdf/${companyName}`} height="150px" />
+          {newspapers.map((paper)=> {
+            return (
+              <PaperCard url={`/new-pdf/`} date={paper.date} month={paper.month}/>
+            )
+          })}
         </SimpleGrid>
       </Box>
     </Layout>

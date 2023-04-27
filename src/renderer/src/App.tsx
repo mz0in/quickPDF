@@ -18,7 +18,7 @@ export default function App(): JSX.Element {
   }
 
   if ((isLogin as boolean) !== true) {
-    return <LoginPage loginHook={setIsLogin}/>
+    return <LoginPage loginHook={setIsLogin} />
   }
 
   return <LoadingOverlay visible={true} />

@@ -46,3 +46,18 @@ export function inToPt(inch: number): number {
 }
 
 export { saveAsPDF }
+
+export const monthsOfYear: string[] = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];

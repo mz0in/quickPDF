@@ -120,9 +120,7 @@ export default function NewCompany() {
   }
 
   if (isAdmin === false) {
-    return (
-      <NotFoundTitle/>
-    )
+    return <NotFoundTitle />
   }
 
   return (

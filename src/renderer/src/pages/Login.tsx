@@ -11,7 +11,7 @@ interface props {
   loginHook: Dispatch<React.SetStateAction<string | boolean>>
 }
 
-export default function LoginPage({loginHook}: props) {
+export default function LoginPage({ loginHook }: props) {
   const [emailValue, setEmailValue] = useInputState<string>('')
   const [passwordValue, setPasswordValue] = useInputState<string>('')
 
@@ -35,12 +35,12 @@ export default function LoginPage({loginHook}: props) {
           'user',
           JSON.stringify({
             login: true,
-            admin: (docSnap.data()?.isAdmin ? true : false)
+            admin: docSnap.data()?.isAdmin ? true : false
           })
         )
 
         loginHook(true) // hook to reload App.tsx
-        
+
         notifications.update({
           id: 'login-data',
           color: 'green',

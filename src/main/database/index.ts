@@ -1,6 +1,6 @@
 import Store from './store'
 import { ipcMain } from 'electron'
-
+import { generatePDF } from '../utils'
 /**
  * direct bindings for DataBase
  * with just storeName, key, value
@@ -16,5 +16,17 @@ export function DbCalls() {
     let result = store.get(args.storeName, args.key)
     // console.log(args);
     return result
+  })
+
+  ipcMain.handle('save', async (event, args) => {
+    store.setPDF(args.info.companyName, args.info.date, args.html)
+    // generating PDF
+    let pdfBuffer = await generatePDF(args.html, args.info.width, args.info.height)
+    return pdfBuffer
+  })
+
+  ipcMain.handle("getPapers", (event, args) => {
+    let papers = store.getPDF(args.companyName);
+    return papers;
   })
 }

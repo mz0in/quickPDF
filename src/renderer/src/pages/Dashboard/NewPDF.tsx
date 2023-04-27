@@ -5,7 +5,9 @@ import { DatePickerInput } from '@mantine/dates'
 import { useForm } from '@mantine/form'
 import { useState } from 'react'
 import { saveAsPDF } from '@renderer/services/utils'
-import type { htmlObject, PageSize } from '@renderer/components/Editor'
+import type { htmlObject } from '@renderer/components/Editor'
+import { useParams } from 'react-router-dom'
+import { Layout } from '@renderer/components/layouts'
 
 interface defaultFormValue {
   date: Date
@@ -16,6 +18,7 @@ interface defaultFormValue {
 export default function NewPage(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
   const [modalData, setModalData] = useState<defaultFormValue>()
+  const { companyName } = useParams()
 
   const form = useForm<defaultFormValue>({
     initialValues: {
@@ -25,7 +28,7 @@ export default function NewPage(): JSX.Element {
     }
   })
 
-  const handleSave = (htmlStrings: htmlObject[], pageHead: string, size: PageSize) => {
+  const handleSave = (htmlStrings: htmlObject[], pageHead: string) => {
     console.log(htmlStrings)
     let allCss = ''
     let allHtml = ''
@@ -35,7 +38,13 @@ export default function NewPage(): JSX.Element {
       allCss = allCss.concat(htmlStrings[i].css)
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
     }
-    saveAsPDF(allCss, allHtml, pageHead, size)
+
+    let info = {
+      ...modalData,
+      companyName
+    }
+
+    saveAsPDF(allCss, allHtml, pageHead, info)
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
@@ -49,7 +58,8 @@ export default function NewPage(): JSX.Element {
 
   if (modalData !== undefined) {
     return (
-      <PaperEditor
+      <Layout isBack>
+        <PaperEditor
         id="editor"
         canvasSize={{
           height: modalData.height,
@@ -57,6 +67,7 @@ export default function NewPage(): JSX.Element {
         }}
         onSave={handleSave}
       />
+      </Layout>
     )
   }
 

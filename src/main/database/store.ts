@@ -25,6 +25,40 @@ class Store {
     this.data[key] = val
     fs.writeFileSync(filePath, JSON.stringify(this.data))
   }
+
+  setPDF(companyName: string, date: string, html: string): void {
+    const directoryPath = path.join(this.userDataPath, 'companies')
+    const filePath = path.join(directoryPath, `${companyName}.json`)
+    let data = {}
+    try {
+      if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true })
+      }
+      if (fs.existsSync(filePath)) {
+        data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
+        console.log(data)
+      }
+      data[date] = html
+      fs.writeFileSync(filePath, JSON.stringify(data))
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  getPDF(companyName: string) {
+    const directoryPath = path.join(this.userDataPath, 'companies')
+    const filePath = path.join(directoryPath, `${companyName}.json`)
+    let data = {}
+    try {
+      if (fs.existsSync(filePath)) {
+        data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
+    return data;
+  }
 }
 
 export default Store

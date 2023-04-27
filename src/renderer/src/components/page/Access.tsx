@@ -1,10 +1,10 @@
-import { createStyles, Title, Text, Button, Container, Group, rem } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+import { createStyles, Title, Text, Button, Container, Group, rem } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   root: {
     paddingTop: rem(80),
-    paddingBottom: rem(80),
+    paddingBottom: rem(80)
   },
 
   label: {
@@ -16,8 +16,8 @@ const useStyles = createStyles((theme) => ({
     color: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2],
 
     [theme.fn.smallerThan('sm')]: {
-      fontSize: rem(120),
-    },
+      fontSize: rem(120)
+    }
   },
 
   title: {
@@ -27,20 +27,20 @@ const useStyles = createStyles((theme) => ({
     fontSize: rem(38),
 
     [theme.fn.smallerThan('sm')]: {
-      fontSize: rem(32),
-    },
+      fontSize: rem(32)
+    }
   },
 
   description: {
     maxWidth: rem(500),
     margin: 'auto',
     marginTop: theme.spacing.xl,
-    marginBottom: `calc(${theme.spacing.xl} * 1.5)`,
-  },
-}));
+    marginBottom: `calc(${theme.spacing.xl} * 1.5)`
+  }
+}))
 
 export default function NotFoundTitle() {
-  const { classes } = useStyles();
+  const { classes } = useStyles()
   const navigate = useNavigate()
 
   return (
@@ -52,10 +52,10 @@ export default function NotFoundTitle() {
         been moved to another URL.
       </Text>
       <Group position="center">
-        <Button variant="subtle" size="md" onClick={()=> navigate("/")}>
+        <Button variant="subtle" size="md" onClick={() => navigate('/')}>
           Take me back to home page
         </Button>
       </Group>
     </Container>
-  );
+  )
 }

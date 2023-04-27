@@ -1,5 +1,3 @@
-import type { PageSize } from '@renderer/components/Editor'
-
 function createAndDownloadBlobFile(body) {
   const blob = new Blob([body])
   const fileName = `$test.pdf`
@@ -17,7 +15,7 @@ function createAndDownloadBlobFile(body) {
   }
 }
 
-export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, size: PageSize) {
+export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, info) {
   let html = `<!DOCTYPE html>
     <html lang="Hi">
     <head>
@@ -34,16 +32,7 @@ export async function saveAsPDF(allCss: string, allHtml: string, pageHead: strin
 
   console.log(html)
 
-  let html2pdfConfig = `let opt = {
-      margin: 0,
-      image: {type: 'jpeg', quality: 1},
-      html2canvas: {scale: 2},
-      enableLinks: true,
-      jsPDF: {unit: "in", format: [15, 21], orientation: 'portrait'}
-  }
-  var worker = html2pdf().from(document.body).set(opt).save();
-  `
-  let generatedPDFBuffer = await window.api.generatePDF(size, html)
+  let generatedPDFBuffer = await window.api.save(info, html)
   console.log(generatedPDFBuffer)
   createAndDownloadBlobFile(generatedPDFBuffer)
 }

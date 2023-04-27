@@ -10,9 +10,11 @@ update useAdminChecker function [X]
 create a not access page[X]
 add a page to edit users [X]
 imporve ipc connections in main folder [X]
-add generated html to a list that can be fatched in companies page
+add generated html to a list that can be fatched in companies page [X]
 desgin templates & save templates
 fix async hell with chatgpt
 add slider for zoom in and out [before 12]
 write components for grapesjs
 write scrapping function
+get html and render in canvas grapesjs
+make application experience better with animations and page transctions

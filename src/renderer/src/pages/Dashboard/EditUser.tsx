@@ -1,13 +1,6 @@
 import { Layout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import {
-  Checkbox,
-  MultiSelect,
-  NumberInput,
-  Title,
-  Paper,
-  Button
-} from '@mantine/core'
+import { Checkbox, MultiSelect, NumberInput, Title, Paper, Button } from '@mantine/core'
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
@@ -90,7 +83,7 @@ export default function UserAdd(): JSX.Element {
         icon: <IconCross size="1rem" />,
         autoClose: 2000
       })
-      form.reset();
+      form.reset()
       setUser(false)
     })
   }
@@ -133,7 +126,12 @@ export default function UserAdd(): JSX.Element {
               withAsterisk
               hideControls
             />
-            <Checkbox my={10} labelPosition="left" label="Admin" {...form.getInputProps('isAdmin')} />
+            <Checkbox
+              my={10}
+              labelPosition="left"
+              label="Admin"
+              {...form.getInputProps('isAdmin')}
+            />
             <MultiSelect
               my={10}
               data={papers}

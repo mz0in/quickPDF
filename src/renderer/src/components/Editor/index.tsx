@@ -7,9 +7,4 @@ export interface htmlObject {
   css: string
 }
 
-export interface PageSize {
-  width: number
-  height: number
-}
-
 export { PaperEditor, TemplateEditor }

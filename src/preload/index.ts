@@ -3,13 +3,16 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 
-interface Size {
+interface Info {
   width: number
   height: number
+  date: string
+  companyName: string
 }
 
 const api = {
-  generatePDF: (size: Size, html: string) => ipcRenderer.invoke('generatePDF', { size, html })
+  save: (info: Info, html: string) => ipcRenderer.invoke('save', { info, html }),
+  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', {companyName})
 }
 
 // Custom DataBase Handler APIs

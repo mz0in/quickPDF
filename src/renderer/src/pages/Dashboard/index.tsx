@@ -5,7 +5,7 @@ import NewDesign from './NewDesign'
 import NewPDF from './NewPDF'
 import Company from './Company'
 import AddUser from './AddUser'
-import EditUser from "./EditUser"
+import EditUser from './EditUser'
 
 export default function Dashboard(): JSX.Element {
   const router = createBrowserRouter([
