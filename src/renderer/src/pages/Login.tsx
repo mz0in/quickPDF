@@ -15,55 +15,56 @@ export default function LoginPage({ loginHook }: props) {
   const [emailValue, setEmailValue] = useInputState<string>('')
   const [passwordValue, setPasswordValue] = useInputState<string>('')
 
-  const submitForm = () => {
+  const submitForm = async () => {
     notifications.show({
       id: 'login-data',
       loading: true,
       title: 'Logining',
       message: 'retriving data from server please wait.',
       autoClose: false,
-      withCloseButton: false
-    })
-    signInWithEmailAndPassword(auth, emailValue, passwordValue)
-      .then(async (userCredential) => {
-        let user = userCredential.user
-        console.log(user)
-        const docRef = doc(fireStore, 'users', user.uid)
-        const docSnap = await getDoc(docRef)
-
-        window.localStorage.setItem(
-          'user',
-          JSON.stringify({
-            login: true,
-            admin: docSnap.data()?.isAdmin ? true : false
-          })
-        )
-
-        loginHook(true) // hook to reload App.tsx
-
-        notifications.update({
-          id: 'login-data',
-          color: 'green',
-          title: `Welcome ${user.displayName}`,
-          message: 'login successful',
-          icon: <IconDiscountCheckFilled size="1rem" />,
-          autoClose: 4000
+      withCloseButton: false,
+    });
+  
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
+      const user = userCredential.user;
+      console.log(user);
+  
+      const docRef = doc(fireStore, 'users', user.uid);
+      const docSnap = await getDoc(docRef);
+  
+      window.localStorage.setItem(
+        'user',
+        JSON.stringify({
+          login: true,
+          admin: docSnap.data()?.isAdmin ? true : false,
         })
-        // ...
-      })
-      .catch((error) => {
-        const errorMessage = error.message
-        console.log('errorMsg', errorMessage)
-        notifications.update({
-          id: 'login-data',
-          color: 'red',
-          title: 'Error',
-          message: errorMessage,
-          icon: <IconCross size="1rem" />,
-          autoClose: 4000
-        })
-      })
-  }
+      );
+  
+      loginHook(true); // hook to reload App.tsx
+  
+      notifications.update({
+        id: 'login-data',
+        color: 'green',
+        title: `Welcome ${user.displayName}`,
+        message: 'login successful',
+        icon: <IconDiscountCheckFilled size="1rem" />,
+        autoClose: 4000,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+      console.log('errorMsg', errorMessage);
+  
+      notifications.update({
+        id: 'login-data',
+        color: 'red',
+        title: 'Error',
+        message: errorMessage,
+        icon: <IconCross size="1rem" />,
+        autoClose: 4000,
+      });
+    }
+  };  
 
   return (
     <Container size={420} my={40}>

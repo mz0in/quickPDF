@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 export const useAdminChecker = () => {
-  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const [isAdmin, setIsAdmin] = useState<boolean>()
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('user') as string)

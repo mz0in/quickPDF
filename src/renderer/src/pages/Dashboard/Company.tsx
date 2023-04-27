@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { DashToSpace, monthsOfYear } from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface paperType {
   date: number,
@@ -30,6 +30,11 @@ export default function Company() {
     })
     setNewspapers(data);
   }
+
+  useEffect(()=> {
+    getAllPapers();
+  }, [])
+
 
   return (
     <Layout isBack>

@@ -1,6 +1,6 @@
 import { Layout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import { Checkbox, MultiSelect, NumberInput, Title, Paper, Button } from '@mantine/core'
+import { Checkbox, MultiSelect, NumberInput, Title, Paper, Button, LoadingOverlay } from '@mantine/core'
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
@@ -92,61 +92,65 @@ export default function UserAdd(): JSX.Element {
     return <NotFoundTitle />
   }
 
-  return (
-    <Layout size="sm" isBack>
-      <Title
-        align="center"
-        sx={{
-          fontWeight: 900
-        }}
-      >
-        Edit user
-      </Title>
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <NumberInput
-          placeholder="His Number"
-          label="Number"
-          value={number}
-          onChange={setNumber}
-          withAsterisk
-          hideControls
-        />
-        <Button my={10} fullWidth onClick={searchFromNumber}>
-          Search
-        </Button>
-      </Paper>
-      {user ? (
+  if (isAdmin === true){
+    return (
+      <Layout size="sm" isBack>
+        <Title
+          align="center"
+          sx={{
+            fontWeight: 900
+          }}
+        >
+          Edit user
+        </Title>
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <form onSubmit={form.onSubmit((values) => save(values))}>
-            <NumberInput
-              my={10}
-              placeholder="His Number"
-              label="Number"
-              {...form.getInputProps('number')}
-              withAsterisk
-              hideControls
-            />
-            <Checkbox
-              my={10}
-              labelPosition="left"
-              label="Admin"
-              {...form.getInputProps('isAdmin')}
-            />
-            <MultiSelect
-              my={10}
-              data={papers}
-              label="Papers that he will work on"
-              placeholder="Pick all that you like"
-              clearButtonProps={{ 'aria-label': 'Clear selection' }}
-              {...form.getInputProps('papers')}
-              clearable
-            />
-            <Button my={10} fullWidth type="submit">
-              Save
-            </Button>
-          </form>
+          <NumberInput
+            placeholder="His Number"
+            label="Number"
+            value={number}
+            onChange={setNumber}
+            withAsterisk
+            hideControls
+          />
+          <Button my={10} fullWidth onClick={searchFromNumber}>
+            Search
+          </Button>
         </Paper>
-      ) : null}
-    </Layout>
-  )
+        {user ? (
+          <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+            <form onSubmit={form.onSubmit((values) => save(values))}>
+              <NumberInput
+                my={10}
+                placeholder="His Number"
+                label="Number"
+                {...form.getInputProps('number')}
+                withAsterisk
+                hideControls
+              />
+              <Checkbox
+                my={10}
+                labelPosition="left"
+                label="Admin"
+                {...form.getInputProps('isAdmin')}
+              />
+              <MultiSelect
+                my={10}
+                data={papers}
+                label="Papers that he will work on"
+                placeholder="Pick all that you like"
+                clearButtonProps={{ 'aria-label': 'Clear selection' }}
+                {...form.getInputProps('papers')}
+                clearable
+              />
+              <Button my={10} fullWidth type="submit">
+                Save
+              </Button>
+            </form>
+          </Paper>
+        ) : null}
+      </Layout>
+    )
+  }
+
+  return <LoadingOverlay visible={true} />
 }
