@@ -7,13 +7,11 @@ import { ipcMain } from 'electron'
  */
 const store = new Store()
 
-export const setDB = (): void => {
+export function DbCalls() {
   ipcMain.handle('setDB', (event, args) => {
     store.set(args.storeName, args.key, args.value)
   })
-}
 
-export const getDB = (): void => {
   ipcMain.handle('getDB', (event, args) => {
     let result = store.get(args.storeName, args.key)
     // console.log(args);

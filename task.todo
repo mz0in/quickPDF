@@ -9,10 +9,10 @@ add users fileds in compaies pages [x]
 update useAdminChecker function [X]
 create a not access page[X]
 add a page to edit users [X]
-imporve ipc connections in main folder
+imporve ipc connections in main folder [X]
 add generated html to a list that can be fatched in companies page
 desgin templates & save templates
 fix async hell with chatgpt
-add slider for zoom in and out 
+add slider for zoom in and out [before 12]
 write components for grapesjs
 write scrapping function
