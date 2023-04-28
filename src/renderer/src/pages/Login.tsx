@@ -51,7 +51,7 @@ export default function LoginPage({ loginHook }: props) {
         icon: <IconDiscountCheckFilled size="1rem" />,
         autoClose: 4000,
       });
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage = error.message;
       console.log('errorMsg', errorMessage);
   

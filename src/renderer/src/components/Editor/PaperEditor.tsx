@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react'
 // @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
+import "@renderer/styles/grapesjs.css"
 import gjsBasicBlock from 'grapesjs-blocks-basic'
-import gjsPluginExport from 'grapesjs-plugin-export'
+import gjsImageEditorPlugin from "grapesjs-tui-image-editor"
+import gjsCkEditorPlugin from "grapesjs-plugin-ckeditor"
 import basicCustomPlugin from './plugins/blocksPlugin'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
@@ -30,6 +32,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
+      style: `p {margin: 0px !important;}`,
       deviceManager: {
         devices: [
           {
@@ -55,8 +58,9 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         gjsBasicBlock,
         basicCustomPlugin,
         grapesjsFontPlugin,
-        gjsPluginExport,
-        grapesjsPageManagerPlugin
+        grapesjsPageManagerPlugin,
+        gjsImageEditorPlugin,
+        gjsCkEditorPlugin
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -66,8 +70,25 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
+        },
+        [gjsCkEditorPlugin]: {
+          position: 'right',
+          options: {
+            language: 'en',
+            	toolbarGroups: [
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                { name: 'basicstyles', groups: [ 'basicstyles'] },
+                '/',
+                { name: 'paragraph', groups: [ 'list', 'indent', 'align', 'bidi', 'paragraph' ] },
+                '/',
+                { name: 'styles', groups: [ 'styles' ] },
+                { name: 'colors', groups: [ 'colors' ] },
+                { name: 'tools', groups: [ 'tools' ] },
+            	],
+              removeButtons: 'NewPage'
+       	 	}
         }
-      }
+      } 
     })
 
     editor.Panels.addButton('options', {
@@ -75,6 +96,14 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       className: 'fa fa-floppy-o',
       command: 'save',
       attributes: { title: 'Save' },
+      category: 'Custom Category' // add a new category for the custom icon
+    })
+
+    editor.Panels.addButton('options', {
+      id: 'back',
+      className: 'fa fa-arrow-left',
+      command: 'goBack',
+      attributes: { title: 'Back' },
       category: 'Custom Category' // add a new category for the custom icon
     })
 
@@ -110,6 +139,12 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         }
       })
     }
+
+    editor.Commands.add("goBack", {
+      run: () => {
+        history.back()
+      }
+    })
 
     // @ts-ignore
     window.editor = editor

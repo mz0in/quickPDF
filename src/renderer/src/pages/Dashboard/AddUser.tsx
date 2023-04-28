@@ -90,7 +90,7 @@ export default function UserAdd(): JSX.Element {
         autoClose: 2000,
       });
       navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..

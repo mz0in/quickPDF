@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react'
 import grapesjs, { Editor } from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import gjsBasicBlock from 'grapesjs-blocks-basic'
-import gjsPluginExport from 'grapesjs-plugin-export'
 import basicCustomPlugin from './plugins/blocksPlugin'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
@@ -37,7 +36,7 @@ export function TemplateEditor({ id, config, onSave, canvasSize }: GrapesJSProps
         ]
       },
       storageManager: false,
-      plugins: [gjsBasicBlock, basicCustomPlugin, grapesjsFontPlugin, gjsPluginExport],
+      plugins: [gjsBasicBlock, basicCustomPlugin, grapesjsFontPlugin],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
           // api_key: "AIzaSyBIbeXm8jJu47tuBj2ubDzjLlLgAmtD07s"

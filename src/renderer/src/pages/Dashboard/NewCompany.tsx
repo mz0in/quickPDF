@@ -16,7 +16,7 @@ import { fireStore, storage } from '@renderer/services/firebase'
 import { doc, setDoc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { ref, uploadString } from 'firebase/storage'
 import { spaceToDash } from '@renderer/services/utils'
-import { IconLoader3, IconCheck, IconCross } from '@tabler/icons-react'
+import { IconCheck, IconCross } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 import { notifications } from '@mantine/notifications'
 import { useAdminChecker } from '@renderer/services/hooks'
@@ -125,7 +125,7 @@ export default function NewCompany() {
   
       navigate("/");
       console.log("saved");
-    } catch (error) {
+    } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       notifications.update({

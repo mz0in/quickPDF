@@ -55,6 +55,9 @@ dependencies:
   grapesjs-plugin-ckeditor:
     specifier: ^0.0.10
     version: 0.0.10(ckeditor@4.12.1)(grapesjs@0.21.1)
+  grapesjs-tui-image-editor:
+    specifier: ^1.0.1
+    version: 1.0.1
   localforage:
     specifier: ^1.10.0
     version: 1.10.0
@@ -132,9 +135,6 @@ devDependencies:
   grapesjs-cli:
     specifier: ^4.0.1
     version: 4.0.1
-  grapesjs-plugin-export:
-    specifier: ^1.0.11
-    version: 1.0.11
   lit-html:
     specifier: ^2.7.2
     version: 2.7.2
@@ -3645,6 +3645,7 @@ packages:
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    requiresBuild: true
     dev: true
 
   /batch@0.6.1:
@@ -5497,9 +5498,9 @@ packages:
       grapesjs: 0.21.1
     dev: false
 
-  /grapesjs-plugin-export@1.0.11:
-    resolution: {integrity: sha512-S444lO7v8jODJ/ApMHIEU2f63MRRHkq+1xarFU/PNwpp/43wwKTTySila+PZzVEQvlZFlVQxYA+qwoI337vwcg==}
-    dev: true
+  /grapesjs-tui-image-editor@1.0.1:
+    resolution: {integrity: sha512-6o4U7mXZ/3Gvu38Jzd8eBp00HXkrNAoVUNYfbZkmgDcuKJ8Db5blIq2hGNkpVHZombrTg5abLDnOZQtCdCHXCw==}
+    dev: false
 
   /grapesjs@0.21.1:
     resolution: {integrity: sha512-gbOQtnF+lEHJBD5LnZ1FR7oMk3YjLP9S8IeH2pC2wUEEkvXocWIQxyiJCo9CkSUexHNDEIFZg6xDYVcpy0yPWg==}
@@ -8752,6 +8753,7 @@ packages:
   /xmlbuilder@15.1.1:
     resolution: {integrity: sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==}
     engines: {node: '>=8.0'}
+    requiresBuild: true
     dev: true
 
   /y18n@5.0.8:

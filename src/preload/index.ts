@@ -30,7 +30,7 @@ if (process.contextIsolated) {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
     contextBridge.exposeInMainWorld('DB', DB)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error)
   }
 } else {
