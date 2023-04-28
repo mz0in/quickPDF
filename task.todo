@@ -13,7 +13,7 @@ imporve ipc connections in main folder [X]
 add generated html to a list that can be fatched in companies page [X]
 fix async hell with chatgpt [X]
 make application experience better with animations and page transctions [X]
-add slider for zoom in and out [before 12]
+add slider for zoom in and out [X]
 write components for grapesjs
 write scrapping function
 desgin templates & save templates
