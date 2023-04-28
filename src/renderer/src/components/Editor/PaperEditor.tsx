@@ -4,6 +4,7 @@ import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import "@renderer/styles/grapesjs.css"
 import gjsBasicBlock from 'grapesjs-blocks-basic'
+import zoomPlugin from "./plugins/zoomPlugin"
 import gjsImageEditorPlugin from "grapesjs-tui-image-editor"
 import gjsCkEditorPlugin from "grapesjs-plugin-ckeditor"
 import basicCustomPlugin from './plugins/blocksPlugin'
@@ -60,7 +61,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         grapesjsFontPlugin,
         grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
-        gjsCkEditorPlugin
+        gjsCkEditorPlugin,
+        zoomPlugin
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -103,8 +105,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       id: 'back',
       className: 'fa fa-arrow-left',
       command: 'goBack',
-      attributes: { title: 'Back' },
-      category: 'Custom Category' // add a new category for the custom icon
+      attributes: { title: 'Back' }
     })
 
     editor.Panels.addButton('views', {
@@ -148,6 +149,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
 
     // @ts-ignore
     window.editor = editor
+
+    document.head.insertAdjacentHTML("beforeend", "<style>body,html {height: 100%;margin: 0;overflow: hidden;}</style>")
 
     return () => {
       editor.destroy()
