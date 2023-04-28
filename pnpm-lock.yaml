@@ -37,9 +37,6 @@ dependencies:
   '@tabler/icons-react':
     specifier: ^2.15.0
     version: 2.15.0(react@18.2.0)
-  ckeditor:
-    specifier: ^4.12.1
-    version: 4.12.1
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
@@ -52,9 +49,6 @@ dependencies:
   grapesjs:
     specifier: ^0.21.1
     version: 0.21.1
-  grapesjs-plugin-ckeditor:
-    specifier: ^0.0.10
-    version: 0.0.10(ckeditor@4.12.1)(grapesjs@0.21.1)
   grapesjs-tui-image-editor:
     specifier: ^1.0.1
     version: 1.0.1
@@ -3928,11 +3922,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ckeditor@4.12.1:
-    resolution: {integrity: sha512-pH2Su4oi0D4iN/3U8nUcwI7/lXHoOJi0aiN8e2zxnm4Ow5kq8eZP2ZGmpYyuqRyKZ2tHaU8+OyYi7laXcjiq9Q==}
-    deprecated: We have renamed the @ckeditor package. New versions are available under the @ckeditor4 name.
-    dev: false
-
   /clean-css@5.3.2:
     resolution: {integrity: sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww==}
     engines: {node: '>= 10.0'}
@@ -5487,16 +5476,6 @@ packages:
       - zen-observable
       - zenObservable
     dev: true
-
-  /grapesjs-plugin-ckeditor@0.0.10(ckeditor@4.12.1)(grapesjs@0.21.1):
-    resolution: {integrity: sha512-WWKure+ptpssV6rFJZ006diL87IeU38cm1pMA4SI5C2i8DoTHui0IM7J5NG5Vit7/PMqDcn9/hHLJwt1IRsqDg==}
-    peerDependencies:
-      ckeditor: 4.x
-      grapesjs: 0.x
-    dependencies:
-      ckeditor: 4.12.1
-      grapesjs: 0.21.1
-    dev: false
 
   /grapesjs-tui-image-editor@1.0.1:
     resolution: {integrity: sha512-6o4U7mXZ/3Gvu38Jzd8eBp00HXkrNAoVUNYfbZkmgDcuKJ8Db5blIq2hGNkpVHZombrTg5abLDnOZQtCdCHXCw==}

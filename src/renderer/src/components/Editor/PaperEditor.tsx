@@ -6,8 +6,8 @@ import "@renderer/styles/grapesjs.css"
 import gjsBasicBlock from 'grapesjs-blocks-basic'
 import zoomPlugin from "./plugins/zoomPlugin"
 import gjsImageEditorPlugin from "grapesjs-tui-image-editor"
-import gjsCkEditorPlugin from "grapesjs-plugin-ckeditor"
 import basicCustomPlugin from './plugins/blocksPlugin'
+import "./plugins/tinymceEditor.js"
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -61,8 +61,9 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         grapesjsFontPlugin,
         grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
-        gjsCkEditorPlugin,
-        zoomPlugin
+        // gjsCkEditorPlugin,
+        zoomPlugin,
+        'grapesjs-plugin-tinymce6'
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -73,22 +74,22 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
         },
-        [gjsCkEditorPlugin]: {
-          position: 'right',
-          options: {
-            language: 'en',
-            	toolbarGroups: [
-                { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-                { name: 'basicstyles', groups: [ 'basicstyles'] },
-                '/',
-                { name: 'paragraph', groups: [ 'list', 'indent', 'align', 'bidi', 'paragraph' ] },
-                '/',
-                { name: 'styles', groups: [ 'styles' ] },
-                { name: 'colors', groups: [ 'colors' ] },
-                { name: 'tools', groups: [ 'tools' ] },
-            	],
-              removeButtons: 'NewPage'
-       	 	}
+        'grapesjs-plugin-tinymce6': {
+          'tinymce-module': "/tinymce/tinymce.min.js",
+          inline: ['span','a','button','h1','h2','h3','h4','h5'],
+          inline_toolbar: [
+            'bold italic underline strikethrough forecolor backcolor',
+            'fontfamily fontsize'
+          ],
+          toolbar: [
+            'bold italic underline strikethrough fontfamily fontsize outdent indent',
+            'blocks forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist'
+          ],
+          plugins:  [
+            'link',
+            'lists',
+            'autolink'
+          ]
         }
       } 
     })
