@@ -8,33 +8,34 @@ import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
 
 interface paperType {
-  date: number,
+  date: number
   month: string
 }
 
 export default function Company() {
   let { companyName } = useParams()
-  const [newspapers, setNewspapers] = useState<paperType[]>([{
-    date: 1,
-    month: 'january'
-  }])
+  const [newspapers, setNewspapers] = useState<paperType[]>([
+    {
+      date: 1,
+      month: 'january'
+    }
+  ])
 
-  const getAllPapers = async() => {
-    let papers = await window.api.getPapers(companyName);
-    let data = Object.keys(papers).map((value)=> {
+  const getAllPapers = async () => {
+    let papers = await window.api.getPapers(companyName)
+    let data = Object.keys(papers).map((value) => {
       let date = new Date(value)
       return {
         date: date.getDate(),
         month: monthsOfYear[date.getMonth()]
       }
     })
-    setNewspapers(data);
+    setNewspapers(data)
   }
 
-  useEffect(()=> {
-    getAllPapers();
+  useEffect(() => {
+    getAllPapers()
   }, [])
-
 
   return (
     <Layout isBack>
@@ -68,10 +69,8 @@ export default function Company() {
         </Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-pdf/${companyName}`} height="150px" />
-          {newspapers.map((paper)=> {
-            return (
-              <PaperCard url={`/new-pdf/`} date={paper.date} month={paper.month}/>
-            )
+          {newspapers.map((paper) => {
+            return <PaperCard url={`/new-pdf/`} date={paper.date} month={paper.month} />
           })}
         </SimpleGrid>
       </Box>

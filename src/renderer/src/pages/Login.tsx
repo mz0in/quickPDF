@@ -22,49 +22,49 @@ export default function LoginPage({ loginHook }: props) {
       title: 'Logining',
       message: 'retriving data from server please wait.',
       autoClose: false,
-      withCloseButton: false,
-    });
-  
+      withCloseButton: false
+    })
+
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
-      const user = userCredential.user;
-      console.log(user);
-  
-      const docRef = doc(fireStore, 'users', user.uid);
-      const docSnap = await getDoc(docRef);
-  
+      const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue)
+      const user = userCredential.user
+      console.log(user)
+
+      const docRef = doc(fireStore, 'users', user.uid)
+      const docSnap = await getDoc(docRef)
+
       window.localStorage.setItem(
         'user',
         JSON.stringify({
           login: true,
-          admin: docSnap.data()?.isAdmin ? true : false,
+          admin: docSnap.data()?.isAdmin ? true : false
         })
-      );
-  
-      loginHook(true); // hook to reload App.tsx
-  
+      )
+
+      loginHook(true) // hook to reload App.tsx
+
       notifications.update({
         id: 'login-data',
         color: 'green',
         title: `Welcome ${user.displayName}`,
         message: 'login successful',
         icon: <IconDiscountCheckFilled size="1rem" />,
-        autoClose: 4000,
-      });
+        autoClose: 4000
+      })
     } catch (error: any) {
-      const errorMessage = error.message;
-      console.log('errorMsg', errorMessage);
-  
+      const errorMessage = error.message
+      console.log('errorMsg', errorMessage)
+
       notifications.update({
         id: 'login-data',
         color: 'red',
         title: 'Error',
         message: errorMessage,
         icon: <IconCross size="1rem" />,
-        autoClose: 4000,
-      });
+        autoClose: 4000
+      })
     }
-  };  
+  }
 
   return (
     <Container size={420} my={40}>

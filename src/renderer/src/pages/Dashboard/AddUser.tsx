@@ -1,6 +1,13 @@
 import { Layout, FormLayout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import { TextInput, PasswordInput, Button, MultiSelect, NumberInput, LoadingOverlay } from '@mantine/core'
+import {
+  TextInput,
+  PasswordInput,
+  Button,
+  MultiSelect,
+  NumberInput,
+  LoadingOverlay
+} from '@mantine/core'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { arrayUnion, doc, updateDoc, query, collection, getDocs, setDoc } from 'firebase/firestore'
 import { auth, fireStore } from '@renderer/services/firebase'
@@ -56,52 +63,52 @@ export default function UserAdd(): JSX.Element {
         auth,
         values.emailAddress,
         values.password
-      );
-      const user = userCredential.user;
-    
+      )
+      const user = userCredential.user
+
       //2. updating name
       await updateProfile(user, {
-        displayName: values.name,
-      });
-    
+        displayName: values.name
+      })
+
       //3. adding in company employ list
-      const userRef = doc(fireStore, "company", "allUsers");
+      const userRef = doc(fireStore, 'company', 'allUsers')
       await updateDoc(userRef, {
         users: arrayUnion({
           name: user.displayName,
-          uid: user.uid,
-        }),
-      });
-    
+          uid: user.uid
+        })
+      })
+
       //4. giving user their company
       await setDoc(doc(fireStore, `users/${user.uid}`), {
         isAdmin: false,
         number: values.number,
-        papers: values.papers,
-      });
-    
+        papers: values.papers
+      })
+
       //5. updating notification
       notifications.update({
-        id: "load-data",
-        color: "teal",
-        title: "Saved " + values.name,
-        message: "user is saved on the server",
+        id: 'load-data',
+        color: 'teal',
+        title: 'Saved ' + values.name,
+        message: 'user is saved on the server',
         icon: <IconCross size="1rem" />,
-        autoClose: 2000,
-      });
-      navigate("/");
+        autoClose: 2000
+      })
+      navigate('/')
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      const errorCode = error.code
+      const errorMessage = error.message
       // ..
       notifications.update({
-        id: "load-data",
-        color: "red",
-        title: "Error " + errorCode,
+        id: 'load-data',
+        color: 'red',
+        title: 'Error ' + errorCode,
         message: errorMessage,
         icon: <IconCross size="1rem" />,
-        autoClose: 2000,
-      });
+        autoClose: 2000
+      })
     }
   }
 

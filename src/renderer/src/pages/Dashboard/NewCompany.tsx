@@ -81,24 +81,21 @@ export default function NewCompany() {
   const save = async (values: typeof form.values) => {
     try {
       notifications.show({
-        id: "load-data",
+        id: 'load-data',
         loading: true,
-        title: "Saving Company",
-        message: "Data is saving on the server please wait.",
+        title: 'Saving Company',
+        message: 'Data is saving on the server please wait.',
         autoClose: false,
-        withCloseButton: false,
-      });
-      let nameInSpaceToDash = spaceToDash(values.name);
-  
+        withCloseButton: false
+      })
+      let nameInSpaceToDash = spaceToDash(values.name)
+
       // save the image with company-name
-      const storageRef = ref(
-        storage,
-        `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`
-      );
-  
+      const storageRef = ref(storage, `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`)
+
       //1. uploading image
-      await uploadString(storageRef, image, "data_url");
-  
+      await uploadString(storageRef, image, 'data_url')
+
       //2. saving paper
       await setDoc(doc(fireStore, `papers`, `${nameInSpaceToDash}`), {
         name: values.name,
@@ -106,44 +103,44 @@ export default function NewCompany() {
         owner: values.owner,
         mobileNumber: values.mobileNumber,
         address: values.address,
-        logo: `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`,
-      });
-  
+        logo: `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`
+      })
+
       //3. assing paper to user
-      await updateDoc(doc(fireStore, "users", values.creator), {
-        papers: arrayUnion(nameInSpaceToDash),
-      });
-  
+      await updateDoc(doc(fireStore, 'users', values.creator), {
+        papers: arrayUnion(nameInSpaceToDash)
+      })
+
       notifications.update({
-        id: "load-data",
-        color: "teal",
-        title: "Saved",
-        message: "data now saved on the server.",
+        id: 'load-data',
+        color: 'teal',
+        title: 'Saved',
+        message: 'data now saved on the server.',
         icon: <IconCheck size="1rem" />,
-        autoClose: 2000,
-      });
-  
-      navigate("/");
-      console.log("saved");
+        autoClose: 2000
+      })
+
+      navigate('/')
+      console.log('saved')
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      const errorCode = error.code
+      const errorMessage = error.message
       notifications.update({
-        id: "load-data",
-        color: "red",
-        title: "Error " + errorCode,
+        id: 'load-data',
+        color: 'red',
+        title: 'Error ' + errorCode,
         message: errorMessage,
         icon: <IconCross size="1rem" />,
-        autoClose: 2000,
-      });
+        autoClose: 2000
+      })
     }
-  };  
+  }
 
   if (isAdmin === false) {
     return <NotFoundTitle />
   }
 
-  if (isAdmin === true){
+  if (isAdmin === true) {
     return (
       <Layout size="sm" isBack>
         <FormLayout title="New Company!">

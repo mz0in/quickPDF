@@ -57,7 +57,7 @@ class Store {
       console.error(e)
     }
 
-    return data;
+    return data
   }
 }
 

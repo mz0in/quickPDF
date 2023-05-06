@@ -166,32 +166,32 @@
         //     {}
         //   )
         // ),
-          new TinyForGrapesJs(editor, options)
-          // eval(
-          //   (function (e, t, n, o, i, r) {
-          //     if (((i = String), !''.replace(/^/, String))) {
-          //       for (; n--; ) r[n] = o[n] || n
-          //       ;(o = [
-          //         function (e) {
-          //           return r[e]
-          //         }
-          //       ]),
-          //         (i = function () {
-          //           return '\\w+'
-          //         }),
-          //         (n = 1)
-          //     }
-          //     for (; n--; ) o[n] && (e = e.replace(new RegExp('\\b' + i(n) + '\\b', 'g'), o[n]))
-          //     return e
-          //   })(
-          //     "0(1.2!='3.4'){5 6 7('8 9');}",
-          //     0,
-          //     10,
-          //     'if|location|hostname|devfuture|pro|throw|new|Error|Something|wrong'.split('|'),
-          //     0,
-          //     {}
-          //   )
-          // )
+        new TinyForGrapesJs(editor, options)
+        // eval(
+        //   (function (e, t, n, o, i, r) {
+        //     if (((i = String), !''.replace(/^/, String))) {
+        //       for (; n--; ) r[n] = o[n] || n
+        //       ;(o = [
+        //         function (e) {
+        //           return r[e]
+        //         }
+        //       ]),
+        //         (i = function () {
+        //           return '\\w+'
+        //         }),
+        //         (n = 1)
+        //     }
+        //     for (; n--; ) o[n] && (e = e.replace(new RegExp('\\b' + i(n) + '\\b', 'g'), o[n]))
+        //     return e
+        //   })(
+        //     "0(1.2!='3.4'){5 6 7('8 9');}",
+        //     0,
+        //     10,
+        //     'if|location|hostname|devfuture|pro|throw|new|Error|Something|wrong'.split('|'),
+        //     0,
+        //     {}
+        //   )
+        // )
       }
       var TinyForGrapesJs = (function () {
         function e(t, n) {

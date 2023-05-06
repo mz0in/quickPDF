@@ -1,6 +1,14 @@
 import { Layout } from '@renderer/components/layouts'
 import { useForm } from '@mantine/form'
-import { Checkbox, MultiSelect, NumberInput, Title, Paper, Button, LoadingOverlay } from '@mantine/core'
+import {
+  Checkbox,
+  MultiSelect,
+  NumberInput,
+  Title,
+  Paper,
+  Button,
+  LoadingOverlay
+} from '@mantine/core'
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
@@ -92,7 +100,7 @@ export default function UserAdd(): JSX.Element {
     return <NotFoundTitle />
   }
 
-  if (isAdmin === true){
+  if (isAdmin === true) {
     return (
       <Layout size="sm" isBack>
         <Title

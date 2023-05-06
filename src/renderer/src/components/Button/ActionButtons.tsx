@@ -14,8 +14,8 @@ interface addButtonProps {
 
 interface paperProps {
   url: string
-  height?: string,
-  date: number,
+  height?: string
+  date: number
   month: string
 }
 
@@ -69,7 +69,6 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
   )
 }
 
-
 export function PaperCard({ url, date, month }: paperProps) {
   const navigate = useNavigate()
 
@@ -78,7 +77,7 @@ export function PaperCard({ url, date, month }: paperProps) {
       sx={{
         backgroundColor: '#f1f1f1',
         display: 'flex',
-        flexDirection: "column",
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: '110px',
@@ -91,16 +90,16 @@ export function PaperCard({ url, date, month }: paperProps) {
       onClick={() => navigate(url)}
     >
       <Text
-      variant="gradient"
-      gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
-      sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
-      ta="center"
-      fz="xl"
-      fw={700}
-    >
-      {date}
-    </Text>
-    <Text fz="sm">{month}</Text>
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
+        sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+        ta="center"
+        fz="xl"
+        fw={700}
+      >
+        {date}
+      </Text>
+      <Text fz="sm">{month}</Text>
     </Box>
   )
 }

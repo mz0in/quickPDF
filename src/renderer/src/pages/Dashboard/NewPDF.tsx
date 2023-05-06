@@ -31,13 +31,13 @@ export default function NewPage(): JSX.Element {
 
   const handleSave = (htmlStrings: htmlObject[], pageHead: string) => {
     notifications.show({
-      id: "load-data",
+      id: 'load-data',
       loading: true,
-      title: "Saving Company",
-      message: "Data is saving on the server please wait.",
+      title: 'Saving Company',
+      message: 'Data is saving on the server please wait.',
       autoClose: false,
-      withCloseButton: false,
-    });
+      withCloseButton: false
+    })
     console.log(htmlStrings)
     let allCss = ''
     let allHtml = ''
@@ -55,13 +55,13 @@ export default function NewPage(): JSX.Element {
 
     saveAsPDF(allCss, allHtml, pageHead, info)
     notifications.update({
-      id: "load-data",
-      color: "teal",
-      title: "Saved",
-      message: "data now saved on the server.",
+      id: 'load-data',
+      color: 'teal',
+      title: 'Saved',
+      message: 'data now saved on the server.',
       icon: <IconCheck size="1rem" />,
-      autoClose: 2000,
-    });
+      autoClose: 2000
+    })
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
@@ -75,7 +75,7 @@ export default function NewPage(): JSX.Element {
 
   if (modalData !== undefined) {
     return (
-        <PaperEditor
+      <PaperEditor
         id="editor"
         canvasSize={{
           height: modalData.height,

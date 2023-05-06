@@ -25,8 +25,8 @@ export function DbCalls() {
     return pdfBuffer
   })
 
-  ipcMain.handle("getPapers", (event, args) => {
-    let papers = store.getPDF(args.companyName);
-    return papers;
+  ipcMain.handle('getPapers', (event, args) => {
+    let papers = store.getPDF(args.companyName)
+    return papers
   })
 }

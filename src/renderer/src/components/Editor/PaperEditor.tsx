@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react'
 // @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
-import "@renderer/styles/grapesjs.css"
+import '@renderer/styles/grapesjs.css'
 import gjsBasicBlock from 'grapesjs-blocks-basic'
-import zoomPlugin from "./plugins/zoomPlugin"
-import gjsImageEditorPlugin from "grapesjs-tui-image-editor"
-import basicCustomPlugin from './plugins/blocksPlugin'
-import "./plugins/tinymceEditor.js"
+import zoomPlugin from './plugins/zoomPlugin'
+import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
+// import basicCustomPlugin from './plugins/blocksPlugin'
+import customComponents from './plugins/componentsPlugin'
+import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -54,10 +55,11 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           }
         ]
       },
-      storageManager: false,
+      // storageManager: false,
       plugins: [
         gjsBasicBlock,
-        basicCustomPlugin,
+        // basicCustomPlugin,
+        customComponents,
         grapesjsFontPlugin,
         grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
@@ -75,8 +77,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           height: `${canvasSize?.height}in` // new page height
         },
         'grapesjs-plugin-tinymce6': {
-          'tinymce-module': "/tinymce/tinymce.min.js",
-          inline: ['span','a','button','h1','h2','h3','h4','h5'],
+          'tinymce-module': '/tinymce/tinymce.min.js',
+          inline: ['span', 'a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5'],
           inline_toolbar: [
             'bold italic underline strikethrough forecolor backcolor',
             'fontfamily fontsize'
@@ -85,13 +87,9 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
             'bold italic underline strikethrough fontfamily fontsize outdent indent',
             'blocks forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist'
           ],
-          plugins:  [
-            'link',
-            'lists',
-            'autolink'
-          ]
+          plugins: ['link', 'lists', 'autolink']
         }
-      } 
+      }
     })
 
     editor.Panels.addButton('options', {
@@ -142,7 +140,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       })
     }
 
-    editor.Commands.add("goBack", {
+    editor.Commands.add('goBack', {
       run: () => {
         history.back()
       }
@@ -151,7 +149,10 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
     // @ts-ignore
     window.editor = editor
 
-    document.head.insertAdjacentHTML("beforeend", "<style>body,html {height: 100%;margin: 0;overflow: hidden;}</style>")
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      '<style>body,html {height: 100%;margin: 0;overflow: hidden;}</style>'
+    )
 
     return () => {
       editor.destroy()

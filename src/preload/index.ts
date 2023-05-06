@@ -12,7 +12,7 @@ interface Info {
 
 const api = {
   save: (info: Info, html: string) => ipcRenderer.invoke('save', { info, html }),
-  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', {companyName})
+  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', { companyName })
 }
 
 // Custom DataBase Handler APIs
