@@ -1,3 +1,5 @@
-import { LayoutTemplate } from './Layouts'
+import { SevenLayoutTemplate } from './7Layouts'
+import {EightLayoutTemplate} from "./8Layouts"
+import { innerLayout } from './innerLayout'
 
-export const templates = [LayoutTemplate]
+export const templates = [SevenLayoutTemplate, EightLayoutTemplate, innerLayout]
