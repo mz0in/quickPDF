@@ -1,169 +1,166 @@
-const categoryName = '7 layouts'
+const category = "7 Blocks"
+const stylePrefix = "qpdf7-"
+const rowHeight = 75;
 
-export const SevenLayoutTemplate = [
+const clsRow = `${stylePrefix}row`;
+const clsCell = `${stylePrefix}cell`;
+const styleRow = `
+    .${clsRow} {
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      padding: 10px;
+    }
+    }`;
+
+const styleClm = `
+    .${clsCell} {
+      min-height: ${rowHeight}px;
+      flex-grow: 1;
+      flex-basis: 100%;
+    }`;
+
+const step = 0.2;
+const minDim = 1;
+const currentUnit = 1;
+const resizerBtm: Record<string, any> = {
+  tl: 0,
+  tc: 0,
+  tr: 0,
+  cl: 0,
+  cr: 0,
+  bl: 0,
+  br: 0,
+  minDim
+};
+const resizerRight: Record<string, any> = {
+  ...resizerBtm,
+  cr: 1,
+  bc: 0,
+  currentUnit,
+  minDim,
+  step,
+  keyWidth: 'flex-basis'
+};
+
+const rowAttr = {
+  class: clsRow,
+  'data-gjs-droppable': `.${clsCell}`,
+  'data-gjs-resizable': resizerBtm,
+  'data-gjs-name': 'Row'
+};
+
+const colAttr: Record<string, any> = {
+  class: clsCell,
+  'data-gjs-draggable': `.${clsRow}`,
+  'data-gjs-resizable': resizerRight,
+  'data-gjs-name': 'Cell',
+  'data-gjs-unstylable': 'width',
+  'data-gjs-stylable-require': 'flex-basis'
+};
+
+
+const attrsToString = (attrs: Record<string, any>) => {
+  const result = [];
+
+  for (let key in attrs) {
+    let value = attrs[key];
+    const toParse = value instanceof Array || value instanceof Object;
+    value = toParse ? JSON.stringify(value) : value;
+    result.push(`${key}=${toParse ? `'${value}'` : `'${value}'`}`);
+  }
+
+  return result.length ? ` ${result.join(' ')}` : '';
+};
+
+const attrsRow = attrsToString(rowAttr);
+const attrsCell = attrsToString(colAttr);
+const commonBlockProps = {
+  category,
+  select: true,
+};
+
+const blocks = [
   {
-    id: '7-block',
+    ...commonBlockProps,
     label: '7 block',
-    content: `<section class="flex-container">
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-  <div class="flex-item-7-block"></div>
-</section>
-<style>
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.flex-item-7-block {
-  flex-basis: calc(100% / 7);
-  min-height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
+    content: `<div ${attrsRow}>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+      <div ${attrsCell} class="column-7"></div>
+    </div>
+    <style>
+        ${styleClm}
+        ${styleRow}
+        .column-7 {
+          flex-basis: calc(100% / 7);
+        }
+      </style>`
   },
   {
-    id: '5/2-block',
+    ...commonBlockProps,
     label: '5/2 block',
-    content: `<section class="flex-container">
-    <div class="flex-item-75"></div>
-    <div class="flex-item-72"></div>
-  </section>
-  
-<style>
-.flex-container {
-  display: flex;
-  width: 100%;
- /*  flex-direction: column; */
-}
-
-.flex-item-75 {
-  flex-basis: 71%;
-  height: 100px;
-  margin: 3px;
-}
-
-.flex-item-72 {
-  flex-basis: 29%;
-  min-height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
+    content: `<div ${attrsRow}>
+    <div ${attrsCell} style='flex-basis : 71%;'></div>
+    <div ${attrsCell} style='flex-basis : 29%;'></div>
+  </div>
+  <style>
+      ${styleClm}
+      ${styleRow}
+    </style>`
   },
   {
-    id: '4/3-block',
+    ...commonBlockProps,
     label: '4/3 block',
-    content: `<section class="flex-container">
-    <div class="flex-item-74"></div>
-    <div class="flex-item-73"></div>
-  </section>
-  
-<style>
-.flex-container {
-  display: flex;
-  width: 100%;
-}
-
-.flex-item-74 {
-  flex-basis: 58%;
-  height: 100px;
-  margin: 3px;
-}
-
-.flex-item-73 {
-  flex-basis: 42%;
-  min-height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
+    content: `<div ${attrsRow}>
+    <div ${attrsCell} style='flex-basis : 58%;'></div>
+    <div ${attrsCell} style='flex-basis : 42%;'></div>
+  </div>
+  <style>
+      ${styleClm}
+      ${styleRow}
+    </style>`
   },
   {
-    id: '3/4-block',
+    ...commonBlockProps,
     label: '3/4 block',
-    content: `<section class="flex-container">
-    <div class="flex-item-73"></div>
-    <div class="flex-item-74"></div>
-  </section>
-  
-<style>
-.flex-container {
-  display: flex;
-  width: 100%;
-}
-
-.flex-item-73 {
-  flex-basis: 42%;
-  height: 100px;
-  margin: 3px;
-}
-
-.flex-item-74 {
-  flex-basis: 58%;
-  min-height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
+    content: `<div ${attrsRow}>
+    <div ${attrsCell} style='flex-basis : 42%;'></div>
+    <div ${attrsCell} style='flex-basis : 58%;'></div>
+  </div>
+  <style>
+      ${styleClm}
+      ${styleRow}
+    </style>`
   },
   {
-    id: '2/5-block',
+    ...commonBlockProps,
     label: '2/5 block',
-    content: `<section class="flex-container">
-    <div class="flex-item-72"></div>
-    <div class="flex-item-75"></div>
-  </section>
-  
-<style>
-.flex-container {
-  display: flex;
-  width: 100%;
-}
-
-.flex-item-72 {
-  flex-basis: 29%;
-  height: 100px;
-  margin: 3px;
-}
-
-.flex-item-75 {
-  flex-basis: 71%;
-  min-height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
+    content: `<div ${attrsRow}>
+    <div ${attrsCell} style='flex-basis : 29%;'></div>
+    <div ${attrsCell} style='flex-basis : 71%;'></div>
+  </div>
+  <style>
+      ${styleClm}
+      ${styleRow}
+    </style>`
   },
   {
-    id: 'full-block',
-    label: 'full block',
-    content: `<section class="flex-container">
-    <div class="flex-item-full"></div>
-  </section>
-  
-<style>
-.flex-container {
-  display: flex;
-  width: 100%;
-}
-.flex-item-full {
-  flex-basis: 100%;
-  height: 100px;
-  margin: 3px;
-}
-</style>
-`,
-    category: categoryName
-  },
+    ...commonBlockProps,
+    label: 'Full 7',
+    content: `<div ${attrsRow}>
+    <div ${attrsCell} style='flex-basis : 100%;'></div>
+  </div>
+  <style>
+      ${styleClm}
+      ${styleRow}
+    </style>`
+  }
 ]
+
+export default blocks
