@@ -3,7 +3,8 @@ import { useEffect, useRef } from 'react'
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
-import gjsBasicBlock from 'grapesjs-blocks-basic'
+// import gjsBasicBlock from 'grapesjs-blocks-basic'
+import basicCustomPlugin from "./plugins/blocksPlugin"
 import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
@@ -57,8 +58,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       },
       storageManager: false,
       plugins: [
-        gjsBasicBlock,
-        // basicCustomPlugin,
+        // gjsBasicBlock,
+        basicCustomPlugin,
         customComponents,
         grapesjsFontPlugin,
         grapesjsPageManagerPlugin,
