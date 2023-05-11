@@ -81,16 +81,22 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           inline: ['span', 'a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5'],
           inline_toolbar: [
             'bold italic underline strikethrough forecolor backcolor',
-            'fontfamily fontsize'
+            'fontsize'
           ],
           toolbar: [
-            'bold italic underline strikethrough fontfamily fontsize outdent indent',
+            'bold italic underline strikethrough fontsize outdent indent',
             'blocks forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist'
           ],
           plugins: ['link', 'lists', 'autolink']
         }
       }
     })
+
+    setTimeout(()=> {
+      console.log("ok")
+      // @ts-ignore
+      editor.BlockManager.getCategories().each(ctg => ctg.set('open', false))
+    }, 2000)
 
     editor.Panels.addButton('options', {
       id: 'save',
