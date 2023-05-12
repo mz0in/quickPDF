@@ -1,9 +1,9 @@
-const category = "Inner Blocks"
-const stylePrefix = "qpdf-inner-"
-const rowHeight = 75;
+const category = 'Inner Blocks'
+const stylePrefix = 'qpdf-inner-'
+const rowHeight = 75
 
-const clsRow = `${stylePrefix}row`;
-const clsCell = `${stylePrefix}cell`;
+const clsRow = `${stylePrefix}row`
+const clsCell = `${stylePrefix}cell`
 const styleRow = `
     .${clsRow} {
       display: flex;
@@ -12,18 +12,18 @@ const styleRow = `
       flex-wrap: nowrap;
       padding: 5px;
     }
-    }`;
+    }`
 
 const styleClm = `
     .${clsCell} {
       min-height: ${rowHeight}px;
       flex-grow: 1;
       flex-basis: 100%;
-    }`;
+    }`
 
-const step = 0.2;
-const minDim = 1;
-const currentUnit = 1;
+const step = 0.2
+const minDim = 1
+const currentUnit = 1
 const resizerBtm: Record<string, any> = {
   tl: 0,
   tc: 0,
@@ -33,7 +33,7 @@ const resizerBtm: Record<string, any> = {
   bl: 0,
   br: 0,
   minDim
-};
+}
 const resizerRight: Record<string, any> = {
   ...resizerBtm,
   cr: 1,
@@ -42,14 +42,14 @@ const resizerRight: Record<string, any> = {
   minDim,
   step,
   keyWidth: 'flex-basis'
-};
+}
 
 const rowAttr = {
   class: clsRow,
   'data-gjs-droppable': `.${clsCell}`,
   'data-gjs-resizable': resizerBtm,
   'data-gjs-name': 'Row'
-};
+}
 
 const colAttr: Record<string, any> = {
   class: clsCell,
@@ -58,28 +58,27 @@ const colAttr: Record<string, any> = {
   'data-gjs-name': 'Cell',
   'data-gjs-unstylable': 'width',
   'data-gjs-stylable-require': 'flex-basis'
-};
-
+}
 
 const attrsToString = (attrs: Record<string, any>) => {
-  const result = [];
+  const result = []
 
   for (let key in attrs) {
-    let value = attrs[key];
-    const toParse = value instanceof Array || value instanceof Object;
-    value = toParse ? JSON.stringify(value) : value;
-    result.push(`${key}=${toParse ? `'${value}'` : `'${value}'`}`);
+    let value = attrs[key]
+    const toParse = value instanceof Array || value instanceof Object
+    value = toParse ? JSON.stringify(value) : value
+    result.push(`${key}=${toParse ? `'${value}'` : `'${value}'`}`)
   }
 
-  return result.length ? ` ${result.join(' ')}` : '';
-};
+  return result.length ? ` ${result.join(' ')}` : ''
+}
 
-const attrsRow = attrsToString(rowAttr);
-const attrsCell = attrsToString(colAttr);
+const attrsRow = attrsToString(rowAttr)
+const attrsCell = attrsToString(colAttr)
 const commonBlockProps = {
   category,
-  select: true,
-};
+  select: true
+}
 
 const blocks = [
   {
@@ -221,7 +220,7 @@ const blocks = [
           flex-basis: calc(100% / 8);
         }
       </style>`
-  },
+  }
 ]
 
 export default blocks
