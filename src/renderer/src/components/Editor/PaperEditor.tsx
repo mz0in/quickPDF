@@ -4,12 +4,13 @@ import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
 // import gjsBasicBlock from 'grapesjs-blocks-basic'
-import basicCustomPlugin from "./plugins/blocksPlugin"
+import basicCustomPlugin from './plugins/blocksPlugin'
 import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
 import './plugins/tinymceEditor.js'
+import './plugins/userBlock.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -66,7 +67,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         gjsImageEditorPlugin,
         // gjsCkEditorPlugin,
         zoomPlugin,
-        'grapesjs-plugin-tinymce6'
+        'grapesjs-plugin-tinymce6',
+        'grapesjs-users-blocks'
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -80,10 +82,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         'grapesjs-plugin-tinymce6': {
           'tinymce-module': '/tinymce/tinymce.min.js',
           inline: ['span', 'a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5'],
-          inline_toolbar: [
-            'bold italic underline strikethrough forecolor backcolor',
-            'fontsize'
-          ],
+          inline_toolbar: ['bold italic underline strikethrough forecolor backcolor', 'fontsize'],
           toolbar: [
             'bold italic underline strikethrough fontsize outdent indent',
             'blocks forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist'
@@ -93,10 +92,10 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       }
     })
 
-    setTimeout(()=> {
-      console.log("ok")
+    setTimeout(() => {
+      console.log('ok')
       // @ts-ignore
-      editor.BlockManager.getCategories().each(ctg => ctg.set('open', false))
+      editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
     }, 2000)
 
     editor.Panels.addButton('options', {
