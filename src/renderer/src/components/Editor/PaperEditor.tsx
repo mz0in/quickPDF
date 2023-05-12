@@ -10,7 +10,6 @@ import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
 import './plugins/tinymceEditor.js'
-import './plugins/userBlock.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -67,8 +66,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         gjsImageEditorPlugin,
         // gjsCkEditorPlugin,
         zoomPlugin,
-        'grapesjs-plugin-tinymce6',
-        'grapesjs-users-blocks'
+        'grapesjs-plugin-tinymce6'
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
