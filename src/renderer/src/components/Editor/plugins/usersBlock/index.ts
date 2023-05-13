@@ -13,12 +13,6 @@ export default (editor: Editor, opts = {}) => {
   </svg>
   `
 
-  function styleToString(style) {
-    return Object.keys(style)
-      .map(prop => `${prop}: ${style[prop]};`)
-      .join('\n');
-  }
-
   dc.getTypes().forEach((elType) => {
     let { model: oldModel, view: oldView } = elType
     console.log(JSON.stringify(elType))

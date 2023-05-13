@@ -32,6 +32,16 @@
   margin-bottom: 32px;
 }
 
-.image-container {
-  max-width: 700px !important;
+#screenShotCanvas {
+  max-width: 750px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.button {
+  padding: 5px 10px 5px 10px;
+  background-color: #363636;
+  border: solid 1px #2c2c2c;
+  color: white;
+  border-radius: 5px;
 }
