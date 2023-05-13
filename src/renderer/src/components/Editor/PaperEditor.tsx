@@ -14,6 +14,7 @@ import './plugins/tinymceEditor.js'
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
 import grapesjsPageManagerPlugin from './plugins/pageManger'
+import gjsUserBlock from './plugins/usersBlock'
 import '@renderer/styles/designer.css'
 import './plugins/pageManger/css/grapesjs-project-manager.min.css'
 import type { htmlObject } from '.'
@@ -64,8 +65,8 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         grapesjsFontPlugin,
         grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
-        // gjsCkEditorPlugin,
         zoomPlugin,
+        gjsUserBlock,
         'grapesjs-plugin-tinymce6'
       ],
       pluginsOpts: {
