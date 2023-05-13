@@ -6,3 +6,32 @@
   max-height: 95vh; /*29 inch*/
   overflow: auto;
 }
+
+.form-row {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+  gap: 30px;
+}
+
+.form-column {
+  flex-basis: 40%;
+  background-color: #363636;
+  border: solid 1px #2c2c2c;
+  margin: 2px;
+  padding: 6px;
+  color: white;
+}
+
+.modal-content {
+  margin-top: 28px;
+}
+
+.container {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.image-container {
+  max-width: 700px !important;
+}

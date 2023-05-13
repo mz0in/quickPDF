@@ -57,7 +57,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           }
         ]
       },
-      storageManager: false,
+      storageManager: true,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
