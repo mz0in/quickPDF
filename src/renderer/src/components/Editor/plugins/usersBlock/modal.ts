@@ -51,7 +51,15 @@ export default function customSaveModal(editor: Editor) {
   
 
   document.getElementById("submit")?.addEventListener("click", ()=> {
-    onSubmit(selectedComponent, editor)
+   let nameBlock = document.getElementById("component-name") as HTMLInputElement
+   let categoryBlock = document.getElementById("component-category") as HTMLInputElement
+
+    let details = {
+      name: nameBlock.value,
+      category: categoryBlock.value
+    }
+
+    onSubmit(selectedComponent, editor, details, myModal)
   })
 
   return myModal
