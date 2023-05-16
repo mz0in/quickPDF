@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
     return <Dashboard />
   }
 
-  if ((isLogin as boolean) !== true) {
+  if ((isLogin as boolean) === false) {
     return <LoginPage loginHook={setIsLogin} />
   }
 

@@ -20,7 +20,6 @@ export default (editor: Editor, opts = {}) => {
 
   dc.getTypes().forEach((elType) => {
     let { model: oldModel, view: oldView } = elType
-    console.log(JSON.stringify(elType))
     dc.addType(elType.id, {
       model: oldModel.extend({
         initToolbar() {

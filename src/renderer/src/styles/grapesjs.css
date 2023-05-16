@@ -48,3 +48,48 @@
   background: transparent !important;
   box-shadow: none !important;
 }
+
+/* INFO PANEL */
+
+.gjs-mdl-dialog-sm {
+  width: 300px;
+}
+
+#info-panel {
+  line-height: 17px;
+}
+
+.info-panel-logo {
+  display: block;
+  height: 90px;
+  margin: 0 auto;
+  width: 90px;
+}
+
+.info-panel-logo path {
+  stroke: #eee !important;
+  stroke-width: 8 !important;
+}
+
+.info-panel-label {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.info-panel-link {
+  text-decoration: none;
+}
+
+/* Temporary fix #2490 */
+.gjs-clm-tag-status,
+.gjs-clm-tag-close {
+    width: 12px;
+    height: 12px;
+}
+.gjs-clm-tags-btn {
+    width: 24px;
+}
+
+span.gjs-pn-btn.fa.fa-cog {
+  display: none;
+}

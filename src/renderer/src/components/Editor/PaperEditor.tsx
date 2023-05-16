@@ -95,7 +95,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       console.log('ok')
       // @ts-ignore
       editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
-    }, 2000)
+    }, 3000)
 
     editor.Panels.addButton('options', {
       id: 'save',
@@ -178,6 +178,9 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         }
       ]
     })
+
+    // block manager open by default
+    editor.Panels.getButton('views', 'open-blocks').set('active', true)
 
     // @ts-ignore
     window.editor = editor
