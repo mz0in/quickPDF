@@ -1,21 +1,13 @@
-hide new company pages from users [X]
-repalce indexedDB with sqllite3 [X]
-resitred compay page route [X]
-replace html2pdf with pdf generation in electron js [X]
-add feature to spacific for users [X]
-add a page to add more users in the applications only for admins [X]
-update database for users spacfic.[x]
-add users fileds in compaies pages [x]
-update useAdminChecker function [X]
-create a not access page[X]
-add a page to edit users [X]
-imporve ipc connections in main folder [X]
-add generated html to a list that can be fatched in companies page [X]
-fix async hell with chatgpt [X]
-make application experience better with animations and page transctions [X]
-add slider for zoom in and out [X]
-write components for grapesjs
-write scrapping function
-desgin templates & save templates
-get html and render in canvas grapesjs
-add filters and search options
+Users component
+Create all types of component
+Make a huge library of components
+Enable border festure, custom fonts, and fix some issues
+Create a web scrapping function 
+Replace image option
+Make ui better 
+Loading saved html
+Date filtering
+Others functions of the application
+Give them finishing touch enable animations and smoothness
+Create a website for qucikpdf where user can send there request also admins can able to download software
+Date organizer 
