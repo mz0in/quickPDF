@@ -151,6 +151,34 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
       }
     })
 
+    editor.StyleManager.addProperty('decorations', {
+      name: 'Border Width',
+      property: 'border-width',
+      type: 'composite',
+      properties: [
+        {
+          name: 'Top',
+          type: 'integer',
+          units: ['px', 'em', 'rem']
+        },
+        {
+          name: 'Right',
+          type: 'integer',
+          units: ['px', 'em', 'rem']
+        },
+        {
+          name: 'Bottom',
+          type: 'integer',
+          units: ['px', 'em', 'rem']
+        },
+        {
+          name: 'left',
+          type: 'integer',
+          units: ['px', 'em', 'rem']
+        }
+      ]
+    })
+
     // @ts-ignore
     window.editor = editor
 
