@@ -31,3 +31,19 @@ export function componentStyle(
         }`
         
 }
+
+export function styleWithFlex(percantage: number, rowHeight: number = 75) {
+    return `
+    min-height: ${rowHeight}px;
+    flex-grow: 1;
+    flex-basis: ${percantage}%;
+    `
+}
+
+export function styleWithFlexForInner(noOfColumns: number, rowHeight: number = 75) {
+    return `
+    min-height: ${rowHeight}px;
+    flex-grow: 1;
+    lex-basis: calc(100% / ${noOfColumns});
+    `
+}

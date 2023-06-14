@@ -1,3 +1,4 @@
+import { styleWithFlexForInner } from "../helper"
 const category = 'Inner Blocks'
 const stylePrefix = 'qpdf-inner-'
 const rowHeight = 75
@@ -14,12 +15,10 @@ const styleRow = `
     }
     }`
 
-const styleClm = `
-    .${clsCell} {
-      min-height: ${rowHeight}px;
-      flex-grow: 1;
-      flex-basis: 100%;
-    }`
+    const styleClm = `
+    min-height: ${rowHeight}px;
+    flex-grow: 1;
+    flex-basis: 100%;`
 
 const step = 0.2
 const minDim = 1
@@ -52,7 +51,7 @@ const rowAttr = {
 }
 
 const colAttr: Record<string, any> = {
-  class: clsCell,
+  // class: clsCell,
   'data-gjs-draggable': `.${clsRow}`,
   'data-gjs-resizable': resizerRight,
   'data-gjs-name': 'Cell',
@@ -67,6 +66,7 @@ const attrsToString = (attrs: Record<string, any>) => {
     let value = attrs[key]
     const toParse = value instanceof Array || value instanceof Object
     value = toParse ? JSON.stringify(value) : value
+    // @ts-ignore
     result.push(`${key}=${toParse ? `'${value}'` : `'${value}'`}`)
   }
 
@@ -85,140 +85,108 @@ const blocks = [
     ...commonBlockProps,
     label: '1 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-1"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(1)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-1 {
-          flex-basis: calc(100% / 1);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '2 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-2"></div>
-      <div ${attrsCell} class="column-inner-2"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(2)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(2)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-2 {
-          flex-basis: calc(100% / 2);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '3 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-3"></div>
-      <div ${attrsCell} class="column-inner-3"></div>
-      <div ${attrsCell} class="column-inner-3"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-3 {
-          flex-basis: calc(100% / 3);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '4 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-4"></div>
-      <div ${attrsCell} class="column-inner-4"></div>
-      <div ${attrsCell} class="column-inner-4"></div>
-      <div ${attrsCell} class="column-inner-4"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-4 {
-          flex-basis: calc(100% / 4);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '5 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-5"></div>
-      <div ${attrsCell} class="column-inner-5"></div>
-      <div ${attrsCell} class="column-inner-5"></div>
-      <div ${attrsCell} class="column-inner-5"></div>
-      <div ${attrsCell} class="column-inner-5"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-5 {
-          flex-basis: calc(100% / 5);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '6 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-6"></div>
-      <div ${attrsCell} class="column-inner-6"></div>
-      <div ${attrsCell} class="column-inner-6"></div>
-      <div ${attrsCell} class="column-inner-6"></div>
-      <div ${attrsCell} class="column-inner-6"></div>
-      <div ${attrsCell} class="column-inner-6"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-6 {
-          flex-basis: calc(100% / 6);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '7 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
-      <div ${attrsCell} class="column-inner-7"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-7 {
-          flex-basis: calc(100% / 7);
-        }
       </style>`
   },
   {
     ...commonBlockProps,
     label: '8 block',
     content: `<div ${attrsRow}>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
-      <div ${attrsCell} class="column-inner-8"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
+      <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
     </div>
     <style>
-        ${styleClm}
         ${styleRow}
-        .column-inner-8 {
-          flex-basis: calc(100% / 8);
-        }
       </style>`
   }
 ]
