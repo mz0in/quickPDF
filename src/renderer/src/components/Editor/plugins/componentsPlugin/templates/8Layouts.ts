@@ -100,6 +100,17 @@ const blocks = [
   },
   {
     ...commonBlockProps,
+    label: '7/1 block',
+    content: `<div ${attrsRow}>
+    <div ${attrsCell}  style="${styleWithFlex(87)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(13)}"></div>
+  </div>
+  <style>
+      ${styleRow}
+    </style>`
+  },
+  {
+    ...commonBlockProps,
     label: '6/2 block',
     content: `<div ${attrsRow}>
     <div ${attrsCell}  style="${styleWithFlex(75)}"></div>
@@ -148,6 +159,17 @@ const blocks = [
     content: `<div ${attrsRow}>
     <div ${attrsCell}  style="${styleWithFlex(25)}"></div>
     <div ${attrsCell}  style="${styleWithFlex(75)}"></div>
+  </div>
+  <style>
+      ${styleRow}
+    </style>`
+  },
+  {
+    ...commonBlockProps,
+    label: '1/7 block',
+    content: `<div ${attrsRow}>
+    <div ${attrsCell}  style="${styleWithFlex(13)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(87)}"></div>
   </div>
   <style>
       ${styleRow}
