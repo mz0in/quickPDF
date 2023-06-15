@@ -4,7 +4,7 @@ import Dashboard from '@renderer/pages/Dashboard'
 import { LoadingOverlay } from '@mantine/core'
 
 export default function App(): JSX.Element {
-  const [isLogin, setIsLogin] = useState<boolean | string>('')
+  const [isLogin, setIsLogin] = useState<boolean | string>(false)
 
   useEffect(() => {
     let userFromLocalStorage = localStorage.getItem('user')
