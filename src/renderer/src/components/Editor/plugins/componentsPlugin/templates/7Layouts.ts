@@ -6,14 +6,11 @@ const rowHeight = 75
 const clsRow = `${stylePrefix}row`
 const clsCell = `${stylePrefix}cell`
 const styleRow = `
-    .${clsRow} {
       display: flex;
       justify-content: flex-start;
       align-items: stretch;
       flex-wrap: nowrap;
-      padding: 10px;
-    }
-    }`
+      padding: 10px;`
 
 const styleClm = `
       min-height: ${rowHeight}px;
@@ -44,7 +41,7 @@ const resizerRight: Record<string, any> = {
 }
 
 const rowAttr = {
-  class: clsRow,
+  // class: clsRow,
   'data-gjs-droppable': `.${clsCell}`,
   'data-gjs-resizable': resizerBtm,
   'data-gjs-name': 'Row'
@@ -84,7 +81,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '7 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
       <div ${attrsCell} style="${styleClm}"></div>
       <div ${attrsCell} style="${styleClm}"></div>
       <div ${attrsCell} style="${styleClm}"></div>
@@ -100,7 +97,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '6/1 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(85)}"></div>
     <div ${attrsCell} style="${styleWithFlex(15)}"></div>
   </div>
@@ -111,7 +108,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '5/2 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(71)}"></div>
     <div ${attrsCell} style="${styleWithFlex(29)}"></div>
   </div>
@@ -122,7 +119,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '4/3 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(58)}"></div>
     <div ${attrsCell} style="${styleWithFlex(42)}"></div>
   </div>
@@ -133,7 +130,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '3/4 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(42)}"></div>
     <div ${attrsCell} style="${styleWithFlex(58)}"></div>
   </div>
@@ -144,7 +141,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '2/5 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(29)}"></div>
     <div ${attrsCell} style="${styleWithFlex(71)}"></div>
   </div>
@@ -155,7 +152,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: '1/6 block',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(15)}"></div>
     <div ${attrsCell} style="${styleWithFlex(85)}"></div>
   </div>
@@ -166,7 +163,7 @@ const blocks = [
   {
     ...commonBlockProps,
     label: 'Full 7',
-    content: `<div ${attrsRow}>
+    content: `<div ${attrsRow} style="${styleRow}">
     <div ${attrsCell} style="${styleWithFlex(100)}"></div>
   </div>
   <style>
