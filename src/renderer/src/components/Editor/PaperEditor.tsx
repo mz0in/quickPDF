@@ -36,6 +36,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
+      protectedCss: "@page {margin: 0;}",
       style: `p {margin: 0px !important;}`,
       deviceManager: {
         devices: [
