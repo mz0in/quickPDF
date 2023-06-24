@@ -9,7 +9,7 @@ import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
-import './plugins/tinymceEditor.js'
+// import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -36,8 +36,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: "@page {margin: 0;}",
-      style: `p {margin: 0px !important;}`,
+      protectedCss: "@page {margin: 0;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}",
       deviceManager: {
         devices: [
           {
@@ -79,16 +78,6 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
         },
-        'grapesjs-plugin-tinymce6': {
-          'tinymce-module': '/tinymce/tinymce.min.js',
-          inline: ['span', 'a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5'],
-          inline_toolbar: ['bold italic underline strikethrough forecolor backcolor', 'fontsize'],
-          toolbar: [
-            'bold italic underline strikethrough fontsize outdent indent',
-            'blocks forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist'
-          ],
-          plugins: ['link', 'lists', 'autolink']
-        }
       }
     })
 
@@ -188,7 +177,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
 
     document.head.insertAdjacentHTML(
       'beforeend',
-      '<style>body,html {height: 100%;margin: 0;overflow: hidden;}</style>'
+      '<style>body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}</style>'
     )
 
     return () => {

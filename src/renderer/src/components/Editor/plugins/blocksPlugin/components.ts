@@ -16,7 +16,7 @@ const blocks = [
     content: {
       type: 'text',
       content: 'Insert your text here',
-      style: { padding: '10px' }
+      style: { padding: '5px' }
     }
   },
   {
