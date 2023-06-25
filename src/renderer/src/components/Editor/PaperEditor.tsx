@@ -149,21 +149,25 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         {
           name: 'Top',
           type: 'integer',
+          default: '0',
           units: ['px', 'em', 'rem']
         },
         {
           name: 'Right',
           type: 'integer',
+          default: '0',
           units: ['px', 'em', 'rem']
         },
         {
           name: 'Bottom',
           type: 'integer',
+          default: '0',
           units: ['px', 'em', 'rem']
         },
         {
           name: 'left',
           type: 'integer',
+          default: '0',
           units: ['px', 'em', 'rem']
         }
       ]
