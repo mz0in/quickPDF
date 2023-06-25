@@ -93,3 +93,7 @@
 span.gjs-pn-btn.fa.fa-cog {
   display: none;
 }
+
+div.gjs-pn-views-container {
+  max-height: 100vh !important;
+}
