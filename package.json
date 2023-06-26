@@ -18,8 +18,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "electron-vite build && electron-builder --mac --config",
-    "build:linux": "electron-vite build && electron-builder --linux --config",
-    "run:web": "lite-server"
+    "build:linux": "electron-vite build && electron-builder --linux --config"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
@@ -37,6 +36,7 @@
     "dayjs": "^1.11.8",
     "electron-updater": "^5.3.0",
     "firebase": "^9.22.2",
+    "framer-motion": "^10.12.17",
     "grapesjs": "^0.21.2",
     "grapesjs-tui-image-editor": "^1.0.2",
     "html2canvas": "^1.4.1",
