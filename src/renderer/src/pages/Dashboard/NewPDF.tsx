@@ -8,7 +8,7 @@ import { saveAsPDF } from '@renderer/services/utils'
 import { IconCheck } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 interface defaultFormValue {
   date: Date
@@ -20,6 +20,7 @@ export default function NewPage(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
   const [modalData, setModalData] = useState<defaultFormValue>()
   const { companyName } = useParams()
+  const navigate = useNavigate()
 
   const form = useForm<defaultFormValue>({
     initialValues: {
@@ -87,7 +88,7 @@ export default function NewPage(): JSX.Element {
   }
 
   return (
-    <Modal opened={opened} onClose={close} title="New Newspaper" centered>
+    <Modal opened={opened} onClose={()=> navigate(-1)} title="New Newspaper" centered>
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <DatePickerInput
           label="Pick date"

@@ -1,16 +1,16 @@
 Users component [X]
 Enable border festure, custom fonts, and fix some issues [X]
-Create all types of component
-Make a huge library of components
+Create all types of component [X]
 Replace image option [X]
-Create a web scrapping function 
-Make ui better {transisition, animatons}
+Make ui better {transisition, animatons} [X]
 Loading saved html
 Date filtering
 Others functions of the application
 Give them finishing touch enable animations and smoothness
 Create a website for qucikpdf where user can send there request also admins can able to download software
 Date organizer 
+Create a web scrapping function 
+Make a huge library of components
 
 // new bugs
 page automatically cut in output.pdf but not in editior
