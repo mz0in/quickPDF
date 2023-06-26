@@ -44,6 +44,7 @@ export default function customSaveModal(editor: Editor) {
 
   /* functioning of modal */
   html2canvas(selectedComponent?.getEl() as HTMLElement).then(function (canvas) {
+    console.log(canvas.toDataURL())
     document.getElementById("screenShotCanvas")?.appendChild(canvas);
   });
   

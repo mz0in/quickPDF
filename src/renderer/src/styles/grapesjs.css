@@ -97,3 +97,29 @@ span.gjs-pn-btn.fa.fa-cog {
 div.gjs-pn-views-container {
   max-height: 100vh !important;
 }
+
+/* for changing block size */
+div.gjs-block.gjs-one-bg.gjs-four-color-h {
+  padding: 0px;
+  min-height: 50px;
+  width: 40%;
+}
+div.gjs-block__media {
+  margin: 0px;
+}
+div.gjs-blocks-c {
+  justify-content: space-around;
+}
+
+@media only screen and (max-width: 1000px) {
+  img.firstBlockImages {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+  }
+}
+@media only screen and (max-width: 720px) {
+  img.firstBlockImages {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+  }
+}

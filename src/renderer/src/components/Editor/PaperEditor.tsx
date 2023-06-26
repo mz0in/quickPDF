@@ -9,6 +9,7 @@ import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
+import customRtePlugin from "./plugins/customRte"
 // import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
@@ -67,7 +68,7 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
         gjsImageEditorPlugin,
         zoomPlugin,
         gjsUserBlock,
-        'grapesjs-plugin-tinymce6'
+        customRtePlugin
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -82,7 +83,6 @@ export function PaperEditor({ id, config, onSave, canvasSize }: GrapesJSProps) {
     })
 
     setTimeout(() => {
-      console.log('ok')
       // @ts-ignore
       editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
     }, 3000)

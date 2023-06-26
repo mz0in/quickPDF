@@ -5,10 +5,10 @@ export function onSubmit(selectedComponent, editor, details, myModal) {
   let cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
   console.log(htmlCode)
   console.log(cssCode)
-  setBlockInLocalStorage(details, htmlCode, cssCode)
+  // setBlockInLocalStorage(details, htmlCode, cssCode)
   //render all the blocks from localhost
-  loadAllBlocksFromLocalStorage(BlockManager)
-  myModal.close()
+  // loadAllBlocksFromLocalStorage(BlockManager)
+  // myModal.close()
 }
 
 function localStorageIniter(): number {

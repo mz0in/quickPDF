@@ -10,7 +10,7 @@ const styleRow = `
       justify-content: flex-start;
       align-items: stretch;
       flex-wrap: nowrap;
-      padding: 10px;`
+      padding: 5px;`
 
 const styleClm = `
       min-height: ${rowHeight}px;
@@ -49,7 +49,7 @@ const rowAttr = {
 
 const colAttr: Record<string, any> = {
   // class: clsCell,
-  'data-gjs-draggable': `.${clsRow}`,
+  // 'data-gjs-draggable': `.${clsRow}`,
   'data-gjs-resizable': resizerRight,
   'data-gjs-name': 'Cell',
   'data-gjs-unstylable': 'width',

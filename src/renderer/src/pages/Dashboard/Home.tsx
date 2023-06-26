@@ -26,7 +26,6 @@ export default function Home() {
 
   const getDataFromIdbStorage = async () => {
     let data: any = await window?.DB?.getData('company', 'companies')
-    console.log(data)
     if (data !== null) {
       dispatch(addCompany(data))
     }

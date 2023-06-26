@@ -184,6 +184,4 @@ const blocks = [
   }
 ]
 
-console.log(blocks)
-
 export default blocks

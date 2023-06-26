@@ -69,8 +69,8 @@ export default function Company() {
         </Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-pdf/${companyName}`} height="150px" />
-          {newspapers.map((paper) => {
-            return <PaperCard url={`/new-pdf/`} date={paper.date} month={paper.month} />
+          {newspapers.map((paper, index) => {
+            return <PaperCard key={`company-${index}`} url={`/new-pdf/`} date={paper.date} month={paper.month} />
           })}
         </SimpleGrid>
       </Box>
