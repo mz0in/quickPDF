@@ -3,6 +3,7 @@ import Home from './Home'
 import NewCompany from './NewCompany'
 import NewDesign from './NewDesign'
 import NewPDF from './NewPDF'
+import EditPDF from "./EditPDF"
 import Company from './Company'
 import AddUser from './AddUser'
 import EditUser from './EditUser'
@@ -18,6 +19,7 @@ export default function Dashboard(): JSX.Element {
         <Route path="/company/:companyName" element={<Company />}/>
         <Route path="/new-design/:companyName" element={<NewDesign />} />
         <Route path="/new-pdf/:companyName" element={<NewPDF />} />
+        <Route path="/edit-pdf/:companyName/:realDate" element={<EditPDF />} />
         <Route path="/user-add" element={<AddUser />} />
         <Route path="/user-edit" element={<EditUser />} />
       </Routes>

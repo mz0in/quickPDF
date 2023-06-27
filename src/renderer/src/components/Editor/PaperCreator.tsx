@@ -3,12 +3,14 @@ import { useEffect, useRef } from 'react'
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
+// import gjsBasicBlock from 'grapesjs-blocks-basic'
 import basicCustomPlugin from './plugins/blocksPlugin'
 import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
 import customRtePlugin from "./plugins/customRte"
+// import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -25,20 +27,17 @@ interface GrapesJSProps {
   canvasSize: {
     height: number
     width: number
-  },
-  paperCode: htmlObject[],
-  pageHead: string
+  }
 }
 
-export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHead }: GrapesJSProps) {
+export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
-  console.log(paperCode)
 
   useEffect(() => {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: "",
+      // protectedCss: "@page {margin: 0;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}",
       deviceManager: {
         devices: [
           {
@@ -50,14 +49,14 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHea
         ]
       },
       pageManager: {
-        pages: paperCode.map((page, index) => {
-          return {
-                name: `page ${index + 1}`,
-                id: `${index + 1}`,
-                styles: page.css,
-                component: page.htmlBody
-              }
-        })
+        pages: [
+          {
+            name: 'page 1',
+            id: '1',
+            styles: ``,
+            component: '' // or a JSON of components
+          }
+        ]
       },
       storageManager: false,
       plugins: [
@@ -136,7 +135,7 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHea
            * defined at: /plugins/grapesjsFonts/fonts.js#L348-L349
            */
           // @ts-ignore
-          let pageHead = editor.Canvas.getDocument().head.innerHTML
+          let pageHead = editor.Canvas.getDocument().head.innerHTML;
 
           onSave(htmlStrings, pageHead)
         }

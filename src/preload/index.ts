@@ -11,8 +11,9 @@ interface Info {
 }
 
 const api = {
-  save: (info: Info, html: string) => ipcRenderer.invoke('save', { info, html }),
-  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', { companyName })
+  save: (info: Info, html: string, codeOfPaper: any) => ipcRenderer.invoke('save', { info, html, codeOfPaper }),
+  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', { companyName }),
+  getPapersWithDate: (companyName: string, date: string) => ipcRenderer.invoke('getPapersWithDate', {companyName, date})
 }
 
 // Custom DataBase Handler APIs

@@ -1,4 +1,4 @@
-import { PaperEditor } from '@renderer/components/Editor'
+import { PaperCreator } from '@renderer/components/Editor'
 import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Flex, NumberInput } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
@@ -8,10 +8,11 @@ import { saveAsPDF } from '@renderer/services/utils'
 import { IconCheck } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
+import {dateToValue} from "@renderer/services/utils"
 import { useParams, useNavigate } from 'react-router-dom'
 
 interface defaultFormValue {
-  date: Date
+  date: Date | string
   height: number
   width: number
 }
@@ -39,7 +40,7 @@ export default function NewPage(): JSX.Element {
       autoClose: false,
       withCloseButton: false
     })
-    console.log(htmlStrings)
+    console.log("htmlStrings", htmlStrings)
     let allCss = ''
     let allHtml = ''
 
@@ -53,8 +54,14 @@ export default function NewPage(): JSX.Element {
       ...modalData,
       companyName
     }
+    // Object that contain htmlCode array and meta data of the paper.
+    let CodeOfPaper = {
+      code: htmlStrings,
+      info,
+      pageHead
+    }
 
-    saveAsPDF(allCss, allHtml, pageHead, info)
+    saveAsPDF(allCss, allHtml, pageHead, info, CodeOfPaper)
     notifications.update({
       id: 'load-data',
       color: 'teal',
@@ -68,7 +75,7 @@ export default function NewPage(): JSX.Element {
   const handleModalSubmit = (values: defaultFormValue) => {
     close() // to close opened modal
     setModalData({
-      date: values.date,
+      date: dateToValue(values.date),
       height: values.height,
       width: values.width
     })
@@ -76,7 +83,7 @@ export default function NewPage(): JSX.Element {
 
   if (modalData !== undefined) {
     return (
-      <PaperEditor
+      <PaperCreator
         id="editor"
         canvasSize={{
           height: modalData.height,

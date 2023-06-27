@@ -61,3 +61,13 @@ export const monthsOfYear: string[] = [
   'November',
   'December'
 ]
+
+/**
+ * function to date object to miningful date
+ * `date-month-year`
+ * @param inch: date object
+ * @returns date: string
+ */
+export const dateToValue = (date) => {
+    return `${date.getDay()}-${date.getMonth()}-${date.getUTCFullYear()}`
+} 

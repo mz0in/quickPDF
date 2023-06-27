@@ -15,7 +15,7 @@ function createAndDownloadBlobFile(body) {
   }
 }
 
-export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, info) {
+export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, info, codeOfPaper) {
   let html = `<!DOCTYPE html>
     <html lang="Hi">
     <head>
@@ -30,9 +30,10 @@ export async function saveAsPDF(allCss: string, allHtml: string, pageHead: strin
     ${allHtml}
     </html>`
 
-  console.log(html)
+  console.log(info, codeOfPaper)
 
-  let generatedPDFBuffer = await window.api.save(info, html)
+  // @ts-ignore
+  let generatedPDFBuffer = await window.api.save(info, html, codeOfPaper)
   console.log(generatedPDFBuffer)
   createAndDownloadBlobFile(generatedPDFBuffer)
 }

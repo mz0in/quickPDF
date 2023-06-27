@@ -19,7 +19,7 @@ export function DbCalls() {
   })
 
   ipcMain.handle('save', async (event, args) => {
-    store.setPDF(args.info.companyName, args.info.date, args.html)
+    store.setPDF(args.info.companyName, args.info.date, args.codeOfPaper)
     // generating PDF
     let pdfBuffer = await generatePDF(args.html, args.info.width, args.info.height)
     return pdfBuffer
@@ -28,5 +28,10 @@ export function DbCalls() {
   ipcMain.handle('getPapers', (event, args) => {
     let papers = store.getPDF(args.companyName)
     return papers
+  })
+
+  ipcMain.handle('getPapersWithDate', (event, args) => {
+    let htmlCodeOfPaper = store.getPDFOnDate(args.companyName, args.date);
+    return htmlCodeOfPaper;
   })
 }

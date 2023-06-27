@@ -24,10 +24,12 @@ export default function Company() {
   const getAllPapers = async () => {
     let papers = await window.api.getPapers(companyName)
     let data = Object.keys(papers).map((value) => {
+      console.log("value", value)
       let date = new Date(value)
       return {
         date: date.getDate(),
-        month: monthsOfYear[date.getMonth()]
+        month: monthsOfYear[date.getMonth()],
+        realDate: value
       }
     })
     setNewspapers(data)
@@ -70,7 +72,7 @@ export default function Company() {
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-pdf/${companyName}`} height="150px" />
           {newspapers.map((paper, index) => {
-            return <PaperCard key={`company-${index}`} url={`/new-pdf/`} date={paper.date} month={paper.month} />
+            return <PaperCard key={`company-${index}`} url={`/edit-pdf/${companyName}/${paper.realDate}`} date={paper.date} month={paper.month} />
           })}
         </SimpleGrid>
       </Box>

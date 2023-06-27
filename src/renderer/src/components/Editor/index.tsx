@@ -1,5 +1,6 @@
 import { PaperEditor } from './PaperEditor'
 import { TemplateEditor } from './TemplateEditor'
+import { PaperCreator } from './PaperCreator'
 
 export interface htmlObject {
   head: string
@@ -7,4 +8,4 @@ export interface htmlObject {
   css: string
 }
 
-export { PaperEditor, TemplateEditor }
+export { PaperEditor, TemplateEditor, PaperCreator }

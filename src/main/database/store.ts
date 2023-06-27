@@ -27,6 +27,7 @@ class Store {
   }
 
   setPDF(companyName: string, date: string, html: string): void {
+    console.log(html)
     const directoryPath = path.join(this.userDataPath, 'companies')
     const filePath = path.join(directoryPath, `${companyName}.json`)
     let data = {}
@@ -36,8 +37,9 @@ class Store {
       }
       if (fs.existsSync(filePath)) {
         data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
-        console.log(data)
+        // console.log(data)
       }
+      // parsing html array to string
       data[date] = html
       fs.writeFileSync(filePath, JSON.stringify(data))
     } catch (e) {
@@ -58,6 +60,21 @@ class Store {
     }
 
     return data
+  }
+
+  getPDFOnDate(companyName: string, date: string) {
+    const directoryPath = path.join(this.userDataPath, 'companies')
+    const filePath = path.join(directoryPath, `${companyName}.json`)
+    let data = {}
+    try {
+      if (fs.existsSync(filePath)) {
+        data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
+    return data[date];
   }
 }
 

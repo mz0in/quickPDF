@@ -313,20 +313,6 @@ function updateHead(editor, fonts) {
   })
   removeAll(doc, GOOGLE_FONTS_ATTR)
 
-  // FIXME: how to use google fonts v2?
-  // google fonts V2: https://developers.google.com/fonts/docs/css2
-  //fonts.forEach(f => {
-  //  const prefix = f.variants.length ? ':' : ''
-  //  const variants = prefix + f.variants.map(v => {
-  //    const weight = parseInt(v)
-  //    const axis = v.replace(/\d+/g, '')
-  //    return `${axis},wght@${weight}`
-  //  }).join(',')
-  //  insert(doc, GOOGLE_FONTS_ATTR, 'link', { 'href': `https://fonts.googleapis.com/css2?family=${f.name.replace(/ /g, '+')}${variants}&display=swap`, 'rel': 'stylesheet' })
-  //})
-
-  // Google fonts v1
-  // https://developers.google.com/fonts/docs/getting_started#a_quick_example
   fonts.forEach((f) => {
     const prefix = f.variants.length ? ':' : ''
     const variants =

@@ -87,7 +87,7 @@ export function PaperCard({ url, date, month }: paperProps) {
         cursor: 'pointer'
       }}
       component="button"
-      onClick={() => console.log(url)}
+      onClick={() => navigate(url)}
     >
       <Text
         variant="gradient"
