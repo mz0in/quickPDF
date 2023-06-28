@@ -11,6 +11,8 @@ Create a website for qucikpdf where user can send there request also admins can 
 Date organizer 
 Create a web scrapping function 
 Make a huge library of components
+Add fonts from pendrive
+mirror of pdf
 
 // new bugs
 page automatically cut in output.pdf but not in editior
