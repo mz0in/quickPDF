@@ -62,12 +62,17 @@ export const monthsOfYear: string[] = [
   'December'
 ]
 
+// convert one digit number to two digit number
+const monthChecker = Intl.NumberFormat('en-US', {
+  minimumIntegerDigits: 2
+});
+
 /**
  * function to date object to miningful date
  * `date-month-year`
  * @param inch: date object
  * @returns date: string
  */
-export const dateToValue = (date) => {
-    return `${date.getDay()}-${date.getMonth()}-${date.getUTCFullYear()}`
-} 
+export const dateToValue = (date: Date) => {
+    return `${date.getDay()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
+}
