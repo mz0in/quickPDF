@@ -75,7 +75,7 @@ export default function NewPage(): JSX.Element {
   const handleModalSubmit = (values: defaultFormValue) => {
     close() // to close opened modal
     setModalData({
-      date: dateToValue(values.date),
+      date: dateToValue(values.date as Date),
       height: values.height,
       width: values.width
     })
@@ -99,6 +99,7 @@ export default function NewPage(): JSX.Element {
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <DatePickerInput
           label="Pick date"
+          dropdownType="modal"
           placeholder="Pick date"
           data-autofocus
           mx="auto"

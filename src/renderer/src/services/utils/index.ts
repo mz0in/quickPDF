@@ -74,5 +74,15 @@ const monthChecker = Intl.NumberFormat('en-US', {
  * @returns date: string
  */
 export const dateToValue = (date: Date) => {
-    return `${date.getDay()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
+    return `${date.getDate()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
+}
+
+/**
+ * convert dd-mm-yyyy to date object
+ * @param dateString 
+ * @returns Date object
+ */
+export function convertToDate(dateString: string): Date {
+  const [day, month, year] = dateString.split('-').map(Number);
+  return new Date(year, month - 1, day);
 }
