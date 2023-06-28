@@ -2,7 +2,7 @@ import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
 import { IconReload, IconCalendar } from '@tabler/icons-react'
 import { useParams } from 'react-router-dom'
-import { DashToSpace, monthsOfYear, convertToDate} from '@renderer/services/utils'
+import { DashToSpace, monthsOfYear, convertToDate } from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
@@ -14,28 +14,35 @@ interface paperType {
 
 export default function Company() {
   let { companyName } = useParams()
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [newspapers, setNewspapers] = useState<paperType[]>([
     {
       date: new Date(),
-      realDate: "01-01-2023"
+      realDate: '01-01-2023'
     }
   ])
 
-  console.log(newspapers)
-
   const getAllPapers = async () => {
     let papers = await window.api.getPapers(companyName)
-    let data: paperType[] = papers.map((realDate: string)=> {
+    let data: paperType[] = papers.map((realDate: string) => {
       return {
         date: convertToDate(realDate),
         realDate
-      } 
+      }
     })
-   
-    setNewspapers(data.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    }));
+
+    setNewspapers(
+      data.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date)
+      })
+    )
   }
+
+  const filteredNewspapers = newspapers.filter((paper) => {
+    if (selectedDate === null) return true // If no date is selected, show all newspapers
+    const paperDate = new Date(paper.date)
+    return paperDate.toDateString() === selectedDate.toDateString()
+  })
 
   useEffect(() => {
     getAllPapers()
@@ -54,8 +61,7 @@ export default function Company() {
             dropdownType="modal"
             label="Filter with date"
             placeholder="Pick date"
-            // value={value}
-            // onChange={setValue}
+            onChange={setSelectedDate}
           />
           <ActionIcon size="lg" variant={'gradient'} onClick={getAllPapers}>
             <IconReload />
@@ -73,8 +79,15 @@ export default function Company() {
         </Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-pdf/${companyName}`} height="150px" />
-          {newspapers.map((paper, index) => {
-            return <PaperCard key={`company-${index}`} url={`/edit-pdf/${companyName}/${paper.realDate}`} date={paper.date.getDate()} month={`${monthsOfYear[paper.date.getMonth()]}`} />
+          {filteredNewspapers.map((paper, index) => {
+            return (
+              <PaperCard
+                key={`company-${index}`}
+                url={`/edit-pdf/${companyName}/${paper.realDate}`}
+                date={paper.date.getDate()}
+                month={`${monthsOfYear[paper.date.getMonth()]}`}
+              />
+            )
           })}
         </SimpleGrid>
       </Box>
