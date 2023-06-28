@@ -65,7 +65,7 @@ export const monthsOfYear: string[] = [
 // convert one digit number to two digit number
 const monthChecker = Intl.NumberFormat('en-US', {
   minimumIntegerDigits: 2
-});
+})
 
 /**
  * function to date object to miningful date
@@ -74,15 +74,15 @@ const monthChecker = Intl.NumberFormat('en-US', {
  * @returns date: string
  */
 export const dateToValue = (date: Date) => {
-    return `${date.getDate()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
+  return `${date.getDate()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
 }
 
 /**
  * convert dd-mm-yyyy to date object
- * @param dateString 
+ * @param dateString
  * @returns Date object
  */
 export function convertToDate(dateString: string): Date {
-  const [day, month, year] = dateString.split('-').map(Number);
-  return new Date(year, month - 1, day);
+  const [day, month, year] = dateString.split('-').map(Number)
+  return new Date(year, month - 1, day)
 }

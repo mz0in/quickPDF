@@ -31,7 +31,7 @@ export function DbCalls() {
   })
 
   ipcMain.handle('getPapersWithDate', (event, args) => {
-    let htmlCodeOfPaper = store.getPDFOnDate(args.companyName, args.date);
-    return htmlCodeOfPaper;
+    let htmlCodeOfPaper = store.getPDFOnDate(args.companyName, args.date)
+    return htmlCodeOfPaper
   })
 }

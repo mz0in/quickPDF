@@ -8,55 +8,57 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface CodeOfPaperProps {
-  code: htmlObject[],
+  code: htmlObject[]
   info: {
-    companyName: string,
-    date: Date | string,
+    companyName: string
+    date: Date | string
     height: number
     width: number
-  },
+  }
   pageHead: string
 }
 
 const dummayData: CodeOfPaperProps = {
-  code: [{
-    head: "",
-    css: "",
-    htmlBody: ""
-  }],
+  code: [
+    {
+      head: '',
+      css: '',
+      htmlBody: ''
+    }
+  ],
   info: {
-    companyName: "test",
-    date: "",
+    companyName: 'test',
+    date: '',
     height: 21,
     width: 15
   },
-  pageHead: ""
+  pageHead: ''
 }
 
 export default function EditPDF(): JSX.Element {
-  const [paperData, setPaperData] = useState<CodeOfPaperProps>(dummayData);
+  const [paperData, setPaperData] = useState<CodeOfPaperProps>(dummayData)
   const { companyName, realDate } = useParams()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const getPaperCode = async () => {
     //@ts-ignore
     let codeOfPaper: CodeOfPaperProps = await window.api.getPapersWithDate(companyName, realDate)
-    if(codeOfPaper === undefined) {
+    if (codeOfPaper === undefined) {
       notifications.show({
         id: 'err-loading',
         loading: false,
         title: 'error',
-        message: 'can\'t find paper in system.',
+        message: "can't find paper in system.",
         autoClose: false,
         withCloseButton: true,
         onClose: () => navigate(-1)
       })
     }
-    console.log("data", codeOfPaper)
+    console.log('data', codeOfPaper)
     setPaperData(codeOfPaper)
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     getPaperCode()
   }, [])
 
@@ -69,7 +71,7 @@ export default function EditPDF(): JSX.Element {
       autoClose: false,
       withCloseButton: false
     })
-    console.log("htmlStrings", htmlStrings)
+    console.log('htmlStrings', htmlStrings)
     let allCss = ''
     let allHtml = ''
 
@@ -96,16 +98,16 @@ export default function EditPDF(): JSX.Element {
     })
   }
 
-    return (
-      <PaperEditor
-        id="editor"
-        canvasSize={{
-          height: paperData?.info.height as number,
-          width: paperData?.info.width as number
-        }}
-        paperCode={paperData?.code as htmlObject[]}
-        pageHead={paperData?.pageHead as string}
-        onSave={handleSave}
-      />
-    )
+  return (
+    <PaperEditor
+      id="editor"
+      canvasSize={{
+        height: paperData?.info.height as number,
+        width: paperData?.info.width as number
+      }}
+      paperCode={paperData?.code as htmlObject[]}
+      pageHead={paperData?.pageHead as string}
+      onSave={handleSave}
+    />
+  )
 }

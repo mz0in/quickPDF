@@ -8,7 +8,7 @@ import { saveAsPDF } from '@renderer/services/utils'
 import { IconCheck } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
-import {dateToValue} from "@renderer/services/utils"
+import { dateToValue } from '@renderer/services/utils'
 import { useParams, useNavigate } from 'react-router-dom'
 
 interface defaultFormValue {
@@ -40,7 +40,7 @@ export default function NewPage(): JSX.Element {
       autoClose: false,
       withCloseButton: false
     })
-    console.log("htmlStrings", htmlStrings)
+    console.log('htmlStrings', htmlStrings)
     let allCss = ''
     let allHtml = ''
 
@@ -95,7 +95,7 @@ export default function NewPage(): JSX.Element {
   }
 
   return (
-    <Modal opened={opened} onClose={()=> navigate(-1)} title="New Newspaper" centered>
+    <Modal opened={opened} onClose={() => navigate(-1)} title="New Newspaper" centered>
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <DatePickerInput
           label="Pick date"

@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 interface CompanyData {
-  papers: string[];
+  papers: string[]
 }
 
 class Store {
@@ -31,47 +31,47 @@ class Store {
   }
 
   setPDF(companyName: string, date: string, html: string): void {
-    const companiesFolderPath = path.join(this.userDataPath, 'companies');
-    const companyFolderPath = path.join(companiesFolderPath, companyName);
-    const companyJsonFileName = `${companyName}.json`;
-    const companyJsonFilePath = path.join(companyFolderPath, companyJsonFileName);
-    const jsonFileName = `${date}.json`;
-    const jsonFilePath = path.join(companyFolderPath, jsonFileName);
-  
+    const companiesFolderPath = path.join(this.userDataPath, 'companies')
+    const companyFolderPath = path.join(companiesFolderPath, companyName)
+    const companyJsonFileName = `${companyName}.json`
+    const companyJsonFilePath = path.join(companyFolderPath, companyJsonFileName)
+    const jsonFileName = `${date}.json`
+    const jsonFilePath = path.join(companyFolderPath, jsonFileName)
+
     // Create the "companies" folder if it doesn't exist
     if (!fs.existsSync(companiesFolderPath)) {
-      fs.mkdirSync(companiesFolderPath);
+      fs.mkdirSync(companiesFolderPath)
     }
-  
+
     // Create the company folder if it doesn't exist
     if (!fs.existsSync(companyFolderPath)) {
-      fs.mkdirSync(companyFolderPath);
+      fs.mkdirSync(companyFolderPath)
     }
-  
-    let companyData: CompanyData = { papers: [] };
-  
+
+    let companyData: CompanyData = { papers: [] }
+
     // Check if the company JSON file exists
     if (fs.existsSync(companyJsonFilePath)) {
-      const companyJsonContent = fs.readFileSync(companyJsonFilePath, 'utf-8');
-      companyData = JSON.parse(companyJsonContent);
+      const companyJsonContent = fs.readFileSync(companyJsonFilePath, 'utf-8')
+      companyData = JSON.parse(companyJsonContent)
     }
-  
+
     // Add the date to the papers array
     if (!companyData.papers.includes(date)) {
-      companyData.papers.push(date);
+      companyData.papers.push(date)
     }
-  
+
     // Write the updated company data to the JSON file
-    fs.writeFileSync(companyJsonFilePath, JSON.stringify(companyData));
-  
+    fs.writeFileSync(companyJsonFilePath, JSON.stringify(companyData))
+
     // Write or append the HTML code to the JSON file
-    fs.writeFileSync(jsonFilePath, JSON.stringify(html));
+    fs.writeFileSync(jsonFilePath, JSON.stringify(html))
   }
 
   getPDF(companyName: string) {
     const directoryPath = path.join(this.userDataPath, 'companies', companyName)
     const filePath = path.join(directoryPath, `${companyName}.json`)
-    let data = {papers: []};
+    let data = { papers: [] }
     try {
       if (fs.existsSync(filePath)) {
         data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
@@ -90,13 +90,13 @@ class Store {
     try {
       if (fs.existsSync(filePath)) {
         data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
-        return data;
+        return data
       }
     } catch (e) {
       console.error(e)
     }
 
-    return data;
+    return data
   }
 }
 

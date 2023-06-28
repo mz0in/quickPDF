@@ -1,11 +1,11 @@
-const category = "2Blocks"
-const height = "60px"
-const width = "70px"
-import {images} from "./images"
+const category = '2Blocks'
+const height = '60px'
+const width = '70px'
+import { images } from './images'
 
 const blocks = [
-	{
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[0]} />`,
+  {
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[0]} />`,
     category: category,
     content: `<div id="it81d"><img id="iwts3" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3R5bGU9ImZpbGw6IHJnYmEoMCwwLDAsMC4xNSk7IHRyYW5zZm9ybTogc2NhbGUoMC43NSkiPgogICAgICAgIDxwYXRoIGQ9Ik04LjUgMTMuNWwyLjUgMyAzLjUtNC41IDQuNSA2SDVtMTYgMVY1YTIgMiAwIDAgMC0yLTJINWMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxNGMxLjEgMCAyLS45IDItMnoiPjwvcGF0aD4KICAgICAgPC9zdmc+"/><div id="iqqtz"><span id="igblj">उधर गृहमंत्री अमित शाह ने विपक्षी एकता पर तंज कसा- विपक्ष कभी एक होने वाला नहीं है। पटना में तो विपक्षी नेताओं का फ़ोटो सेशन चल रहा है। इससे ज़्यादा या अलग कुछ नहीं।</span></div></div>
     <style>
@@ -13,7 +13,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[1]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[1]} />`,
     category: category,
     content: `<div id="ido6ul"><div id="ixi94i">इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर</div><b id="i4hykd">इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे</b><div id="ij9sbo"><div id="ip7qnj"><div id="i1f24g"><span id="igcqgh"><b id="ic0ooi">भास्कर न्यूज |</b> कोचिन्ग/ जैपुर </span></div><div id="i8k4rm"><b id="i7oj5n-2" draggable="true">इस मीटिंग |</b><span id="isc0dc"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। अब्दुल्ला ने तो इस मीटिंग में ही आप पार्टी पर तंज कस दिया कि धारा 370 पर आप के रुख़ को लेकर मैं आश्चर्यचकित हूँ। इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं </span></div></div><div id="i9s4a4"><div id="idny3j"><div id="iinmn7"><div id="ix5m5b"><b id="iltozp">उधर गृहमंत्री अमित शाह ने विपक्षी एकता पर तंज कसा</b></div><div id="ildze2"><span id="irubws">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं</span><br/></div></div></div><div id="ivtykr"><span id="ia361h">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं</span></div></div></div><div id="ittdrh"></div></div>
     <style>
@@ -21,7 +21,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[2]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[2]} />`,
     category: category,
     content: `<div id="itah3h"><div id="i095wg">इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार</div><b id="it1p24">इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे</b><div id="i6877f"><div id="i3779u"><div id="i5slpg"><span id="i1jgdt"><b id="ikygwv">भास्कर न्यूज |</b> कोचिन्ग/ जैपुर </span></div><div id="i8j72y"><span id="i1kqaf">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं</span></div></div><div id="i6iol1"><div id="i6o2jf"><b draggable="true" id="i12ple">इस मीटिंग |</b><span id="iriq2q"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span></div></div></div></div>
     <style>
@@ -29,7 +29,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[3]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[3]} />`,
     category: category,
     content: `<div id="i6877f"><div id="i3779u"><div id="i5slpg"><span id="i1jgdt"><b id="ikygwv">भास्कर न्यूज |</b> कोचिन्ग/ जैपुर </span></div><div id="i8j72y"><span id="i1kqaf">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं</span></div></div><div id="i6iol1"><div id="i6o2jf"><b draggable="true" id="i12ple">इस मीटिंग |</b><span id="iriq2q"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span></div></div></div>
     <style>
@@ -37,7 +37,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[4]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[4]} />`,
     category: category,
     content: `<div id="i4vrb4"><div id="icksxx"><span id="i28zr8">भगवान जगन्नाथ, बहन सुभद्रा और बड़े भाई बलदाऊ, </span><span id="ixsbc1">भगवान जगन्नाथ, बहन सुभद्रा और बड़े भाई बलदाऊ</span></div><div id="ixjajd"><div id="i8ptov"><div id="ibcwsn"><b draggable="true" id="ijbl8c">इस मीटिंग |</b><span id="ihhg8o"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। अब्दुल्ला ने तो इस मीटिंग में ही आप पार्टी पर तंज कस दिया कि</span></div></div><div id="id4auv"><div id="imd4fw"><span id="i9fm3o"> धारा 370 पर आप के रुख़ को लेकर मैं आश्चर्यचकित हूँ। इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं </span></div></div></div></div>
     <style>
@@ -45,7 +45,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[5]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[5]} />`,
     category: category,
     content: `<div id="if7ixz"><div id="i47fa1"><span id="ihl79v"><b>भगवान</b></span> जगन्नाथ की नगरी पुरी इन दिनों गुलजार है</div><div id="iex3w1">भगवान जगन्नाथ की नगरी पुरी इन दिनों गुलजार है। ये रथयात्रा का असर है</div><div id="icuo3p"><div id="i6jbwg"><div id="ivm5bl"><span id="i2z2jh"><b id="iboqyp">भास्कर न्यूज |</b> कोचिन्ग/ जैपुर </span></div><div id="ipufr4"><span id="i13rnk"> धारा 370 पर आप के रुख़ को लेकर मैं आश्चर्यचकित हूँ। इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं </span></div></div><div id="ik0dh2"><div id="is7jng"><span id="ihhwh8"> धारा 370 पर आप के रुख़ को लेकर मैं आश्चर्यचकित हूँ। इस मीटिंग को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं </span><span id="iwpx7j">ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके</span></div></div></div></div>
     <style>
@@ -53,7 +53,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[6]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[6]} />`,
     category: category,
     content: `<div id="iw6s6h"><div id="igdj41">बिना बताए मौसी के घर जाने से गुस्सा, पुजारी ने बताया क्या है</div><div id="iywusq"><span draggable="true" id="i69ldj">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="iidmkl">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span><span id="ijiunu">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span><span id="iryn2u">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। </span></div></div>
     <style>
@@ -61,7 +61,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[7]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[7]} />`,
     category: category,
     content: `<div id="ihschi"><div id="iy1dgw">आज भगवान जगन्नाथ का रथ तोड़ेंगी लक्ष्मीजी:<br/>बिना बताए मौसी के</div><img id="i3rdsc" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…RjMCAxLjEuOSAyIDIgMmgxNGMxLjEgMCAyLS45IDItMnoiPjwvcGF0aD4KICAgICAgPC9zdmc+"/><div id="i0eszj"><span draggable="true" id="i1jycm">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="iigvb3">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span><span id="iw9wdl">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span><span id="iix2ds">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। </span></div></div>
     <style>
@@ -69,7 +69,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[8]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[8]} />`,
     category: category,
     content: `<div id="ixjqhc"><img id="ilryho" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3R5bGU9ImZpbGw6IHJnYmEoMCwwLDAsMC4xNSk7IHRyYW5zZm9ybTogc2NhbGUoMC43NSkiPgogICAgICAgIDxwYXRoIGQ9Ik04LjUgMTMuNWwyLjUgMyAzLjUtNC41IDQuNSA2SDVtMTYgMVY1YTIgMiAwIDAgMC0yLTJINWMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxNGMxLjEgMCAyLS45IDItMnoiPjwvcGF0aD4KICAgICAgPC9zdmc+"/><div id="i1j6xl"><div id="i76yc7"><div id="i9uznl"><span draggable="true" id="ixfseb">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="iooxe4">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span></div></div><div id="iirulh"><div id="iubo13"><span draggable="true" id="iw4bph">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="iajglh">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं।</span></div></div></div></div>
     <style>
@@ -77,7 +77,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[9]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[9]} />`,
     category: category,
     content: `<div id="idburt"><div id="ikpzax"><div id="igljq4"><b draggable="true" id="i8zxwc">इस मीटिंग |</b><span draggable="true" id="iha36e"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="ipdx5x">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। </span></div></div><div id="ixd2px"><div id="ikoxtx"><span draggable="true" id="i8wbf3">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="ilj34g">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है।<br/></span></div></div></div>
     <style>
@@ -85,7 +85,7 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[10]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[10]} />`,
     category: category,
     content: `<div id="ig6bwu"><div id="iug5v2">इधर-उधर देखा तो आसन से कुछ</div><div id="ijxdj4">इधर-उधर देखा तो आसन से कुछ आगे दो मूर्तियों पर नजर गई पुजारियों से पूछा तो पता चला</div><div id="idburt"><div id="ikpzax"><div id="igljq4"><b draggable="true" id="i8zxwc">इस मीटिंग |</b><span draggable="true" id="iha36e"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="ipdx5x">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। </span></div></div><div id="ixd2px"><div id="ikoxtx"><span draggable="true" id="i8wbf3">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="ilj34g">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है।<br/></span></div></div></div></div>
     <style>
@@ -93,13 +93,13 @@ const blocks = [
     </style>`
   },
   {
-    media : `<img height=${height} width=${width} class="firstBlockImages" src=${images[11]} />`,
+    media: `<img height=${height} width=${width} class="firstBlockImages" src=${images[11]} />`,
     category: category,
     content: `<div id="i5ekwp"><div id="imzrza">इधर-उधर देखा तो आसन से कुछ आगे दो मूर्तियों पर नजर गई पुजारियों से पूछा तो पता चला</div><div id="i5dw3l"><div id="ixei2h"><div id="isa9wy"><b draggable="true" id="ieu0mt">इस मीटिंग |</b><span draggable="true" id="ibwxrm"> को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="itgrb5">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। </span></div></div><div id="i1kv49"><div id="il8uw8"><span draggable="true" id="ihg6p2">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है। ये पार्टियाँ कभी एक नहीं हो सकतीं क्योंकि अलग- अलग राज्यों में इनके अपने- अपने हित हैं जिनसे ये कभी समझौता नहीं कर सकतीं। </span><span id="i0rgue">को लेकर कई भाजपा नेताओं ने नीतीश कुमार और ख़ासकर, कांग्रेस के खिलाफ खूब तंज कसे, उनका कहना है कि विपक्षी एकता सिर्फ़ दिखावा है।<br/></span></div></div></div></div>
     <style>
    #i5ekwp{min-height:75px;flex-grow:1;flex-basis:calc(100% / 2);}#imzrza{padding:5px 10px 5px 10px;font-size:x-large;font-weight:700;}#i5dw3l{display:flex;justify-content:flex-start;align-items:stretch;flex-wrap:nowrap;}#ixei2h{min-height:75px;flex-grow:1;flex-basis:calc(100% / 2);}#i1kv49{min-height:75px;flex-grow:1;flex-basis:calc(100% / 2);}#ieu0mt{font-size:small;}#ibwxrm{font-size:small;}#itgrb5{font-size:small;}#isa9wy{padding:5px 10px 5px 10px;color:black;border:0 solid black;}#ihg6p2{font-size:small;}#i0rgue{font-size:small;}#il8uw8{padding:5px 10px 5px 10px;}
     </style>`
-  },
+  }
 ]
 
 export default blocks

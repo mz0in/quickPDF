@@ -1,4 +1,4 @@
-import {styleWithFlex} from "../helper"
+import { styleWithFlex } from '../helper'
 const category = '8 Blocks'
 const stylePrefix = 'qpdf8-'
 const rowHeight = 75
@@ -12,7 +12,7 @@ const styleRow = `
       flex-wrap: nowrap;
       padding: 10px;`
 
-    const styleClm = `
+const styleClm = `
     min-height: ${rowHeight}px;
     flex-grow: 1;
     flex-basis: 100%;`

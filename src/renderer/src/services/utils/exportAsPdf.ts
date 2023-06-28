@@ -15,7 +15,13 @@ function createAndDownloadBlobFile(body) {
   }
 }
 
-export async function saveAsPDF(allCss: string, allHtml: string, pageHead: string, info, codeOfPaper) {
+export async function saveAsPDF(
+  allCss: string,
+  allHtml: string,
+  pageHead: string,
+  info,
+  codeOfPaper
+) {
   let html = `<!DOCTYPE html>
     <html lang="Hi">
     <head>

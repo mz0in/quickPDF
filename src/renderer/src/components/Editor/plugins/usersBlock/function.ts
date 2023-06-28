@@ -1,5 +1,5 @@
 export function onSubmit(selectedComponent, editor, details, myModal) {
-    // Get the BlockManager module first
+  // Get the BlockManager module first
   const BlockManager = editor.Blocks // `Blocks` is an alias of `BlockManager`
   const htmlCode = selectedComponent?.toHTML()
   let cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
@@ -66,21 +66,21 @@ export function addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode
 }
 
 export function loadAllBlocksFromLocalStorage(BlockManager) {
-  // updating BlockManager 
+  // updating BlockManager
   let allBlocks = getBlocksFromLocalStorage()
   // Iterate over the allBlocks object
-for (let category in allBlocks) {
-    let blocks = allBlocks[category];
+  for (let category in allBlocks) {
+    let blocks = allBlocks[category]
     for (let blockID in blocks) {
-        let block = blocks[blockID];
-        let details = {
-            id: blockID,
-            category: category
-        };
-        let htmlCode = block.htmlCode;
-        let cssCode = block.cssCode;
-        addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode);
+      let block = blocks[blockID]
+      let details = {
+        id: blockID,
+        category: category
+      }
+      let htmlCode = block.htmlCode
+      let cssCode = block.cssCode
+      addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode)
     }
-}
-  BlockManager.render();
+  }
+  BlockManager.render()
 }

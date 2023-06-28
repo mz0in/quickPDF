@@ -8,7 +8,7 @@ import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
-import customRtePlugin from "./plugins/customRte"
+import customRtePlugin from './plugins/customRte'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
 // @ts-ignore
@@ -25,19 +25,26 @@ interface GrapesJSProps {
   canvasSize: {
     height: number
     width: number
-  },
-  paperCode: htmlObject[],
+  }
+  paperCode: htmlObject[]
   pageHead: string
 }
 
-export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHead }: GrapesJSProps) {
+export function PaperEditor({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  paperCode,
+  pageHead
+}: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: "",
+      protectedCss: '',
       deviceManager: {
         devices: [
           {
@@ -51,11 +58,11 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHea
       pageManager: {
         pages: paperCode.map((page, index) => {
           return {
-                name: `page ${index + 1}`,
-                id: `${index + 1}`,
-                styles: page.css,
-                component: page.htmlBody
-              }
+            name: `page ${index + 1}`,
+            id: `${index + 1}`,
+            styles: page.css,
+            component: page.htmlBody
+          }
         })
       },
       storageManager: false,
@@ -78,7 +85,7 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHea
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
-        },
+        }
       }
     })
 

@@ -1,11 +1,11 @@
-import { Editor } from "grapesjs";
-import html2canvas from 'html2canvas';
-import {onSubmit} from "./function"
+import { Editor } from 'grapesjs'
+import html2canvas from 'html2canvas'
+import { onSubmit } from './function'
 
 export default function customSaveModal(editor: Editor) {
-  const selectedComponent = editor.getSelected();
+  const selectedComponent = editor.getSelected()
   // Get the Modal module
-  const modal = editor.Modal;
+  const modal = editor.Modal
 
   // Define the content of the modal
   // Define the content of the modal
@@ -28,7 +28,7 @@ export default function customSaveModal(editor: Editor) {
                   </div>
                 </div>
               </div>                       
-`;
+`
 
   // Create the modal
   const myModal = modal.open({
@@ -37,23 +37,20 @@ export default function customSaveModal(editor: Editor) {
     width: '400px',
     height: 'auto',
     closedOnEscape: true,
-    closedOnClickOutside: true,
-  });
-
-
+    closedOnClickOutside: true
+  })
 
   /* functioning of modal */
   html2canvas(selectedComponent?.getEl() as HTMLElement).then(function (canvas) {
     console.log(canvas.toDataURL())
-    document.getElementById("screenShotCanvas")?.appendChild(canvas);
-  });
-  
-  // onsaving function
-  
+    document.getElementById('screenShotCanvas')?.appendChild(canvas)
+  })
 
-  document.getElementById("submit")?.addEventListener("click", ()=> {
-   let nameBlock = document.getElementById("component-name") as HTMLInputElement
-   let categoryBlock = document.getElementById("component-category") as HTMLInputElement
+  // onsaving function
+
+  document.getElementById('submit')?.addEventListener('click', () => {
+    let nameBlock = document.getElementById('component-name') as HTMLInputElement
+    let categoryBlock = document.getElementById('component-category') as HTMLInputElement
 
     let details = {
       name: nameBlock.value,

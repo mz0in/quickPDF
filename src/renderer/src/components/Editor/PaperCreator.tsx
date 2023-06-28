@@ -9,7 +9,7 @@ import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from './plugins/componentsPlugin'
-import customRtePlugin from "./plugins/customRte"
+import customRtePlugin from './plugins/customRte'
 // import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
@@ -78,7 +78,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
-        },
+        }
       }
     })
 
@@ -135,7 +135,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
            * defined at: /plugins/grapesjsFonts/fonts.js#L348-L349
            */
           // @ts-ignore
-          let pageHead = editor.Canvas.getDocument().head.innerHTML;
+          let pageHead = editor.Canvas.getDocument().head.innerHTML
 
           onSave(htmlStrings, pageHead)
         }

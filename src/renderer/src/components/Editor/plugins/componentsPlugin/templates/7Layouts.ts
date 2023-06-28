@@ -1,4 +1,4 @@
-import { styleWithFlex } from "../helper"
+import { styleWithFlex } from '../helper'
 const category = '7 Blocks'
 const stylePrefix = 'qpdf7-'
 const rowHeight = 75
