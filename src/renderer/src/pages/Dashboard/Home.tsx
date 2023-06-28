@@ -8,12 +8,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchCompanies, addCompany } from '@renderer/services/redux/allCompanies'
 import { AppDispatch } from '../../store'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 
 export default function Home() {
-  const allCompnay = useSelector((state: RootState) => state.companies.companies)
+  const allCompany = useSelector((state: RootState) => state.companies.companies)
   const dispatch = useDispatch<AppDispatch>()
+  const [userInput, setUserInput] = useState('');
   const [isAdmin] = useAdminChecker()
 
   const syncAllCompany = () => {
@@ -30,6 +31,15 @@ export default function Home() {
       dispatch(addCompany(data))
     }
   }
+
+  function filterCompanies(allCompanies: any[], userInput: string): any[] {
+    const searchTerm = userInput.toLowerCase();
+    return allCompanies.filter(company =>
+      company.name.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  const filteredCompanies = filterCompanies(allCompany, userInput);
 
   useEffect(() => {
     getDataFromIdbStorage()
@@ -48,6 +58,7 @@ export default function Home() {
             rightSection={
               <IconFolderSearch size="1rem" style={{ display: 'block', opacity: 0.5 }} />
             }
+            onChange={(e)=> setUserInput(e.target.value)}
           />
           <ActionIcon variant={'gradient'} p={5} size="lg" onClick={syncAllCompany}>
             <IconReload />
@@ -57,8 +68,8 @@ export default function Home() {
       <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>
         {isAdmin ? <AddButton url="/company" /> : null}
 
-        {allCompnay !== undefined
-          ? Object.values(allCompnay).map((company: any) => {
+        {allCompany !== undefined
+          ? filteredCompanies.map((company: any) => {
               return (
                 <PdfCompanyCard
                   key={company.id}

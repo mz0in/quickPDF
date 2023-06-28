@@ -2,7 +2,7 @@ import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
 import { IconReload, IconCalendar } from '@tabler/icons-react'
 import { useParams } from 'react-router-dom'
-import { DashToSpace, monthsOfYear, convertToDate } from '@renderer/services/utils'
+import { DashToSpace, monthsOfYear, convertToDate, capitalizeFirstLetters } from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
@@ -52,7 +52,7 @@ export default function Company() {
     <Layout isBack>
       <Flex justify="center" align="center" direction="column">
         <Title order={3} mb={15}>
-          {DashToSpace(companyName as string)}
+          {capitalizeFirstLetters(DashToSpace(companyName as string))}
         </Title>
         <Group position="apart" spacing="xl" w="100%">
           <DatePickerInput
