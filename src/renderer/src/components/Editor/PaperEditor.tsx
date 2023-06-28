@@ -32,7 +32,6 @@ interface GrapesJSProps {
 
 export function PaperEditor({ id, config, onSave, canvasSize, paperCode, pageHead }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
-  console.log(paperCode)
 
   useEffect(() => {
     const editor = grapesjs.init({
