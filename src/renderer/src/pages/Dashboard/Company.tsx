@@ -2,7 +2,12 @@ import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
 import { IconReload, IconCalendar } from '@tabler/icons-react'
 import { useParams } from 'react-router-dom'
-import { DashToSpace, monthsOfYear, convertToDate, capitalizeFirstLetters } from '@renderer/services/utils'
+import {
+  DashToSpace,
+  monthsOfYear,
+  convertToDate,
+  capitalizeFirstLetters
+} from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
@@ -63,7 +68,12 @@ export default function Company() {
             placeholder="Pick date"
             onChange={setSelectedDate}
           />
-          <ActionIcon size="lg" variant={'gradient'} gradient={{ from: 'black', to: 'gray', deg: 45 }} onClick={getAllPapers}>
+          <ActionIcon
+            size="lg"
+            variant={'gradient'}
+            gradient={{ from: 'black', to: 'gray', deg: 45 }}
+            onClick={getAllPapers}
+          >
             <IconReload />
           </ActionIcon>
         </Group>

@@ -14,7 +14,7 @@ import { useAdminChecker } from '@renderer/services/hooks'
 export default function Home() {
   const allCompany = useSelector((state: RootState) => state.companies.companies)
   const dispatch = useDispatch<AppDispatch>()
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState('')
   const [isAdmin] = useAdminChecker()
 
   const syncAllCompany = () => {
@@ -33,13 +33,11 @@ export default function Home() {
   }
 
   function filterCompanies(allCompanies: any[], userInput: string): any[] {
-    const searchTerm = userInput.toLowerCase();
-    return allCompanies.filter(company =>
-      company.name.toLowerCase().includes(searchTerm)
-    );
+    const searchTerm = userInput.toLowerCase()
+    return allCompanies.filter((company) => company.name.toLowerCase().includes(searchTerm))
   }
 
-  const filteredCompanies = filterCompanies(allCompany, userInput);
+  const filteredCompanies = filterCompanies(allCompany, userInput)
 
   useEffect(() => {
     getDataFromIdbStorage()
@@ -58,9 +56,15 @@ export default function Home() {
             rightSection={
               <IconFolderSearch size="1rem" style={{ display: 'block', opacity: 0.5 }} />
             }
-            onChange={(e)=> setUserInput(e.target.value)}
+            onChange={(e) => setUserInput(e.target.value)}
           />
-          <ActionIcon variant={'gradient'} p={5} size="lg" onClick={syncAllCompany}>
+          <ActionIcon
+            variant={'gradient'}
+            gradient={{ from: 'black', to: 'gray', deg: 45 }}
+            p={5}
+            size="lg"
+            onClick={syncAllCompany}
+          >
             <IconReload />
           </ActionIcon>
         </Group>
