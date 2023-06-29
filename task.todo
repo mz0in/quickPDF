@@ -6,13 +6,15 @@ Make ui better {transisition, animatons} [X]
 Loading saved html [X]
 Date filtering [X]
 Give them finishing touch enable animations and smoothness [X]
-Others functions of the application
+Date organizer [X]
+Others functions of the application []
+Add fonts from pendrive 
+mirror of pdf 
 Create a website for qucikpdf where user can send there request also admins can able to download software
-Date organizer 
-Create a web scrapping function 
-Make a huge library of components
-Add fonts from pendrive
-mirror of pdf
+Make a huge library of components 
 
 // new bugs
 page automatically cut in output.pdf but not in editior
+
+// upcoming time 
+Create a web scrapping function 

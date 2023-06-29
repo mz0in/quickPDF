@@ -92,7 +92,7 @@ export function PaperCard({ url, date, month }: paperProps) {
       <Text
         variant="gradient"
         gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
-        sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+        sx={{ fontFamily: 'SF display, sans-serif' }}
         ta="center"
         fz="xl"
         fw={700}

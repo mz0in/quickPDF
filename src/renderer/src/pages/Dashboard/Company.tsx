@@ -63,7 +63,7 @@ export default function Company() {
             placeholder="Pick date"
             onChange={setSelectedDate}
           />
-          <ActionIcon size="lg" variant={'gradient'} onClick={getAllPapers}>
+          <ActionIcon size="lg" variant={'gradient'} gradient={{ from: 'black', to: 'gray', deg: 45 }} onClick={getAllPapers}>
             <IconReload />
           </ActionIcon>
         </Group>

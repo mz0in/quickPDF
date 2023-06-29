@@ -33,7 +33,7 @@ export default function HeaderComponent({ isBack = false }) {
         <div className={classes.inner}>
           <Group>
             {isBack ? (
-              <ActionIcon onClick={() => navigate(-1)} variant={'gradient'} p={5} size="lg">
+              <ActionIcon onClick={() => navigate(-1)} variant={'gradient'} gradient={{ from: 'black', to: 'gray', deg: 45 }} p={5} size="lg">
                 <IconArrowLeft />
               </ActionIcon>
             ) : null}
