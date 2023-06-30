@@ -72,7 +72,7 @@ app.on('window-all-closed', () => {
 // code. You can also put them in separate files and require them here.
 DbCalls() // calling all database ipc calls
 
-ipcMain.handle('generatePDF', async (event, args) => {
+ipcMain.handle('generatePDF', async (_, args) => {
   let printableWindow = new BrowserWindow({ show: false, webPreferences: { webSecurity: false } })
   printableWindow.loadURL('data:text/html;base64,' + Buffer.from(args.html).toString('base64'))
   let customPageSize = { width: args.size.width, height: args.size.height }
