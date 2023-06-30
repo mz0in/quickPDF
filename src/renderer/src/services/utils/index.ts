@@ -1,4 +1,5 @@
 import { saveAsPDF } from './exportAsPdf'
+import {setComponentInLocalStorage} from "./templateFunction"
 
 /**
  * function to convert Text with sapce to text with dashes
@@ -44,8 +45,6 @@ export function inToPt(inch: number): number {
   const ptPrIn = 72
   return Math.round(inch * ptPrIn)
 }
-
-export { saveAsPDF }
 
 export const monthsOfYear: string[] = [
   'January',
@@ -102,3 +101,6 @@ export function capitalizeFirstLetters(str: string): string {
   })
   return capitalizedWords.join(' ')
 }
+
+
+export { saveAsPDF, setComponentInLocalStorage }

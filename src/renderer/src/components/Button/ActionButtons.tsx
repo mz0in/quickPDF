@@ -19,6 +19,11 @@ interface paperProps {
   month: string
 }
 
+interface LayoutProps {
+  url: string
+  name: string
+}
+
 export function AddButton({ url, height = '110px' }: addButtonProps) {
   const navigate = useNavigate()
 
@@ -100,6 +105,31 @@ export function PaperCard({ url, date, month }: paperProps) {
         {date}
       </Text>
       <Text fz="sm">{month}</Text>
+    </Box>
+  )
+}
+
+export function LayoutCard({ url, name }: LayoutProps) {
+  const navigate = useNavigate()
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: '#f1f1f1',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '110px',
+        height: '150px',
+        border: 'none',
+        filter: 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))',
+        cursor: 'pointer'
+      }}
+      component="button"
+      onClick={() => navigate(url)}
+    >
+      <Text fz="sm">{name}</Text>
     </Box>
   )
 }

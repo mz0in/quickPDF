@@ -1,9 +1,10 @@
-import { TemplateEditor } from '@renderer/components/Editor'
+import { TemplateEditor, htmlObject } from '@renderer/components/Editor'
 import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, TextInput, Flex, NumberInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useState } from 'react'
-import { inToPx } from '@renderer/services/utils'
+import { setComponentInLocalStorage } from '@renderer/services/utils'
+import { useParams, useNavigate } from 'react-router-dom'
 
 interface defaultFormValue {
   title: string
@@ -14,6 +15,8 @@ interface defaultFormValue {
 export default function NewDesign(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
   const [modalData, setModalData] = useState<defaultFormValue>()
+  const { companyName } = useParams()
+  const navigate = useNavigate()
 
   const form = useForm<defaultFormValue>({
     initialValues: {
@@ -23,34 +26,36 @@ export default function NewDesign(): JSX.Element {
     }
   })
 
-  const handleSave = (html: string) => {
+  const handleSave = (html: htmlObject[]) => {
     console.log('HTML saved:', html)
+    setComponentInLocalStorage(companyName as string, modalData?.title as string, html);
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
     close() // to close opened modal
     setModalData({
       title: values.title,
-      height: inToPx(values.height),
-      width: inToPx(values.width)
+      height: values.height,
+      width: values.width
     })
   }
 
   if (modalData !== undefined) {
     return (
       <TemplateEditor
-        id="editor"
-        canvasSize={{
-          height: modalData.height,
-          width: modalData.width
-        }}
-        onSave={handleSave}
+      id="editor"
+      canvasSize={{
+        height: modalData.height,
+        width: modalData.width
+      }}
+      componentName={modalData.title}
+      onSave={handleSave}
       />
     )
   }
 
   return (
-    <Modal opened={opened} onClose={close} title="Design" centered>
+    <Modal opened={opened} onClose={() => navigate(-1)} title="Design" centered>
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <TextInput
           placeholder="Design Name"

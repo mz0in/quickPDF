@@ -40,6 +40,25 @@ export function PaperEditor({
 }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
+  function addStyle() {
+    var styleElement = document.createElement('style');
+    styleElement.innerHTML = 'body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}'; // CSS for locking screen
+    
+    document.head.appendChild(styleElement);
+  }
+
+  function removeStyle() {
+    var styleElement = document.querySelector('style');
+    if (styleElement) {
+      styleElement.parentNode.removeChild(styleElement);
+    }
+  }
+
+  // Add the style dynamically after the page has finished loading
+  window.addEventListener('load', function() {
+    addStyle();
+  });
+
   useEffect(() => {
     const editor = grapesjs.init({
       container: `#${id}`,
@@ -91,7 +110,11 @@ export function PaperEditor({
 
     setTimeout(() => {
       // @ts-ignore
-      editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
+      try {
+        editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
+      } catch (e) {
+        console.log("element list unexpanded")
+      }
     }, 3000)
 
     editor.Panels.addButton('options', {
@@ -151,7 +174,8 @@ export function PaperEditor({
 
     editor.Commands.add('goBack', {
       run: () => {
-        history.back()
+        removeStyle();
+        history.back();
       }
     })
 
@@ -192,11 +216,6 @@ export function PaperEditor({
 
     // @ts-ignore
     window.editor = editor
-
-    document.head.insertAdjacentHTML(
-      'beforeend',
-      '<style>body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}</style>'
-    )
 
     return () => {
       editor.destroy()

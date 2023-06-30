@@ -9,7 +9,7 @@ import {
   capitalizeFirstLetters
 } from '@renderer/services/utils'
 import { DatePickerInput } from '@mantine/dates'
-import { AddButton, PaperCard } from '@renderer/components/Button/ActionButtons'
+import { AddButton, PaperCard, LayoutCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
 
 interface paperType {
@@ -19,6 +19,7 @@ interface paperType {
 
 export default function Company() {
   let { companyName } = useParams()
+  const [localLayouts, setLocalLayouts] = useState({})
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [newspapers, setNewspapers] = useState<paperType[]>([
     {
@@ -27,6 +28,7 @@ export default function Company() {
     }
   ])
 
+  // getting data from backend
   const getAllPapers = async () => {
     let papers = await window.api.getPapers(companyName)
     let data: paperType[] = papers.map((realDate: string) => {
@@ -43,6 +45,14 @@ export default function Company() {
     )
   }
 
+  //get layout components from localStorage
+  const getAllLayout = () => {
+    let localData = localStorage.getItem(companyName as string);
+    if (localData != null) {
+      setLocalLayouts(JSON.parse(localData))
+    }
+  }
+
   const filteredNewspapers = newspapers.filter((paper) => {
     if (selectedDate === null) return true // If no date is selected, show all newspapers
     const paperDate = new Date(paper.date)
@@ -51,7 +61,10 @@ export default function Company() {
 
   useEffect(() => {
     getAllPapers()
+    getAllLayout()
   }, [])
+
+  console.log(localLayouts);
 
   return (
     <Layout isBack>
@@ -82,6 +95,17 @@ export default function Company() {
         <Title order={4}>Layout</Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-design/${companyName}`} height="150px" />
+          {
+            Object.keys(localLayouts).map((layout, index)=> {
+              return (
+                <LayoutCard
+                  key={`companyLayout-${index}`}
+                  url={`/edit-layout/${companyName}/${layout}`}
+                  name={layout}
+                />
+              )
+            })
+          }
         </SimpleGrid>
 
         <Title order={4} mt={30}>
