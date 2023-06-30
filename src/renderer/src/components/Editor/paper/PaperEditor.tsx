@@ -3,22 +3,20 @@ import { useEffect, useRef } from 'react'
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
-// import gjsBasicBlock from 'grapesjs-blocks-basic'
-import basicCustomPlugin from './plugins/blocksPlugin'
-import zoomPlugin from './plugins/zoomPlugin'
+import basicCustomPlugin from '../plugins/blocksPlugin'
+import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
-import customComponents from './plugins/componentsPlugin'
-import customRtePlugin from './plugins/customRte'
-// import './plugins/tinymceEditor.js'
+import customComponents from '../plugins/componentsPlugin'
+import customRtePlugin from '../plugins/customRte'
 // @ts-ignore
-import grapesjsFontPlugin from './plugins/grapesjsFonts'
+import grapesjsFontPlugin from '../plugins/grapesjsFonts'
 // @ts-ignore
-import grapesjsPageManagerPlugin from './plugins/pageManger'
-import gjsUserBlock from './plugins/usersBlock'
+import grapesjsPageManagerPlugin from '../plugins/pageManger'
+import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
-import './plugins/pageManger/css/grapesjs-project-manager.min.css'
-import type { htmlObject } from '.'
+import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
+import type { htmlObject } from '..'
 
 interface GrapesJSProps {
   id: string
@@ -28,9 +26,18 @@ interface GrapesJSProps {
     height: number
     width: number
   }
+  paperCode: htmlObject[]
+  pageHead: string
 }
 
-export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) {
+export function PaperEditor({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  paperCode,
+  pageHead
+}: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   function addStyle() {
@@ -56,7 +63,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      // protectedCss: "@page {margin: 0;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}",
+      protectedCss: '',
       deviceManager: {
         devices: [
           {
@@ -68,14 +75,14 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
         ]
       },
       pageManager: {
-        pages: [
-          {
-            name: 'page 1',
-            id: '1',
-            styles: ``,
-            component: '' // or a JSON of components
+        pages: paperCode.map((page, index) => {
+          return {
+            name: `page ${index + 1}`,
+            id: `${index + 1}`,
+            styles: page.css,
+            component: page.htmlBody
           }
-        ]
+        })
       },
       storageManager: false,
       plugins: [
@@ -209,11 +216,6 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
 
     // @ts-ignore
     window.editor = editor
-
-    document.head.insertAdjacentHTML(
-      'beforeend',
-      '<style>body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}</style>'
-    )
 
     return () => {
       editor.destroy()

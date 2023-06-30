@@ -8,6 +8,8 @@ import {
   convertToDate,
   capitalizeFirstLetters
 } from '@renderer/services/utils'
+import {fireStore} from "@renderer/services/firebase"
+import { doc, getDoc } from "firebase/firestore";
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard, LayoutCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
@@ -61,13 +63,25 @@ export default function Company() {
 
   const loadAllData = async() => {
     // loading layouts from firebase
-    
+    const docRef = doc(fireStore, "papers", companyName as string);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.data()?.layouts != undefined) {
+      console.log("running because its not undefind")
+      let layouts = docSnap.data()?.layouts;
+      localStorage.setItem(companyName as string, JSON.stringify(layouts));
+    } else {
+      console.log("No layouts found");
+    }
+    getAllPapers()
   }
 
   useEffect(() => {
     getAllPapers()
     getAllLayout()
   }, [])
+
+  console.log(localLayouts)
 
   return (
     <Layout isBack>
@@ -88,7 +102,7 @@ export default function Company() {
             size="lg"
             variant={'gradient'}
             gradient={{ from: 'black', to: 'gray', deg: 45 }}
-            onClick={getAllPapers}
+            onClick={loadAllData}
           >
             <IconReload />
           </ActionIcon>

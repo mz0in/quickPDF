@@ -3,18 +3,20 @@ import { useEffect, useRef } from 'react'
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
-import basicCustomPlugin from './plugins/blocksPlugin'
-import zoomPlugin from './plugins/zoomPlugin'
+import basicCustomPlugin from '../plugins/blocksPlugin'
+import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
-import customComponents from './plugins/componentsPlugin'
-import customRtePlugin from './plugins/customRte'
+// import basicCustomPlugin from './plugins/blocksPlugin'
+import customComponents from '../plugins/componentsPlugin'
+import customRtePlugin from '../plugins/customRte'
 // @ts-ignore
-import grapesjsFontPlugin from './plugins/grapesjsFonts'
+import grapesjsFontPlugin from '../plugins/grapesjsFonts'
 // @ts-ignore
-import grapesjsPageManagerPlugin from './plugins/pageManger'
+import grapesjsPageManagerPlugin from '../plugins/pageManger'
+import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
-import './plugins/pageManger/css/grapesjs-project-manager.min.css'
-import type { htmlObject } from '.'
+import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
+import type { htmlObject } from '..'
 
 interface GrapesJSProps {
   id: string
@@ -24,16 +26,25 @@ interface GrapesJSProps {
     height: number
     width: number
   }
-  componentName: string
+  paperCode: htmlObject
+  pageHead?: string
 }
 
-export function TemplateEditor({ id, config, onSave, canvasSize, componentName }: GrapesJSProps) {
+export function TemplateEditor({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  paperCode,
+  pageHead
+}: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
+      protectedCss: '',
       deviceManager: {
         devices: [
           {
@@ -44,22 +55,34 @@ export function TemplateEditor({ id, config, onSave, canvasSize, componentName }
           }
         ]
       },
+      pageManager: {
+        pages: [{
+            name: `page 1`,
+            id: `1`,
+            styles: paperCode.css,
+            component: paperCode.htmlBody
+          }]
+      },
       storageManager: false,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
         customComponents,
         grapesjsFontPlugin,
-        // grapesjsPageManagerPlugin,
+        grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
         zoomPlugin,
-        // gjsUserBlock,
+        gjsUserBlock,
         customRtePlugin
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
           // api_key: "AIzaSyBIbeXm8jJu47tuBj2ubDzjLlLgAmtD07s"
           api_key: 'AIzaSyAdJTYSLPlKz4w5Iqyy-JAF2o8uQKd1FKc'
+        },
+        [grapesjsPageManagerPlugin]: {
+          width: `${canvasSize?.width}in`, // new page width
+          height: `${canvasSize?.height}in` // new page height
         }
       }
     })
@@ -88,6 +111,16 @@ export function TemplateEditor({ id, config, onSave, canvasSize, componentName }
       attributes: { title: 'Back' }
     })
 
+    editor.Panels.addButton('views', {
+      id: 'open-pages',
+      className: 'fa fa-file-o',
+      attributes: {
+        title: 'pages'
+      },
+      command: 'open-pages',
+      togglable: false
+    })
+
     if (onSave) {
       editor.Commands.add('save', {
         run: () => {
@@ -100,8 +133,8 @@ export function TemplateEditor({ id, config, onSave, canvasSize, componentName }
             const css = editor.getCss({ component })
 
             return {
-              htmlBody: body.replaceAll("<body>", `<div id="#${componentName}Bar">`).replaceAll("</body>", "</div>"),
-              css: css?.replaceAll("body", `#${componentName}Bar`)
+              htmlBody: body,
+              css: css
             }
           }) as htmlObject[]
 
@@ -120,8 +153,7 @@ export function TemplateEditor({ id, config, onSave, canvasSize, componentName }
 
     editor.Commands.add('goBack', {
       run: () => {
-        // removeStyle();
-        history.back()
+        history.back();
       }
     })
 
@@ -167,8 +199,6 @@ export function TemplateEditor({ id, config, onSave, canvasSize, componentName }
       editor.destroy()
     }
   }, [id, config, onSave])
-
-  
 
   return <div ref={editorRef} id={id} />
 }

@@ -1,4 +1,4 @@
-import { TemplateEditor, htmlObject } from '@renderer/components/Editor'
+import { TemplateCreator, htmlObject } from '@renderer/components/Editor'
 import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, TextInput, Flex, NumberInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
@@ -10,7 +10,7 @@ interface defaultFormValue {
   title: string
   height: number
   width: number
-}
+} // defalutFormValue = Info type in services/templateFunction.ts
 
 export default function NewDesign(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
@@ -28,7 +28,8 @@ export default function NewDesign(): JSX.Element {
 
   const handleSave = (html: htmlObject[]) => {
     console.log('HTML saved:', html)
-    setComponentInLocalStorage(companyName as string, modalData?.title as string, html);
+    // @ts-ignore
+    setComponentInLocalStorage(companyName as string, modalData, html);
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
@@ -42,7 +43,7 @@ export default function NewDesign(): JSX.Element {
 
   if (modalData !== undefined) {
     return (
-      <TemplateEditor
+      <TemplateCreator
       id="editor"
       canvasSize={{
         height: modalData.height,
