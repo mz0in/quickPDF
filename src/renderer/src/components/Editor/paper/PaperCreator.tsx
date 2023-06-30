@@ -33,25 +33,6 @@ interface GrapesJSProps {
 export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
-  function addStyle() {
-    var styleElement = document.createElement('style');
-    styleElement.innerHTML = 'body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}'; // CSS for locking screen
-    
-    document.head.appendChild(styleElement);
-  }
-
-  function removeStyle() {
-    var styleElement = document.querySelector('style');
-    if (styleElement) {
-      styleElement.parentNode.removeChild(styleElement);
-    }
-  }
-
-  // Add the style dynamically after the page has finished loading
-  window.addEventListener('load', function() {
-    addStyle();
-  });
-
   useEffect(() => {
     const editor = grapesjs.init({
       container: `#${id}`,
@@ -167,7 +148,6 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
 
     editor.Commands.add('goBack', {
       run: () => {
-        removeStyle();
         history.back();
       }
     })

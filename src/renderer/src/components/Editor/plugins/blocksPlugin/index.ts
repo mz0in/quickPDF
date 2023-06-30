@@ -5,7 +5,7 @@ export const templates = [customComponents]
 
 export default (editor: Editor) => {
   templates.forEach((element) => {
-    element.map((template) => {
+    element.map((template: any) => {
       editor.BlockManager.add(template.id, template)
     })
   })
