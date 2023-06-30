@@ -9,15 +9,15 @@ Give them finishing touch enable animations and smoothness [X]
 Date organizer [X]
 Create a website where user can send there request also admins can able to download software [X]
 Make a huge library of components [X]
-Others functions of the application []
+Others functions of the application [X]
+mirror of pdf [X]
+date issue [X]
+add name in edit user page [X]
 Add fonts from pendrive 
-mirror of pdf 
-custom Rte plugin
-date issue
-add name in edit user page
 
 // new bugs
 page automatically cut in output.pdf but not in editior
 
 // upcoming time 
 Create a web scrapping function 
+custom Rte plugin

@@ -4,6 +4,7 @@ import {
   Checkbox,
   MultiSelect,
   NumberInput,
+  TextInput,
   Title,
   Paper,
   Button,
@@ -26,6 +27,7 @@ export default function UserAdd(): JSX.Element {
   const form = useForm({
     initialValues: {
       uid: '',
+      name: "",
       isAdmin: false,
       number: 0,
       papers: []
@@ -57,6 +59,7 @@ export default function UserAdd(): JSX.Element {
       // doc.data() is never undefined for query doc snapshots
       form.setValues({
         uid: doc.id,
+        name: doc.data().name,
         isAdmin: doc.data().isAdmin,
         number: doc.data().number,
         papers: doc.data().papers
@@ -79,6 +82,7 @@ export default function UserAdd(): JSX.Element {
 
     updateDoc(doc(fireStore, `users/${values.uid}`), {
       isAdmin: values.isAdmin,
+      name: values.name,
       number: values.number,
       papers: values.papers
     }).then(() => {
@@ -127,6 +131,13 @@ export default function UserAdd(): JSX.Element {
         {user ? (
           <Paper withBorder shadow="md" p={30} mt={30} radius="md">
             <form onSubmit={form.onSubmit((values) => save(values))}>
+              <TextInput
+                my={10}
+                placeholder="His Name"
+                label="Name"
+                {...form.getInputProps('name')}
+                withAsterisk
+              />
               <NumberInput
                 my={10}
                 placeholder="His Number"

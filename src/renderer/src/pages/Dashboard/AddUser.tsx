@@ -83,6 +83,7 @@ export default function UserAdd(): JSX.Element {
       //4. giving user their company
       await setDoc(doc(fireStore, `users/${user.uid}`), {
         isAdmin: false,
+        name: values.name,
         number: values.number,
         papers: values.papers
       })
