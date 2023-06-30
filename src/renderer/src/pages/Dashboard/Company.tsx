@@ -59,12 +59,15 @@ export default function Company() {
     return paperDate.toDateString() === selectedDate.toDateString()
   })
 
+  const loadAllData = async() => {
+    // loading layouts from firebase
+    
+  }
+
   useEffect(() => {
     getAllPapers()
     getAllLayout()
   }, [])
-
-  console.log(localLayouts);
 
   return (
     <Layout isBack>
