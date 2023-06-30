@@ -81,7 +81,7 @@ export default function Company() {
     getAllLayout()
   }, [])
 
-  console.log(localLayouts)
+  console.log(newspapers)
 
   return (
     <Layout isBack>
@@ -136,7 +136,7 @@ export default function Company() {
                 key={`company-${index}`}
                 url={`/edit-pdf/${companyName}/${paper.realDate}`}
                 date={paper.date.getDate()}
-                month={`${monthsOfYear[paper.date.getMonth()]}`}
+                month={`${monthsOfYear[paper.date.getMonth()+1]}`}
               />
             )
           })}

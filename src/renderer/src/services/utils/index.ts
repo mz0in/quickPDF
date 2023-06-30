@@ -73,7 +73,8 @@ const monthChecker = Intl.NumberFormat('en-US', {
  * @returns date: string
  */
 export const dateToValue = (date: Date) => {
-  return `${date.getDate()}-${monthChecker.format(date.getMonth())}-${date.getUTCFullYear()}`
+  console.log(date)
+  return `${date.getDate()}-${monthChecker.format(date.getMonth())+1}-${date.getUTCFullYear()}`
 }
 
 /**
