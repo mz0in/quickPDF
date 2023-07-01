@@ -10,6 +10,7 @@ import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
+import localBlocks from '../plugins/localBlocks'
 // import './plugins/tinymceEditor.js'
 // @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
@@ -28,9 +29,10 @@ interface GrapesJSProps {
     height: number
     width: number
   }
+  companyName: string
 }
 
-export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) {
+export function PaperCreator({ id, config, onSave, canvasSize, companyName }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -68,7 +70,8 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
         gjsImageEditorPlugin,
         zoomPlugin,
         gjsUserBlock,
-        customRtePlugin
+        customRtePlugin,
+        localBlocks
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -78,6 +81,9 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
+        },
+        [localBlocks]: {
+          companyName: companyName
         }
       }
     })

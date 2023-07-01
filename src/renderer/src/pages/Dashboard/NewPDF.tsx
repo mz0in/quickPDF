@@ -90,6 +90,7 @@ export default function NewPage(): JSX.Element {
           width: modalData.width
         }}
         onSave={handleSave}
+        companyName={companyName as string}
       />
     )
   }

@@ -1,11 +1,5 @@
-import { Editor } from 'grapesjs'
-
-interface PluginOptions {
-  companyName: string
-}
-
-export default function (editor: Editor, options: PluginOptions) {
-  const { companyName } = options
+export default (editor, opts = {}) => {
+  const { companyName } = opts
   const category = 'templates'
 
   // Check if data is available in localStorage
@@ -25,12 +19,15 @@ export default function (editor: Editor, options: PluginOptions) {
     return {
       category,
       select: true,
-      label: '7 block',
-      content: `
-            <style>
-                ${styleRow}
-              </style>`
+      label: layout,
+      content: `${companyData[layout].htmlBody}
+      <style>
+        ${companyData[layout].css}
+      </style>`
     }
   })
-  return {}
+
+  blocks.map((template) => {
+    editor.BlockManager.add(template.category, template)
+  })
 }

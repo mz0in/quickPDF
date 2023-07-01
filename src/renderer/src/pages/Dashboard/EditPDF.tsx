@@ -107,6 +107,7 @@ export default function EditPDF(): JSX.Element {
       }}
       paperCode={paperData?.code as htmlObject[]}
       pageHead={paperData?.pageHead as string}
+      companyName={companyName as string}
       onSave={handleSave}
     />
   )
