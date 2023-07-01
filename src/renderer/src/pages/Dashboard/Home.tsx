@@ -3,40 +3,56 @@ import { Flex, Input, SimpleGrid, ActionIcon, Group, LoadingOverlay } from '@man
 import { IconFolderSearch, IconReload } from '@tabler/icons-react'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
-import type { RootState } from '../../store'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchCompanies, addCompany } from '@renderer/services/redux/allCompanies'
-import { AppDispatch } from '../../store'
-import { unwrapResult } from '@reduxjs/toolkit'
+import {query, collection, getDocs} from "firebase/firestore"
+import { fireStore } from '@renderer/services/firebase'
 import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 
 export default function Home() {
-  const allCompany = useSelector((state: RootState) => state.companies.companies)
-  const dispatch = useDispatch<AppDispatch>()
+  const [allCompany, setAllCompany] = useState<any>();
   const [userInput, setUserInput] = useState('')
   const [isAdmin] = useAdminChecker()
   const [dataFetched, setDataFetched] = useState(false); // New state variable
 
-  const syncAllCompany = () => {
-    dispatch(fetchCompanies())
-      .then(unwrapResult)
-      .then(async (res) => {
-    //@ts-ignore
-        await window?.DB?.setData('company', 'companies', res)
+  const syncAllCompany = async() => {
+    try {
+      // loading all companies
+      const companiesCollection = query(collection(fireStore, 'papers'))
+      const snapshot = await getDocs(companiesCollection)
+      const companies = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        logo: doc.data().logo,
+        mobileNumber: doc.data().mobileNumber,
+        owner: doc.data().owner,
+        type: doc.data().type,
+        address: doc.data().address
+      }))
+      let localData =  localStorage.getItem('user') as string;
+      let localUserPaper = JSON.parse(localData)
+      console.log("localUserPaper", localUserPaper);
+      if (localUserPaper != undefined) {
+        console.log('working')
+        let usersProject = companies.filter(item => localUserPaper.papers.includes(item.id))
+        console.log('worked', usersProject)
+        setAllCompany(usersProject);
+        // @ts-ignore
+        await window?.DB?.setData('company', 'companies', usersProject)
         setDataFetched(true);
-      })
+      }
+    } catch (error: any) {
+      console.log(error)
+    }
   }
 
   const getDataFromIdbStorage = async () => {
     //@ts-ignore
     let data: any = await window?.DB?.getData('company', 'companies')
-    console.log('data from server', data);
     if (data === undefined) {
       syncAllCompany();
     }
     if (data !== null) {
-      dispatch(addCompany(data))
+      setAllCompany(data)
       setDataFetched(true); // Set dataFetched to true after data is fetched
     }
   }
@@ -50,7 +66,6 @@ export default function Home() {
   }
 
   const filteredCompanies = filterCompanies(allCompany, userInput)
-  console.log("allCompayn", allCompany)
 
   useEffect(() => {
     getDataFromIdbStorage()

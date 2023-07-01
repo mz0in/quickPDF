@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 import App from './App'
-import { store } from './store'
-import { Provider } from 'react-redux'
 import { Notifications } from '@mantine/notifications'
 
 const theme: MantineThemeOverride = {
@@ -29,9 +27,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
       <Notifications />
-      <Provider store={store}>
         <App />
-      </Provider>
     </MantineProvider>
   </React.StrictMode>
 )
