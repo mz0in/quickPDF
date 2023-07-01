@@ -3,18 +3,18 @@ import { Flex, Input, SimpleGrid, ActionIcon, Group, LoadingOverlay } from '@man
 import { IconFolderSearch, IconReload } from '@tabler/icons-react'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
-import {query, collection, getDocs} from "firebase/firestore"
+import { query, collection, getDocs } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
 import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 
 export default function Home() {
-  const [allCompany, setAllCompany] = useState<any>();
+  const [allCompany, setAllCompany] = useState<any>()
   const [userInput, setUserInput] = useState('')
   const [isAdmin] = useAdminChecker()
-  const [dataFetched, setDataFetched] = useState(false); // New state variable
+  const [dataFetched, setDataFetched] = useState(false) // New state variable
 
-  const syncAllCompany = async() => {
+  const syncAllCompany = async () => {
     try {
       // loading all companies
       const companiesCollection = query(collection(fireStore, 'papers'))
@@ -28,17 +28,17 @@ export default function Home() {
         type: doc.data().type,
         address: doc.data().address
       }))
-      let localData =  localStorage.getItem('user') as string;
+      let localData = localStorage.getItem('user') as string
       let localUserPaper = JSON.parse(localData)
-      console.log("localUserPaper", localUserPaper);
+      console.log('localUserPaper', localUserPaper)
       if (localUserPaper != undefined) {
         console.log('working')
-        let usersProject = companies.filter(item => localUserPaper.papers.includes(item.id))
+        let usersProject = companies.filter((item) => localUserPaper.papers.includes(item.id))
         console.log('worked', usersProject)
-        setAllCompany(usersProject);
+        setAllCompany(usersProject)
         // @ts-ignore
         await window?.DB?.setData('company', 'companies', usersProject)
-        setDataFetched(true);
+        setDataFetched(true)
       }
     } catch (error: any) {
       console.log(error)
@@ -49,17 +49,17 @@ export default function Home() {
     //@ts-ignore
     let data: any = await window?.DB?.getData('company', 'companies')
     if (data === undefined) {
-      syncAllCompany();
+      syncAllCompany()
     }
     if (data !== null) {
       setAllCompany(data)
-      setDataFetched(true); // Set dataFetched to true after data is fetched
+      setDataFetched(true) // Set dataFetched to true after data is fetched
     }
   }
 
   function filterCompanies(allCompanies: any[], userInput: string): any[] {
     if (allCompanies === undefined) {
-      return []; // Return an empty array if allCompanies is undefined
+      return [] // Return an empty array if allCompanies is undefined
     }
     const searchTerm = userInput.toLowerCase()
     return allCompanies.filter((company) => company.name.toLowerCase().includes(searchTerm))

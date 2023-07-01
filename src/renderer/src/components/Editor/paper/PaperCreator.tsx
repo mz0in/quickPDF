@@ -44,7 +44,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
             id: 'paper',
             name: 'paper',
             width: `${canvasSize?.width}in`,
-            height: `${canvasSize?.height-1}in`
+            height: `${canvasSize?.height - 1}in`
           }
         ]
       },
@@ -87,7 +87,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
-        console.log("element list unexpanded")
+        console.log('element list unexpanded')
       }
     }, 3000)
 
@@ -148,7 +148,7 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
 
     editor.Commands.add('goBack', {
       run: () => {
-        history.back();
+        history.back()
       }
     })
 

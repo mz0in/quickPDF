@@ -1,30 +1,36 @@
-import { Editor } from "grapesjs";
+import { Editor } from 'grapesjs'
 
 interface PluginOptions {
-    companyName: string;
-  }
+  companyName: string
+}
 
 export default function (editor: Editor, options: PluginOptions) {
-    const { companyName } = options;
-    const category = "templates"
-  
-    // Check if data is available in localStorage
-    const localStorageData = localStorage.getItem(companyName);
-  
-    let companyData = {};
-  
-    if (localStorageData) {
-      try {
-        companyData = JSON.parse(localStorageData);
-      } catch (error) {
-        console.error('Error parsing localStorage data:', error);
-      }
-    }
+  const { companyName } = options
+  const category = 'templates'
 
-    const blocks = Object.keys(companyData).map((layout)=> {
-        return {
-            category,
-        }
-    })
-    return {};
-  };
+  // Check if data is available in localStorage
+  const localStorageData = localStorage.getItem(companyName)
+
+  let companyData = {}
+
+  if (localStorageData) {
+    try {
+      companyData = JSON.parse(localStorageData)
+    } catch (error) {
+      console.error('Error parsing localStorage data:', error)
+    }
+  }
+
+  const blocks = Object.keys(companyData).map((layout) => {
+    return {
+      category,
+      select: true,
+      label: '7 block',
+      content: `
+            <style>
+                ${styleRow}
+              </style>`
+    }
+  })
+  return {}
+}

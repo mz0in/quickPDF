@@ -1,5 +1,5 @@
 import { saveAsPDF } from './exportAsPdf'
-import {setComponentInLocalStorage} from "./templateFunction"
+import { setComponentInLocalStorage } from './templateFunction'
 
 /**
  * function to convert Text with sapce to text with dashes
@@ -74,7 +74,7 @@ const monthChecker = Intl.NumberFormat('en-US', {
  */
 export const dateToValue = (date: Date) => {
   console.log(date)
-  return `${date.getDate()}-${monthChecker.format(date.getMonth()+1)}-${date.getUTCFullYear()}`
+  return `${date.getDate()}-${monthChecker.format(date.getMonth() + 1)}-${date.getUTCFullYear()}`
 }
 
 /**
@@ -102,6 +102,5 @@ export function capitalizeFirstLetters(str: string): string {
   })
   return capitalizedWords.join(' ')
 }
-
 
 export { saveAsPDF, setComponentInLocalStorage }

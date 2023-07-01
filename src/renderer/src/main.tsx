@@ -22,12 +22,11 @@ const theme: MantineThemeOverride = {
   primaryColor: 'brand'
 }
 
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
       <Notifications />
-        <App />
+      <App />
     </MantineProvider>
   </React.StrictMode>
 )

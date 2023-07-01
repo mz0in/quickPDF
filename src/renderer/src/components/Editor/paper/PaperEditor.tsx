@@ -30,13 +30,7 @@ interface GrapesJSProps {
   pageHead: string
 }
 
-export function PaperEditor({
-  id,
-  config,
-  onSave,
-  canvasSize,
-  paperCode,
-}: GrapesJSProps) {
+export function PaperEditor({ id, config, onSave, canvasSize, paperCode }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -50,7 +44,7 @@ export function PaperEditor({
             id: 'paper',
             name: 'paper',
             width: `${canvasSize?.width}in`,
-            height: `${canvasSize?.height-1}in`
+            height: `${canvasSize?.height - 1}in`
           }
         ]
       },
@@ -93,7 +87,7 @@ export function PaperEditor({
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
-        console.log("element list unexpanded")
+        console.log('element list unexpanded')
       }
     }, 3000)
 
@@ -154,7 +148,7 @@ export function PaperEditor({
 
     editor.Commands.add('goBack', {
       run: () => {
-        history.back();
+        history.back()
       }
     })
 

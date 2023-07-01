@@ -30,13 +30,7 @@ interface GrapesJSProps {
   pageHead?: string
 }
 
-export function TemplateEditor({
-  id,
-  config,
-  onSave,
-  canvasSize,
-  paperCode,
-}: GrapesJSProps) {
+export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -55,12 +49,14 @@ export function TemplateEditor({
         ]
       },
       pageManager: {
-        pages: [{
+        pages: [
+          {
             name: `page 1`,
             id: `1`,
             styles: paperCode.css,
             component: paperCode.htmlBody
-          }]
+          }
+        ]
       },
       storageManager: false,
       plugins: [
@@ -91,7 +87,7 @@ export function TemplateEditor({
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
-        console.log("element list unexpanded")
+        console.log('element list unexpanded')
       }
     }, 3000)
 
@@ -152,7 +148,7 @@ export function TemplateEditor({
 
     editor.Commands.add('goBack', {
       run: () => {
-        history.back();
+        history.back()
       }
     })
 

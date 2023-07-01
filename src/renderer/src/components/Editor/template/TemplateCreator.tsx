@@ -69,7 +69,7 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
-        console.log("element list unexpanded")
+        console.log('element list unexpanded')
       }
     }, 3000)
 
@@ -100,8 +100,10 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
             const css = editor.getCss({ component })
 
             return {
-              htmlBody: body.replaceAll("<body>", `<div id="#${componentName}Bar">`).replaceAll("</body>", "</div>"),
-              css: css?.replaceAll("body", `#${componentName}Bar`)
+              htmlBody: body
+                .replaceAll('<body>', `<div id="#${componentName}Bar">`)
+                .replaceAll('</body>', '</div>'),
+              css: css?.replaceAll('body', `#${componentName}Bar`)
             }
           }) as htmlObject[]
 
@@ -167,8 +169,6 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
       editor.destroy()
     }
   }, [id, config, onSave])
-
-  
 
   return <div ref={editorRef} id={id} />
 }

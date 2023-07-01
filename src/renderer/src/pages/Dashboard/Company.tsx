@@ -8,8 +8,8 @@ import {
   convertToDate,
   capitalizeFirstLetters
 } from '@renderer/services/utils'
-import {fireStore} from "@renderer/services/firebase"
-import { doc, getDoc } from "firebase/firestore";
+import { fireStore } from '@renderer/services/firebase'
+import { doc, getDoc } from 'firebase/firestore'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard, LayoutCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
@@ -43,7 +43,7 @@ export default function Company() {
 
     setNewspapers(
       data.sort((a, b) => {
-    //@ts-ignore
+        //@ts-ignore
         return new Date(b.date) - new Date(a.date)
       })
     )
@@ -51,7 +51,7 @@ export default function Company() {
 
   //get layout components from localStorage
   const getAllLayout = () => {
-    let localData = localStorage.getItem(companyName as string);
+    let localData = localStorage.getItem(companyName as string)
     if (localData != null) {
       setLocalLayouts(JSON.parse(localData))
     }
@@ -63,17 +63,17 @@ export default function Company() {
     return paperDate.toDateString() === selectedDate.toDateString()
   })
 
-  const loadAllData = async() => {
+  const loadAllData = async () => {
     // loading layouts from firebase
-    const docRef = doc(fireStore, "papers", companyName as string);
-    const docSnap = await getDoc(docRef);
+    const docRef = doc(fireStore, 'papers', companyName as string)
+    const docSnap = await getDoc(docRef)
 
     if (docSnap.data()?.layouts != undefined) {
-      console.log("running because its not undefind")
-      let layouts = docSnap.data()?.layouts;
-      localStorage.setItem(companyName as string, JSON.stringify(layouts));
+      console.log('running because its not undefind')
+      let layouts = docSnap.data()?.layouts
+      localStorage.setItem(companyName as string, JSON.stringify(layouts))
     } else {
-      console.log("No layouts found");
+      console.log('No layouts found')
     }
     getAllPapers()
   }
@@ -114,17 +114,15 @@ export default function Company() {
         <Title order={4}>Layout</Title>
         <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={20}>
           <AddButton url={`/new-design/${companyName}`} height="150px" />
-          {
-            Object.keys(localLayouts).map((layout, index)=> {
-              return (
-                <LayoutCard
-                  key={`companyLayout-${index}`}
-                  url={`/edit-layout/${companyName}/${layout}`}
-                  name={layout}
-                />
-              )
-            })
-          }
+          {Object.keys(localLayouts).map((layout, index) => {
+            return (
+              <LayoutCard
+                key={`companyLayout-${index}`}
+                url={`/edit-layout/${companyName}/${layout}`}
+                name={layout}
+              />
+            )
+          })}
         </SimpleGrid>
 
         <Title order={4} mt={30}>

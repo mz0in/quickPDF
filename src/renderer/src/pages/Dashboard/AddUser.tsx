@@ -141,7 +141,7 @@ export default function UserAdd(): JSX.Element {
       <Layout size="sm" isBack>
         <FormLayout title="Add User">
           <form onSubmit={form.onSubmit((values) => save(values))}>
-          <Center>
+            <Center>
               <Avatar size={100} radius="lg" src={image} />
             </Center>
             <TextInput
@@ -151,11 +151,11 @@ export default function UserAdd(): JSX.Element {
               withAsterisk
             />
             <FileInput
-                accept="image/*"
-                label="Photo"
-                placeholder="Upload photo"
-                onChange={handleFileUpload}
-              />
+              accept="image/*"
+              label="Photo"
+              placeholder="Upload photo"
+              onChange={handleFileUpload}
+            />
             <TextInput
               my={10}
               label="Email"

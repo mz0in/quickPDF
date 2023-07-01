@@ -29,7 +29,7 @@ export default function NewDesign(): JSX.Element {
   const handleSave = (html: htmlObject[]) => {
     console.log('HTML saved:', html)
     // @ts-ignore
-    setComponentInLocalStorage(companyName as string, modalData, html);
+    setComponentInLocalStorage(companyName as string, modalData, html)
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
@@ -44,13 +44,13 @@ export default function NewDesign(): JSX.Element {
   if (modalData !== undefined) {
     return (
       <TemplateCreator
-      id="editor"
-      canvasSize={{
-        height: modalData.height,
-        width: modalData.width
-      }}
-      componentName={modalData.title}
-      onSave={handleSave}
+        id="editor"
+        canvasSize={{
+          height: modalData.height,
+          width: modalData.width
+        }}
+        componentName={modalData.title}
+        onSave={handleSave}
       />
     )
   }

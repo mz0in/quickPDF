@@ -76,7 +76,7 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
 
 export function PaperCard({ url, date, month }: paperProps) {
   const navigate = useNavigate()
-  console.log("month", month);
+  console.log('month', month)
 
   return (
     <Box

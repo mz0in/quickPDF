@@ -7,7 +7,7 @@ import EditPDF from './EditPDF'
 import Company from './Company'
 import AddUser from './AddUser'
 import EditUser from './EditUser'
-import EditLayout from "./EditLayout"
+import EditLayout from './EditLayout'
 import { AnimatePresence } from 'framer-motion'
 
 export default function Dashboard(): JSX.Element {
@@ -23,7 +23,7 @@ export default function Dashboard(): JSX.Element {
           <Route path="/edit-pdf/:companyName/:realDate" element={<EditPDF />} />
           <Route path="/user-add" element={<AddUser />} />
           <Route path="/user-edit" element={<EditUser />} />
-          <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout/>} />
+          <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout />} />
         </Routes>
       </AnimatePresence>
     </BrowserRouter>

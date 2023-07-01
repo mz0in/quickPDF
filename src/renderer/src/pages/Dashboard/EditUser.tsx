@@ -27,7 +27,7 @@ export default function UserAdd(): JSX.Element {
   const form = useForm({
     initialValues: {
       uid: '',
-      name: "",
+      name: '',
       isAdmin: false,
       number: 0,
       papers: []
@@ -87,10 +87,10 @@ export default function UserAdd(): JSX.Element {
       papers: values.papers
     }).then(() => {
       //5. updating localData if changing for currentUser
-      if (auth.currentUser?.uid === values.uid){
-        let currentUserData = JSON.parse(localStorage.getItem('user') as string);
-        currentUserData.papers = values.papers;
-        localStorage.setItem('user', JSON.stringify(currentUserData));
+      if (auth.currentUser?.uid === values.uid) {
+        let currentUserData = JSON.parse(localStorage.getItem('user') as string)
+        currentUserData.papers = values.papers
+        localStorage.setItem('user', JSON.stringify(currentUserData))
       }
       notifications.update({
         id: 'load-data',

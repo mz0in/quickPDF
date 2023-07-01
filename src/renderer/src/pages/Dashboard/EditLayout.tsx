@@ -8,16 +8,16 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface CodeOfPaperProps {
-  htmlBody: string,
-  css: string,
+  htmlBody: string
+  css: string
   info: {
-    height: number,
+    height: number
     width: number
   }
 }
 
 const dummayData: CodeOfPaperProps = {
-  htmlBody: "",
+  htmlBody: '',
   css: '',
   info: {
     height: 0,
@@ -65,9 +65,9 @@ export default function EditPDF(): JSX.Element {
     console.log('htmlStrings', htmlStrings)
 
     let info = {
-        title: componentName as string,
-        height: paperData.info.height,
-        width: paperData.info.width
+      title: componentName as string,
+      height: paperData.info.height,
+      width: paperData.info.width
     }
 
     setComponentInLocalStorage(companyName as string, info, htmlStrings)
@@ -88,11 +88,13 @@ export default function EditPDF(): JSX.Element {
         height: paperData?.info.height as number,
         width: paperData?.info.width as number
       }}
-      paperCode={{
-        htmlBody: paperData.htmlBody,
-        css: paperData.css
-      } as htmlObject}
-    //   pageHead={paperData?.pageHead as string}
+      paperCode={
+        {
+          htmlBody: paperData.htmlBody,
+          css: paperData.css
+        } as htmlObject
+      }
+      //   pageHead={paperData?.pageHead as string}
       onSave={handleSave}
     />
   )
