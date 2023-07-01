@@ -1,21 +1,12 @@
 import { styleWithFlexForInner } from '../helper'
 const category = 'Inner Blocks'
-const stylePrefix = 'qpdf-inner-'
-const rowHeight = 75
 
-const clsRow = `${stylePrefix}row`
-const clsCell = `${stylePrefix}cell`
 const styleRow = `
       display: flex;
       justify-content: flex-start;
       align-items: stretch;
       flex-wrap: nowrap;
       padding: 5px;`
-
-const styleClm = `
-    min-height: ${rowHeight}px;
-    flex-grow: 1;
-    flex-basis: 100%;`
 
 const step = 1
 const minDim = 1

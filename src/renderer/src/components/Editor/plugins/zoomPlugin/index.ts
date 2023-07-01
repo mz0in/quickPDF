@@ -4,7 +4,7 @@
 
 import { Editor } from 'grapesjs'
 
-const myPlugin = (editor: Editor, opts = {}) => {
+const myPlugin = (editor: Editor) => {
   editor.Panels.addButton('options', {
     id: 'Zoom Out',
     className: 'fa fa-minus',

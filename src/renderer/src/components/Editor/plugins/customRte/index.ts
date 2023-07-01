@@ -5,7 +5,8 @@
 import { Editor } from 'grapesjs'
 
 const myPlugin = function (editor: Editor) {
-  const rte = editor.RichTextEditor
+  // const rte = editor.RichTextEditor
+  console.log(editor);
   // TODO: create [fontSize, colors]
 }
 

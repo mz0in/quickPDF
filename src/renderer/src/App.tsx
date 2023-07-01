@@ -14,6 +14,7 @@ export default function App(): JSX.Element {
   }, [isLogin])
 
   if (isLogin === true) {
+    console.log("displaying dashboard")
     return <Dashboard />
   }
 

@@ -6,7 +6,7 @@ import { Editor } from 'grapesjs'
 import customSaveModal from './modal'
 import { loadAllBlocksFromLocalStorage } from './function'
 
-export default (editor: Editor, opts = {}) => {
+export default (editor: Editor) => {
   const dc = editor.DomComponents
   const BlockManager = editor.Blocks
   const id = 'block-adder'
@@ -23,6 +23,7 @@ export default (editor: Editor, opts = {}) => {
     dc.addType(elType.id, {
       model: oldModel.extend({
         initToolbar() {
+          //@ts-ignore
           oldModel.prototype.initToolbar.apply(this, arguments)
           const toolbar = this.get('toolbar')
 
@@ -30,6 +31,7 @@ export default (editor: Editor, opts = {}) => {
             toolbar.unshift({
               id,
               command: function () {
+                // @ts-ignore
                 let modal = customSaveModal(editor)
               },
               label: htmlLabel

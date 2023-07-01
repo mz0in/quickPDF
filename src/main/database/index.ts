@@ -14,7 +14,7 @@ export function DbCalls() {
 
   ipcMain.handle('getDB', (_, args) => {
     let result = store.get(args.storeName, args.key)
-    // console.log(args);
+    console.log(args, result);
     return result
   })
 

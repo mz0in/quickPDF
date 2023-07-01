@@ -1,5 +1,5 @@
 import { TemplateEditor } from '@renderer/components/Editor'
-import { saveAsPDF, setComponentInLocalStorage } from '@renderer/services/utils'
+import { setComponentInLocalStorage } from '@renderer/services/utils'
 import { IconCheck } from '@tabler/icons-react'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
@@ -53,7 +53,7 @@ export default function EditPDF(): JSX.Element {
     getLayoutCode()
   }, [])
 
-  const handleSave = (htmlStrings: htmlObject[], pageHead: string) => {
+  const handleSave = (htmlStrings: htmlObject[]) => {
     notifications.show({
       id: 'load-data',
       loading: true,

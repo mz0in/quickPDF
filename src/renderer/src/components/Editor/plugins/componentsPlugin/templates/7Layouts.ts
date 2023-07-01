@@ -3,7 +3,6 @@ const category = '7 Blocks'
 const stylePrefix = 'qpdf7-'
 const rowHeight = 75
 
-const clsRow = `${stylePrefix}row`
 const clsCell = `${stylePrefix}cell`
 const styleRow = `
       display: flex;

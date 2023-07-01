@@ -36,7 +36,6 @@ export function TemplateEditor({
   onSave,
   canvasSize,
   paperCode,
-  pageHead
 }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 

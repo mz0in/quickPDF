@@ -3,12 +3,10 @@ export function onSubmit(selectedComponent, editor, details, myModal) {
   const BlockManager = editor.Blocks // `Blocks` is an alias of `BlockManager`
   const htmlCode = selectedComponent?.toHTML()
   let cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
-  console.log(htmlCode)
-  console.log(cssCode)
-  // setBlockInLocalStorage(details, htmlCode, cssCode)
-  //render all the blocks from localhost
-  // loadAllBlocksFromLocalStorage(BlockManager)
-  // myModal.close()
+  setBlockInLocalStorage(details, htmlCode, cssCode)
+  // render all the blocks from localhost
+  loadAllBlocksFromLocalStorage(BlockManager)
+  myModal.close()
 }
 
 function localStorageIniter(): number {
@@ -54,7 +52,7 @@ export function setBlockInLocalStorage(details, htmlCode, cssCode) {
 
 export function addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode) {
   // Add a new Block
-  const block = BlockManager.add(details.id, {
+  BlockManager.add(details.id, {
     // Your block properties...
     label: details.id,
     category: details.category,
