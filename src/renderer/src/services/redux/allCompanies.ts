@@ -24,6 +24,7 @@ export const fetchCompanies = createAsyncThunk<Company[], void, { rejectValue: s
   'companies/fetchCompanies',
   async (_, { rejectWithValue }) => {
     try {
+      // loading all companies
       const companiesCollection = query(collection(fireStore, 'papers'))
       const snapshot = await getDocs(companiesCollection)
       const companies = snapshot.docs.map((doc) => ({
@@ -35,7 +36,6 @@ export const fetchCompanies = createAsyncThunk<Company[], void, { rejectValue: s
         type: doc.data().type,
         address: doc.data().address
       }))
-      console.log(companies)
       let localData =  localStorage.getItem('user') as string;
       let localUserPaper = JSON.parse(localData)
       console.log("localUserPaper", localUserPaper);

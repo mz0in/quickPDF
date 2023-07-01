@@ -11,7 +11,7 @@ import {
   LoadingOverlay
 } from '@mantine/core'
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore'
-import { fireStore } from '@renderer/services/firebase'
+import { fireStore, auth } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
 import { IconCross } from '@tabler/icons-react'
 import { useState } from 'react'
@@ -86,7 +86,12 @@ export default function UserAdd(): JSX.Element {
       number: values.number,
       papers: values.papers
     }).then(() => {
-      //5. updating notification
+      //5. updating localData if changing for currentUser
+      if (auth.currentUser?.uid === values.uid){
+        let currentUserData = JSON.parse(localStorage.getItem('user') as string);
+        currentUserData.papers = values.papers;
+        localStorage.setItem('user', JSON.stringify(currentUserData));
+      }
       notifications.update({
         id: 'load-data',
         color: 'teal',

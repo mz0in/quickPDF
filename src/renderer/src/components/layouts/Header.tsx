@@ -76,7 +76,7 @@ export default function HeaderComponent({ isBack = false }) {
               </Menu.Item>
               </>
               ) : (null)}
-              <Menu.Item icon={<IconUserEdit size={14} />} onClick={logout}>
+              <Menu.Item  icon={<IconUserEdit size={14} />} onClick={logout}>
                   Logout
               </Menu.Item>
             </Menu.Dropdown>
