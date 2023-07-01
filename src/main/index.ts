@@ -71,24 +71,3 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
 DbCalls() // calling all database ipc calls
-
-ipcMain.handle('generatePDF', async (_, args) => {
-  let printableWindow = new BrowserWindow({ show: false, webPreferences: { webSecurity: false } })
-  printableWindow.loadURL('data:text/html;base64,' + Buffer.from(args.html).toString('base64'))
-  let customPageSize = { width: args.size.width, height: args.size.height }
-  console.log(customPageSize)
-  let option = {
-    landscape: false,
-    printBackground: true,
-    pageSize: customPageSize
-  }
-  let pdfBuffer: Buffer | undefined
-
-  await new Promise<void>((resolve) => {
-    printableWindow.webContents.on('did-finish-load', async () => {
-      pdfBuffer = await printableWindow.webContents.printToPDF(option)
-      resolve()
-    })
-  })
-  return pdfBuffer
-})

@@ -50,7 +50,7 @@ export function PaperEditor({
             id: 'paper',
             name: 'paper',
             width: `${canvasSize?.width}in`,
-            height: `${canvasSize?.height}in`
+            height: `${canvasSize?.height-1}in`
           }
         ]
       },

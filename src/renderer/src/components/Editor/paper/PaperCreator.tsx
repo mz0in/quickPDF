@@ -37,14 +37,14 @@ export function PaperCreator({ id, config, onSave, canvasSize }: GrapesJSProps) 
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      // protectedCss: "@page {margin: 0;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}",
+      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}`,
       deviceManager: {
         devices: [
           {
             id: 'paper',
             name: 'paper',
             width: `${canvasSize?.width}in`,
-            height: `${canvasSize?.height}in`
+            height: `${canvasSize?.height-1}in`
           }
         ]
       },
