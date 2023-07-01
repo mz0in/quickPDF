@@ -37,7 +37,8 @@ export default function LoginPage({ loginHook }: props) {
         'user',
         JSON.stringify({
           login: true,
-          admin: docSnap.data()?.isAdmin ? true : false
+          admin: docSnap.data()?.isAdmin ? true : false,
+          papers: docSnap.data()?.papers
         })
       )
 

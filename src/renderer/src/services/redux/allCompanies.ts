@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fireStore, auth } from '@renderer/services/firebase'
+import { fireStore } from '@renderer/services/firebase'
 import { collection, query, getDocs } from 'firebase/firestore'
 
 export interface Company {
@@ -36,6 +36,12 @@ export const fetchCompanies = createAsyncThunk<Company[], void, { rejectValue: s
         address: doc.data().address
       }))
       console.log(companies)
+      let localData =  localStorage.getItem('user') as string;
+      let localUserPaper = JSON.parse(localData)
+      console.log("localUserPaper", localUserPaper);
+      if (localUserPaper != undefined) {
+        return companies.filter(item => localUserPaper.papers.includes(item.id))
+      }
       return companies
     } catch (error: any) {
       return rejectWithValue(error.message)
@@ -48,7 +54,7 @@ export const companiesSlice = createSlice({
   initialState,
   reducers: {
     addCompany: (state, action: any) => {
-      state.companies = action.payload
+      state.companies = action.payload;
     }
   },
   extraReducers: (builder) => {

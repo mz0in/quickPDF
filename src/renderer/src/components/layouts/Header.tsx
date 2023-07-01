@@ -12,6 +12,8 @@ import {
 import { useAdminChecker } from '@renderer/services/hooks'
 import { IconArrowLeft, IconUserPlus, IconUserEdit } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '@renderer/services/firebase'
+import { signOut } from "firebase/auth";  
 
 const useStyles = createStyles(() => ({
   inner: {
@@ -26,6 +28,17 @@ export default function HeaderComponent({ isBack = false }) {
   const { classes } = useStyles()
   const navigate = useNavigate()
   const [isAdmin] = useAdminChecker()
+
+  const logout = () => {
+    signOut(auth).then(async() => {
+      localStorage.removeItem("user");
+      //@ts-ignore
+      await window?.DB?.setData('company', 'companies', undefined)
+      location.reload();
+    }).catch((error) => {
+      console.log("An error happened.", error);
+    });
+  }
 
   return (
     <Header height={56} mb={30}>
@@ -45,23 +58,29 @@ export default function HeaderComponent({ isBack = false }) {
             ) : null}
             <Text>QuickPDF</Text>
           </Group>
-          {isAdmin ? (
-            <Menu shadow="md" width={150}>
+          <Menu shadow="md" width={150}>
               <Menu.Target>
-                <Avatar color={'dark'} radius="xl" />
+                <Avatar
+                color={'dark'}
+                src={auth.currentUser?.photoURL} 
+                 radius="xl" />
               </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item icon={<IconUserPlus size={14} />} onClick={() => navigate('/user-add')}>
+            <Menu.Dropdown>
+              {isAdmin ? (
+              <>
+              <Menu.Item icon={<IconUserPlus size={14} />} onClick={() => navigate('/user-add')}>
                   add user
-                </Menu.Item>
-                <Menu.Item icon={<IconUserEdit size={14} />} onClick={() => navigate('/user-edit')}>
+              </Menu.Item>
+              <Menu.Item icon={<IconUserEdit size={14} />} onClick={() => navigate('/user-edit')}>
                   Edit User
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          ) : (
-            <Avatar color={'dark'} radius="xl" />
-          )}
+              </Menu.Item>
+              </>
+              ) : (null)}
+              <Menu.Item icon={<IconUserEdit size={14} />} onClick={logout}>
+                  Logout
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </div>
       </Container>
     </Header>

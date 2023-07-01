@@ -6,20 +6,26 @@ import {
   Button,
   MultiSelect,
   NumberInput,
-  LoadingOverlay
+  LoadingOverlay,
+  FileInput,
+  Center,
+  Avatar
 } from '@mantine/core'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { ref, uploadString } from 'firebase/storage'
 import { arrayUnion, doc, updateDoc, query, collection, getDocs, setDoc } from 'firebase/firestore'
-import { auth, fireStore } from '@renderer/services/firebase'
+import { auth, fireStore, storage } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
 import { IconCross } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 import NotFoundTitle from '@renderer/components/page/Access'
+import { getHttpImage } from '@renderer/services/utils'
 
 export default function UserAdd(): JSX.Element {
   const [papers, setPapers] = useState(['test'])
+  const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
   const navigate = useNavigate()
   const form = useForm({
@@ -43,9 +49,13 @@ export default function UserAdd(): JSX.Element {
     setPapers(allPapers)
   }
 
-  useEffect(() => {
-    getAllPapers()
-  }, [])
+  const handleFileUpload = (file: File) => {
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setImage(reader.result as string)
+    }
+    reader.readAsDataURL(file)
+  }
 
   const save = async (values: typeof form.values) => {
     // saving user
@@ -66,9 +76,14 @@ export default function UserAdd(): JSX.Element {
       )
       const user = userCredential.user
 
+      //2. uploading profile pic
+      const storageRef = ref(storage, `userpic/${user.uid}.jpeg`)
+      await uploadString(storageRef, image, 'data_url')
+
       //2. updating name
       await updateProfile(user, {
-        displayName: values.name
+        displayName: values.name,
+        photoURL: getHttpImage(`userpic/${user.uid}.jpeg`)
       })
 
       //3. adding in company employ list
@@ -113,6 +128,10 @@ export default function UserAdd(): JSX.Element {
     }
   }
 
+  useEffect(() => {
+    getAllPapers()
+  }, [])
+
   if (isAdmin === false) {
     return <NotFoundTitle />
   }
@@ -122,12 +141,21 @@ export default function UserAdd(): JSX.Element {
       <Layout size="sm" isBack>
         <FormLayout title="Add User">
           <form onSubmit={form.onSubmit((values) => save(values))}>
+          <Center>
+              <Avatar size={100} radius="lg" src={image} />
+            </Center>
             <TextInput
               label="First Name"
-              placeholder="Atar"
+              placeholder="Anshu"
               {...form.getInputProps('name')}
               withAsterisk
             />
+            <FileInput
+                accept="image/*"
+                label="Photo"
+                placeholder="Upload photo"
+                onChange={handleFileUpload}
+              />
             <TextInput
               my={10}
               label="Email"

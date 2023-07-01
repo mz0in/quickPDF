@@ -1,5 +1,5 @@
 import { Layout } from '@renderer/components/layouts'
-import { Flex, Input, SimpleGrid, ActionIcon, Group } from '@mantine/core'
+import { Flex, Input, SimpleGrid, ActionIcon, Group, LoadingOverlay } from '@mantine/core'
 import { IconFolderSearch, IconReload } from '@tabler/icons-react'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
@@ -16,34 +16,50 @@ export default function Home() {
   const dispatch = useDispatch<AppDispatch>()
   const [userInput, setUserInput] = useState('')
   const [isAdmin] = useAdminChecker()
+  const [dataFetched, setDataFetched] = useState(false); // New state variable
 
   const syncAllCompany = () => {
     dispatch(fetchCompanies())
       .then(unwrapResult)
       .then(async (res) => {
+    //@ts-ignore
         await window?.DB?.setData('company', 'companies', res)
+        setDataFetched(true);
       })
   }
 
   const getDataFromIdbStorage = async () => {
+    //@ts-ignore
     let data: any = await window?.DB?.getData('company', 'companies')
+    console.log('data from server', data);
+    if (data === undefined) {
+      syncAllCompany();
+    }
     if (data !== null) {
       dispatch(addCompany(data))
+      setDataFetched(true); // Set dataFetched to true after data is fetched
     }
   }
 
   function filterCompanies(allCompanies: any[], userInput: string): any[] {
+    if (allCompanies === undefined) {
+      return []; // Return an empty array if allCompanies is undefined
+    }
     const searchTerm = userInput.toLowerCase()
     return allCompanies.filter((company) => company.name.toLowerCase().includes(searchTerm))
   }
 
   const filteredCompanies = filterCompanies(allCompany, userInput)
+  console.log("allCompayn", allCompany)
 
   useEffect(() => {
     getDataFromIdbStorage()
-
     //checking for admin user;
   }, [])
+
+  if (!dataFetched) {
+    return <LoadingOverlay visible={true} />
+  }
 
   return (
     <Layout>

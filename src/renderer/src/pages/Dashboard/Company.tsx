@@ -32,6 +32,7 @@ export default function Company() {
 
   // getting data from backend
   const getAllPapers = async () => {
+    //@ts-ignore
     let papers = await window.api.getPapers(companyName)
     let data: paperType[] = papers.map((realDate: string) => {
       return {
@@ -42,6 +43,7 @@ export default function Company() {
 
     setNewspapers(
       data.sort((a, b) => {
+    //@ts-ignore
         return new Date(b.date) - new Date(a.date)
       })
     )
@@ -136,7 +138,7 @@ export default function Company() {
                 key={`company-${index}`}
                 url={`/edit-pdf/${companyName}/${paper.realDate}`}
                 date={paper.date.getDate()}
-                month={`${monthsOfYear[paper.date.getMonth()+1]}`}
+                month={`${monthsOfYear[paper.date.getMonth()]}`}
               />
             )
           })}
