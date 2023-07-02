@@ -17,6 +17,7 @@ export default function Home() {
   const syncAllCompany = async () => {
     try {
       // loading all companies
+      console.log("fetching papers")
       const companiesCollection = query(collection(fireStore, 'papers'))
       const snapshot = await getDocs(companiesCollection)
       const companies = snapshot.docs.map((doc) => ({
@@ -28,6 +29,7 @@ export default function Home() {
         type: doc.data().type,
         address: doc.data().address
       }))
+      console.log("fatched papers", companies);
       let localData = localStorage.getItem('user') as string
       let localUserPaper = JSON.parse(localData)
       console.log('localUserPaper', localUserPaper)
@@ -46,6 +48,7 @@ export default function Home() {
   }
 
   const getDataFromIdbStorage = async () => {
+    console.log("get data")
     //@ts-ignore
     let data: any = await window?.DB?.getData('company', 'companies')
     if (data === undefined) {
@@ -66,6 +69,7 @@ export default function Home() {
   }
 
   const filteredCompanies = filterCompanies(allCompany, userInput)
+  console.log("home page mount", allCompany)
 
   useEffect(() => {
     getDataFromIdbStorage()

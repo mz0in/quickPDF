@@ -9,11 +9,13 @@ export default function App(): JSX.Element {
   useEffect(() => {
     let userFromLocalStorage = localStorage.getItem('user')
     if (userFromLocalStorage !== null) {
+      console.log("loged in")
       setIsLogin(true)
     }
   }, [isLogin])
 
   if (isLogin === true) {
+    console.log("displaying dashboard")
     return <Dashboard />
   }
 

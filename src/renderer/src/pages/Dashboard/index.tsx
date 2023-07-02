@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from './Home'
 import NewCompany from './NewCompany'
 import NewDesign from './NewDesign'
@@ -8,12 +8,12 @@ import Company from './Company'
 import AddUser from './AddUser'
 import EditUser from './EditUser'
 import EditLayout from './EditLayout'
-import { AnimatePresence } from 'framer-motion'
+import PageNoteFound from './404'
 
 export default function Dashboard(): JSX.Element {
+  console.log("add routes")
   return (
-    <BrowserRouter>
-      <AnimatePresence mode="wait">
+    <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/company" element={<NewCompany />} />
@@ -24,8 +24,8 @@ export default function Dashboard(): JSX.Element {
           <Route path="/user-add" element={<AddUser />} />
           <Route path="/user-edit" element={<EditUser />} />
           <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout />} />
+          <Route path="*" element={<PageNoteFound/>} />
         </Routes>
-      </AnimatePresence>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
