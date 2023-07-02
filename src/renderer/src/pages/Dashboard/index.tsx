@@ -12,7 +12,6 @@ import PageNoteFound from './404'
 import { AnimatePresence } from 'framer-motion'
 
 export default function Dashboard(): JSX.Element {
-  console.log("add routes")
   return (
     <HashRouter>
       <AnimatePresence mode="wait">

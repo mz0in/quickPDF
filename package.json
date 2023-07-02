@@ -30,6 +30,7 @@
     "@mantine/notifications": "^6.0.15",
     "electron-updater": "^5.3.0",
     "firebase": "^9.23.0",
+    "framer-motion": "^10.12.18",
     "grapesjs": "^0.21.2",
     "grapesjs-tui-image-editor": "^1.0.2",
     "html2canvas": "^1.4.1",

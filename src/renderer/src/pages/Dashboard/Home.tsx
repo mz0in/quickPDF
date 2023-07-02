@@ -1,5 +1,5 @@
 import { Layout } from '@renderer/components/layouts'
-import { Flex, Input, SimpleGrid, Group, LoadingOverlay } from '@mantine/core'
+import { Flex, Input, SimpleGrid, Group } from '@mantine/core'
 import { IconFolderSearch } from '@renderer/components/icons'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
@@ -78,7 +78,7 @@ export default function Home() {
   }, [])
 
   if (!dataFetched) {
-    return <LoadingOverlay visible={true} />
+    return <></>
   }
 
   return (

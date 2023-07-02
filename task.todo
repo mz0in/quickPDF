@@ -26,6 +26,7 @@ custom Rte plugin
 // to make it production
 fix react router [X]
 remove icon pack [X]
-add css animations
+add dark mode [X]
+add css animations [X]
+not working reload [X]
 cache system
-add dark mode
