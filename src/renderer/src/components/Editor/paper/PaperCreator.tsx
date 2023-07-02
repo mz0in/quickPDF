@@ -84,6 +84,14 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         },
         [localBlocks]: {
           companyName: companyName
+        },
+        // @ts-ignore
+        [gjsImageEditorPlugin]: {
+          config: {
+            includeUI: {
+              initMenu: 'filter',
+            },
+          },
         }
       }
     })

@@ -84,6 +84,14 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, company
         },
         [localBlocks]: {
           companyName: companyName
+        },
+        // @ts-ignore
+        [gjsImageEditorPlugin]: {
+          config: {
+            includeUI: {
+              initMenu: 'filter',
+            },
+          },
         }
       }
     })

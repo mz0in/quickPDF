@@ -60,6 +60,14 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
         [grapesjsFontPlugin]: {
           // api_key: "AIzaSyBIbeXm8jJu47tuBj2ubDzjLlLgAmtD07s"
           api_key: 'AIzaSyAdJTYSLPlKz4w5Iqyy-JAF2o8uQKd1FKc'
+        },
+        // @ts-ignore
+        [gjsImageEditorPlugin]: {
+          config: {
+            includeUI: {
+              initMenu: 'filter',
+            },
+          },
         }
       }
     })

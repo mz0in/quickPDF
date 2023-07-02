@@ -78,6 +78,14 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
+        },
+        // @ts-ignore
+        [gjsImageEditorPlugin]: {
+          config: {
+            includeUI: {
+              initMenu: 'filter',
+            },
+          },
         }
       }
     })
