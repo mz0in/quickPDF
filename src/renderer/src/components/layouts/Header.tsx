@@ -10,7 +10,7 @@ import {
   Menu
 } from '@mantine/core'
 import { useAdminChecker } from '@renderer/services/hooks'
-import { IconArrowLeft, IconUserPlus, IconUserEdit, IconLogout } from "@renderer/components/icons"
+import { IconArrowLeft, IconUserPlus, IconUserEdit, IconLogout, IconMoon, IconSun } from "@renderer/components/icons"
 import { useNavigate } from 'react-router-dom'
 import { auth } from '@renderer/services/firebase'
 import { signOut } from 'firebase/auth'
@@ -24,7 +24,7 @@ const useStyles = createStyles(() => ({
   }
 }))
 
-export default function HeaderComponent({ isBack = false }) {
+export default function HeaderComponent({ isBack = false, dark, toggleColorScheme }) {
   const { classes } = useStyles()
   const navigate = useNavigate()
   const [isAdmin] = useAdminChecker()
@@ -51,7 +51,7 @@ export default function HeaderComponent({ isBack = false }) {
               <ActionIcon
                 onClick={() => navigate(-1)}
                 variant={'gradient'}
-                gradient={{ from: 'black', to: 'gray', deg: 45 }}
+                gradient={dark ? { from: 'gray', to: 'gray', deg: 45 } : { from: 'black', to: 'gray', deg: 45 }}
                 p={5}
                 size="lg"
               >
@@ -60,6 +60,14 @@ export default function HeaderComponent({ isBack = false }) {
             ) : null}
             <Text>QuickPDF</Text>
           </Group>
+          <Group>
+          <ActionIcon
+            size="xl"
+            onClick={() => toggleColorScheme()}
+            title="Toggle color scheme"
+          >
+            {dark ? <IconSun /> : <IconMoon />}
+          </ActionIcon>
           <Menu shadow="md" width={150}>
             <Menu.Target>
               <Avatar color={'dark'} src={auth.currentUser?.photoURL} radius="xl" />
@@ -86,6 +94,7 @@ export default function HeaderComponent({ isBack = false }) {
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
+          </Group>
         </div>
       </Container>
     </Header>

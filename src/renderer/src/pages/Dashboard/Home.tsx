@@ -1,12 +1,13 @@
 import { Layout } from '@renderer/components/layouts'
-import { Flex, Input, SimpleGrid, ActionIcon, Group, LoadingOverlay } from '@mantine/core'
-import { IconFolderSearch, IconReload } from '@renderer/components/icons'
+import { Flex, Input, SimpleGrid, Group, LoadingOverlay } from '@mantine/core'
+import { IconFolderSearch } from '@renderer/components/icons'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
 import { query, collection, getDocs } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
 import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
+import ReloadButton from '@renderer/components/Button/ReloadButton'
 
 export default function Home() {
   const [allCompany, setAllCompany] = useState<any>()
@@ -93,15 +94,7 @@ export default function Home() {
             }
             onChange={(e) => setUserInput(e.target.value)}
           />
-          <ActionIcon
-            variant={'gradient'}
-            gradient={{ from: 'black', to: 'gray', deg: 45 }}
-            p={5}
-            size="lg"
-            onClick={syncAllCompany}
-          >
-            <IconReload />
-          </ActionIcon>
+          <ReloadButton onClick={syncAllCompany} />
         </Group>
       </Flex>
       <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>

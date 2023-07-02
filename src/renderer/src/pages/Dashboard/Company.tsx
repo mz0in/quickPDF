@@ -1,6 +1,6 @@
-import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
+import { Flex, Group, Title, SimpleGrid, Box,  } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
-import { IconReload, IconCalendar } from '@renderer/components/icons'
+import { IconCalendar } from '@renderer/components/icons'
 import { useParams } from 'react-router-dom'
 import {
   DashToSpace,
@@ -13,6 +13,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { DatePickerInput } from '@mantine/dates'
 import { AddButton, PaperCard, LayoutCard } from '@renderer/components/Button/ActionButtons'
 import { useEffect, useState } from 'react'
+import ReloadButton from '@renderer/components/Button/ReloadButton'
 
 interface paperType {
   date: Date
@@ -100,14 +101,7 @@ export default function Company() {
             placeholder="Pick date"
             onChange={setSelectedDate}
           />
-          <ActionIcon
-            size="lg"
-            variant={'gradient'}
-            gradient={{ from: 'black', to: 'gray', deg: 45 }}
-            onClick={loadAllData}
-          >
-            <IconReload />
-          </ActionIcon>
+          <ReloadButton onClick={loadAllData} />
         </Group>
       </Flex>
       <Box my={'lg'}>
