@@ -1,6 +1,6 @@
 import { Flex, Group, ActionIcon, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
-import { IconReload, IconCalendar } from '@tabler/icons-react'
+import { IconReload, IconCalendar } from '@renderer/components/icons'
 import { useParams } from 'react-router-dom'
 import {
   DashToSpace,
@@ -94,7 +94,7 @@ export default function Company() {
         <Group position="apart" spacing="xl" w="100%">
           <DatePickerInput
             clearable
-            icon={<IconCalendar size="1.1rem" stroke={1.5} />}
+            icon={<IconCalendar />}
             dropdownType="modal"
             label="Filter with date"
             placeholder="Pick date"

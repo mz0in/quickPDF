@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, fireStore } from '@renderer/services/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { notifications } from '@mantine/notifications'
-import { IconCross, IconDiscountCheckFilled } from '@tabler/icons-react'
+import { IconCross, IconDiscountCheckFilled } from '@renderer/components/icons'
 import { Dispatch } from 'react'
 
 interface props {

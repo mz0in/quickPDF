@@ -1,5 +1,5 @@
 import { Box, Text } from '@mantine/core'
-import { IconSquareRoundedPlus } from '@tabler/icons-react'
+import { IconSquareRoundedPlus } from "../icons"
 import { useNavigate } from 'react-router-dom'
 
 interface pdfCompneyCardProps {
@@ -76,7 +76,6 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
 
 export function PaperCard({ url, date, month }: paperProps) {
   const navigate = useNavigate()
-  console.log('month', month)
 
   return (
     <Box

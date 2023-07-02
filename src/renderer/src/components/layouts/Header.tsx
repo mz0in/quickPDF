@@ -10,7 +10,7 @@ import {
   Menu
 } from '@mantine/core'
 import { useAdminChecker } from '@renderer/services/hooks'
-import { IconArrowLeft, IconUserPlus, IconUserEdit } from '@tabler/icons-react'
+import { IconArrowLeft, IconUserPlus, IconUserEdit, IconLogout } from "@renderer/components/icons"
 import { useNavigate } from 'react-router-dom'
 import { auth } from '@renderer/services/firebase'
 import { signOut } from 'firebase/auth'
@@ -68,20 +68,20 @@ export default function HeaderComponent({ isBack = false }) {
               {isAdmin ? (
                 <>
                   <Menu.Item
-                    icon={<IconUserPlus size={14} />}
+                    icon={<IconUserPlus />}
                     onClick={() => navigate('/user-add')}
                   >
                     add user
                   </Menu.Item>
                   <Menu.Item
-                    icon={<IconUserEdit size={14} />}
+                    icon={<IconUserEdit />}
                     onClick={() => navigate('/user-edit')}
                   >
                     Edit User
                   </Menu.Item>
                 </>
               ) : null}
-              <Menu.Item icon={<IconUserEdit size={14} />} onClick={logout}>
+              <Menu.Item icon={<IconLogout />} onClick={logout}>
                 Logout
               </Menu.Item>
             </Menu.Dropdown>

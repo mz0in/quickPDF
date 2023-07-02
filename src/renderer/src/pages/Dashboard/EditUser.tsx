@@ -13,7 +13,7 @@ import {
 import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { fireStore, auth } from '@renderer/services/firebase'
 import { notifications } from '@mantine/notifications'
-import { IconCross } from '@tabler/icons-react'
+import { IconCross } from '@renderer/components/icons'
 import { useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 import NotFoundTitle from '@renderer/components/page/Access'

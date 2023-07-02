@@ -1,6 +1,6 @@
 import { TemplateEditor } from '@renderer/components/Editor'
 import { setComponentInLocalStorage } from '@renderer/services/utils'
-import { IconCheck } from '@tabler/icons-react'
+import { IconCheck } from '@renderer/components/icons'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
 import { useParams } from 'react-router-dom'

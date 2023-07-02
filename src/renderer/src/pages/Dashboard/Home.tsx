@@ -1,6 +1,6 @@
 import { Layout } from '@renderer/components/layouts'
 import { Flex, Input, SimpleGrid, ActionIcon, Group, LoadingOverlay } from '@mantine/core'
-import { IconFolderSearch, IconReload } from '@tabler/icons-react'
+import { IconFolderSearch, IconReload } from '@renderer/components/icons'
 import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionButtons'
 import { getHttpImage } from '@renderer/services/utils'
 import { query, collection, getDocs } from 'firebase/firestore'
