@@ -94,7 +94,7 @@ export default function Home() {
             }
             onChange={(e) => setUserInput(e.target.value)}
           />
-          <ReloadButton onClick={syncAllCompany} />
+          <ReloadButton onClickFunction={syncAllCompany} />
         </Group>
       </Flex>
       <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>

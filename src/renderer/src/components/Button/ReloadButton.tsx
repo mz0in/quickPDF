@@ -1,7 +1,7 @@
 import { ActionIcon, useMantineColorScheme } from "@mantine/core";
 import { IconReload } from "../icons";
 
-export default function ReloadButton(onClickFunction) {
+export default function ReloadButton({onClickFunction}) {
     const { colorScheme } = useMantineColorScheme();
     const dark = colorScheme === 'dark';
     return (

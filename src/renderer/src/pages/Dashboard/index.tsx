@@ -9,11 +9,13 @@ import AddUser from './AddUser'
 import EditUser from './EditUser'
 import EditLayout from './EditLayout'
 import PageNoteFound from './404'
+import { AnimatePresence } from 'framer-motion'
 
 export default function Dashboard(): JSX.Element {
   console.log("add routes")
   return (
     <HashRouter>
+      <AnimatePresence mode="wait">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/company" element={<NewCompany />} />
@@ -26,6 +28,7 @@ export default function Dashboard(): JSX.Element {
           <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout />} />
           <Route path="*" element={<PageNoteFound/>} />
         </Routes>
+        </AnimatePresence>
     </HashRouter>
   )
 }

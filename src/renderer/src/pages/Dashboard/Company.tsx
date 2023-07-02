@@ -101,8 +101,8 @@ export default function Company() {
             placeholder="Pick date"
             onChange={setSelectedDate}
           />
-          <ReloadButton onClick={loadAllData} />
-        </Group>
+          <ReloadButton onClickFunction={loadAllData} />
+        </Group>  
       </Flex>
       <Box my={'lg'}>
         <Title order={4}>Layout</Title>
@@ -134,7 +134,7 @@ export default function Company() {
               />
             )
           })}
-        </SimpleGrid>
+        </SimpleGrid> 
       </Box>
     </Layout>
   )
