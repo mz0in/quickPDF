@@ -30,7 +30,7 @@ add dark mode [X]
 add css animations [X]
 not working reload [X]
 notification not comming in template creator [X]
-dark mode color of template layout card at compay page
+dark mode color of template layout card at compay page [X]
 name and date in the print pdf  file name 
 layout copy from server but not render on company page
 grapesjs style remains on all pages 

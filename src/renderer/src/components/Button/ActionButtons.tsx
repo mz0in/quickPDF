@@ -114,12 +114,14 @@ export function PaperCard({ url, date, month }: paperProps) {
 }
 
 export function LayoutCard({ url, name }: LayoutProps) {
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
   const navigate = useNavigate()
 
   return (
     <Box
       sx={{
-        backgroundColor: '#f1f1f1',
+        backgroundColor: dark ? "#25262B" : "#f1f1f1",
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
