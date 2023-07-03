@@ -1,6 +1,6 @@
-function createAndDownloadBlobFile(body) {
+function createAndDownloadBlobFile(body, info) {
   const blob = new Blob([body])
-  const fileName = `$test.pdf`
+  const fileName = `${info.companyName}-${info.date}.pdf`
   const link = document.createElement('a')
   // Browsers that support HTML5 download attribute
   if (link.download !== undefined) {
@@ -41,5 +41,5 @@ export async function saveAsPDF(
   // @ts-ignore
   let generatedPDFBuffer = await window.api.save(info, html, codeOfPaper)
   console.log(generatedPDFBuffer)
-  createAndDownloadBlobFile(generatedPDFBuffer)
+  createAndDownloadBlobFile(generatedPDFBuffer, info)
 }
