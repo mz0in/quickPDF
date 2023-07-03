@@ -33,7 +33,7 @@ notification not comming in template creator [X]
 dark mode color of template layout card at compay page [X]
 name and date in the print pdf file name [X]
 layout copy from server but not render on company page [X]
-grapesjs style remains on all pages 
-remove app menu
+grapesjs style remains on all pages [X]
+remove app menu [X]
 stop inspacting
 fix bitecode issue
