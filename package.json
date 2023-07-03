@@ -4,7 +4,7 @@
   "description": "application to minimize the build time of a pdf creation",
   "main": "./out/main/index.js",
   "author": "Ai Anshu",
-  "homepage": "quickpdf.codenanshu.in",
+  "homepage": "quickpdf.web.app",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

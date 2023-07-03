@@ -1,4 +1,4 @@
-appId: com.quickpdf.codenanshu.app
+appId: quickpdf.web.app
 productName: quickpdf
 directories:
   buildResources: build
