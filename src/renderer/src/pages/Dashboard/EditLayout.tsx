@@ -1,6 +1,5 @@
 import { TemplateEditor } from '@renderer/components/Editor'
 import { setComponentInLocalStorage } from '@renderer/services/utils'
-import { IconCheck } from '@renderer/components/icons'
 import { notifications } from '@mantine/notifications'
 import type { htmlObject } from '@renderer/components/Editor'
 import { useParams } from 'react-router-dom'
@@ -25,7 +24,7 @@ const dummayData: CodeOfPaperProps = {
   }
 }
 
-export default function EditPDF(): JSX.Element {
+export default function EditDesign(): JSX.Element {
   const [paperData, setPaperData] = useState<CodeOfPaperProps>(dummayData)
   const { companyName, componentName } = useParams()
   const navigate = useNavigate()
@@ -54,14 +53,6 @@ export default function EditPDF(): JSX.Element {
   }, [])
 
   const handleSave = (htmlStrings: htmlObject[]) => {
-    notifications.show({
-      id: 'load-data',
-      loading: true,
-      title: 'Saving Company',
-      message: 'Data is saving on the server please wait.',
-      autoClose: false,
-      withCloseButton: false
-    })
     console.log('htmlStrings', htmlStrings)
 
     let info = {
@@ -71,13 +62,12 @@ export default function EditPDF(): JSX.Element {
     }
 
     setComponentInLocalStorage(companyName as string, info, htmlStrings)
-    notifications.update({
+    notifications.show({
       id: 'load-data',
-      color: 'teal',
-      title: 'Saved',
-      message: 'data now saved on the server.',
-      icon: <IconCheck size="1rem" />,
-      autoClose: 2000
+      title: `saved ${componentName}`,
+      message: 'saved on server.',
+      autoClose: 1000,
+      withCloseButton: false
     })
   }
 

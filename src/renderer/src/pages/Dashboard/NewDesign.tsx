@@ -5,6 +5,7 @@ import { useForm } from '@mantine/form'
 import { useState } from 'react'
 import { setComponentInLocalStorage } from '@renderer/services/utils'
 import { useParams, useNavigate } from 'react-router-dom'
+import { notifications } from '@mantine/notifications'
 
 interface defaultFormValue {
   title: string
@@ -30,6 +31,13 @@ export default function NewDesign(): JSX.Element {
     console.log('HTML saved:', html)
     // @ts-ignore
     setComponentInLocalStorage(companyName as string, modalData, html)
+    notifications.show({
+      id: 'load-data',
+      title: `Saved ${modalData?.title}`,
+      message: 'saved data on server.',
+      autoClose: 1000,
+      withCloseButton: false
+    })
   }
 
   const handleModalSubmit = (values: defaultFormValue) => {
