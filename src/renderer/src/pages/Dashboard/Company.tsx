@@ -73,6 +73,7 @@ export default function Company() {
       console.log('running because its not undefind')
       let layouts = docSnap.data()?.layouts
       localStorage.setItem(companyName as string, JSON.stringify(layouts))
+      setLocalLayouts(layouts);
     } else {
       console.log('No layouts found')
     }
