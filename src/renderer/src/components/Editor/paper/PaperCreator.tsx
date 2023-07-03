@@ -204,13 +204,21 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     // @ts-ignore
     window.editor = editor
 
-    document.head.insertAdjacentHTML(
-      'beforeend',
-      '<style>body,html {height: 100%;margin: 0;padding: 0;overflow: hidden;}</style>'
-    )
+    const style = document.createElement('style');
+    style.innerHTML = `
+      body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+    `;
+    document.head.appendChild(style);
 
     return () => {
       editor.destroy()
+      // Cleanup the added style when the component unmounts
+      document.head.removeChild(style);
     }
   }, [id, config, onSave])
 
