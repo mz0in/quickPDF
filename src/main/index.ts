@@ -17,7 +17,7 @@ function createWindow(): void {
       sandbox: false
     }
   })
-  mainWindow.setMenu(null)
+  // mainWindow.setMenu(null)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
