@@ -7,6 +7,7 @@ import '@renderer/styles/grapesjs.css'
 import basicCustomPlugin from '../plugins/blocksPlugin'
 import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
+import parserPostCSS from 'grapesjs-parser-postcss';
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
@@ -60,7 +61,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
           }
         ]
       },
-      storageManager: false,
+      storageManager: true,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
@@ -71,7 +72,9 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         zoomPlugin,
         gjsUserBlock,
         customRtePlugin,
-        localBlocks
+        localBlocks,
+        parserPostCSS,
+        'grapesjs-component-code-editor'
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -129,6 +132,14 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
       command: 'open-pages',
       togglable: false
     })
+
+    editor.Panels.addButton('options', {
+    id: 'open-code',
+    className: 'fa fa-code',
+    command: 'open-code',
+    attributes: { title: 'Code editor' },
+    category: 'Custom Category' // add a new category for the custom icon
+  })
 
     if (onSave) {
       editor.Commands.add('save', {
