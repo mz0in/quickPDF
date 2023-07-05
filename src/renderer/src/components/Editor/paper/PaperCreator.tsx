@@ -57,11 +57,11 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
             name: 'page 1',
             id: '1',
             styles: ``,
-            component: '' // or a JSON of components
+            component: ``
           }
         ]
       },
-      storageManager: true,
+      storageManager: false,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
@@ -73,8 +73,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         gjsUserBlock,
         customRtePlugin,
         localBlocks,
-        parserPostCSS,
-        'grapesjs-component-code-editor'
+        parserPostCSS
       ],
       pluginsOpts: {
         [grapesjsFontPlugin]: {
@@ -233,5 +232,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     }
   }, [id, config, onSave])
 
-  return <div ref={editorRef} id={id} />
+  return (
+    <div ref={editorRef} id={id}/>
+    )
 }
