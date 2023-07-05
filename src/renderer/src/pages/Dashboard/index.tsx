@@ -25,9 +25,9 @@ export default function Dashboard(): JSX.Element {
           <Route path="/user-add" element={<AddUser />} />
           <Route path="/user-edit" element={<EditUser />} />
           <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout />} />
-          <Route path="*" element={<PageNoteFound/>} />
+          <Route path="*" element={<PageNoteFound />} />
         </Routes>
-        </AnimatePresence>
+      </AnimatePresence>
     </HashRouter>
   )
 }

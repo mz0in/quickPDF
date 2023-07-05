@@ -1,5 +1,5 @@
 import { Box, Text, useMantineColorScheme } from '@mantine/core'
-import { IconSquareRoundedPlus } from "../icons"
+import { IconSquareRoundedPlus } from '../icons'
 import { useNavigate } from 'react-router-dom'
 
 interface pdfCompneyCardProps {
@@ -25,14 +25,14 @@ interface LayoutProps {
 }
 
 export function AddButton({ url, height = '110px' }: addButtonProps) {
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { colorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
   const navigate = useNavigate()
 
   return (
     <Box
       sx={{
-        backgroundColor: dark ? "#25262B" : "#f1f1f1",
+        backgroundColor: dark ? '#25262B' : '#f1f1f1',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -77,14 +77,14 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
 }
 
 export function PaperCard({ url, date, month }: paperProps) {
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { colorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
   const navigate = useNavigate()
 
   return (
     <Box
       sx={{
-        backgroundColor: dark ? "#25262B" : "#f1f1f1",
+        backgroundColor: dark ? '#25262B' : '#f1f1f1',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -100,7 +100,9 @@ export function PaperCard({ url, date, month }: paperProps) {
     >
       <Text
         variant="gradient"
-        gradient={dark ? { from: 'white', to: '#f1f1f1', deg: 45 } : { from: 'indigo', to: 'cyan', deg: 45 }}
+        gradient={
+          dark ? { from: 'white', to: '#f1f1f1', deg: 45 } : { from: 'indigo', to: 'cyan', deg: 45 }
+        }
         sx={{ fontFamily: 'SF display, sans-serif' }}
         ta="center"
         fz="xl"
@@ -114,14 +116,14 @@ export function PaperCard({ url, date, month }: paperProps) {
 }
 
 export function LayoutCard({ url, name }: LayoutProps) {
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { colorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
   const navigate = useNavigate()
 
   return (
     <Box
       sx={{
-        backgroundColor: dark ? "#25262B" : "#f1f1f1",
+        backgroundColor: dark ? '#25262B' : '#f1f1f1',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

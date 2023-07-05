@@ -7,7 +7,7 @@ import '@renderer/styles/grapesjs.css'
 import basicCustomPlugin from '../plugins/blocksPlugin'
 import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
-import parserPostCSS from 'grapesjs-parser-postcss';
+import parserPostCSS from 'grapesjs-parser-postcss'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
@@ -92,9 +92,9 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
-              initMenu: 'filter',
-            },
-          },
+              initMenu: 'filter'
+            }
+          }
         }
       }
     })
@@ -134,12 +134,12 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     })
 
     editor.Panels.addButton('options', {
-    id: 'open-code',
-    className: 'fa fa-code',
-    command: 'open-code',
-    attributes: { title: 'Code editor' },
-    category: 'Custom Category' // add a new category for the custom icon
-  })
+      id: 'open-code',
+      className: 'fa fa-code',
+      command: 'open-code',
+      attributes: { title: 'Code editor' },
+      category: 'Custom Category' // add a new category for the custom icon
+    })
 
     if (onSave) {
       editor.Commands.add('save', {
@@ -215,7 +215,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     // @ts-ignore
     window.editor = editor
 
-    const style = document.createElement('style');
+    const style = document.createElement('style')
     style.innerHTML = `
       body, html {
         height: 100%;
@@ -223,13 +223,13 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         padding: 0;
         overflow: hidden;
       }
-    `;
-    document.head.appendChild(style);
+    `
+    document.head.appendChild(style)
 
     return () => {
       editor.destroy()
       // Cleanup the added style when the component unmounts
-      document.head.removeChild(style);
+      document.head.removeChild(style)
     }
   }, [id, config, onSave])
 

@@ -9,7 +9,7 @@ import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 // import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
-import localBlocks from "../plugins/localBlocks"
+import localBlocks from '../plugins/localBlocks'
 // @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
 // @ts-ignore
@@ -28,11 +28,18 @@ interface GrapesJSProps {
     width: number
   }
   paperCode: htmlObject[]
-  pageHead: string,
+  pageHead: string
   companyName: string
 }
 
-export function PaperEditor({ id, config, onSave, canvasSize, paperCode, companyName }: GrapesJSProps) {
+export function PaperEditor({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  paperCode,
+  companyName
+}: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -89,9 +96,9 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, company
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
-              initMenu: 'filter',
-            },
-          },
+              initMenu: 'filter'
+            }
+          }
         }
       }
     })
@@ -203,7 +210,7 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, company
 
     // @ts-ignore
     window.editor = editor
-    const style = document.createElement('style');
+    const style = document.createElement('style')
     style.innerHTML = `
       body, html {
         height: 100%;
@@ -211,13 +218,13 @@ export function PaperEditor({ id, config, onSave, canvasSize, paperCode, company
         padding: 0;
         overflow: hidden;
       }
-    `;
-    document.head.appendChild(style);
+    `
+    document.head.appendChild(style)
 
     return () => {
       editor.destroy()
       // Cleanup the added style when the component unmounts
-      document.head.removeChild(style);
+      document.head.removeChild(style)
     }
   }, [id, config, onSave])
 

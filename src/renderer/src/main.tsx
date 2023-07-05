@@ -4,6 +4,6 @@ import MainComponent from './MainComponent'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MainComponent/>
+    <MainComponent />
   </React.StrictMode>
 )

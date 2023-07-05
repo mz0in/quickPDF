@@ -1,4 +1,4 @@
-import { Flex, Group, Title, SimpleGrid, Box,  } from '@mantine/core'
+import { Flex, Group, Title, SimpleGrid, Box } from '@mantine/core'
 import { Layout } from '@renderer/components/layouts'
 import { IconCalendar } from '@renderer/components/icons'
 import { useParams } from 'react-router-dom'
@@ -73,7 +73,7 @@ export default function Company() {
       console.log('running because its not undefind')
       let layouts = docSnap.data()?.layouts
       localStorage.setItem(companyName as string, JSON.stringify(layouts))
-      setLocalLayouts(layouts);
+      setLocalLayouts(layouts)
     } else {
       console.log('No layouts found')
     }
@@ -103,7 +103,7 @@ export default function Company() {
             onChange={setSelectedDate}
           />
           <ReloadButton onClickFunction={loadAllData} />
-        </Group>  
+        </Group>
       </Flex>
       <Box my={'lg'}>
         <Title order={4}>Layout</Title>
@@ -135,7 +135,7 @@ export default function Company() {
               />
             )
           })}
-        </SimpleGrid> 
+        </SimpleGrid>
       </Box>
     </Layout>
   )

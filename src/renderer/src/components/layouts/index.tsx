@@ -11,12 +11,12 @@ interface props {
 }
 
 export function Layout({ children, size = 'xl', isBack = false }: props) {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
   console.log(colorScheme, toggleColorScheme)
   return (
     <AnimationPage>
-      <Header isBack={isBack} dark={dark} toggleColorScheme={toggleColorScheme}/>
+      <Header isBack={isBack} dark={dark} toggleColorScheme={toggleColorScheme} />
       <Container size={size}>{children}</Container>
     </AnimationPage>
   )

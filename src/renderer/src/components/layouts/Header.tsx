@@ -10,7 +10,14 @@ import {
   Menu
 } from '@mantine/core'
 import { useAdminChecker } from '@renderer/services/hooks'
-import { IconArrowLeft, IconUserPlus, IconUserEdit, IconLogout, IconMoon, IconSun } from "@renderer/components/icons"
+import {
+  IconArrowLeft,
+  IconUserPlus,
+  IconUserEdit,
+  IconLogout,
+  IconMoon,
+  IconSun
+} from '@renderer/components/icons'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '@renderer/services/firebase'
 import { signOut } from 'firebase/auth'
@@ -51,7 +58,11 @@ export default function HeaderComponent({ isBack = false, dark, toggleColorSchem
               <ActionIcon
                 onClick={() => navigate(-1)}
                 variant={'gradient'}
-                gradient={dark ? { from: 'gray', to: 'gray', deg: 45 } : { from: 'black', to: 'gray', deg: 45 }}
+                gradient={
+                  dark
+                    ? { from: 'gray', to: 'gray', deg: 45 }
+                    : { from: 'black', to: 'gray', deg: 45 }
+                }
                 p={5}
                 size="lg"
               >
@@ -61,39 +72,29 @@ export default function HeaderComponent({ isBack = false, dark, toggleColorSchem
             <Text>QuickPDF</Text>
           </Group>
           <Group>
-          <ActionIcon
-            size="xl"
-            onClick={() => toggleColorScheme()}
-            title="Toggle color scheme"
-          >
-            {dark ? <IconSun /> : <IconMoon />}
-          </ActionIcon>
-          <Menu shadow="md" width={150}>
-            <Menu.Target>
-              <Avatar color={'dark'} src={auth.currentUser?.photoURL} radius="xl" />
-            </Menu.Target>
-            <Menu.Dropdown>
-              {isAdmin ? (
-                <>
-                  <Menu.Item
-                    icon={<IconUserPlus />}
-                    onClick={() => navigate('/user-add')}
-                  >
-                    add user
-                  </Menu.Item>
-                  <Menu.Item
-                    icon={<IconUserEdit />}
-                    onClick={() => navigate('/user-edit')}
-                  >
-                    Edit User
-                  </Menu.Item>
-                </>
-              ) : null}
-              <Menu.Item icon={<IconLogout />} onClick={logout}>
-                Logout
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+            <ActionIcon size="xl" onClick={() => toggleColorScheme()} title="Toggle color scheme">
+              {dark ? <IconSun /> : <IconMoon />}
+            </ActionIcon>
+            <Menu shadow="md" width={150}>
+              <Menu.Target>
+                <Avatar color={'dark'} src={auth.currentUser?.photoURL} radius="xl" />
+              </Menu.Target>
+              <Menu.Dropdown>
+                {isAdmin ? (
+                  <>
+                    <Menu.Item icon={<IconUserPlus />} onClick={() => navigate('/user-add')}>
+                      add user
+                    </Menu.Item>
+                    <Menu.Item icon={<IconUserEdit />} onClick={() => navigate('/user-edit')}>
+                      Edit User
+                    </Menu.Item>
+                  </>
+                ) : null}
+                <Menu.Item icon={<IconLogout />} onClick={logout}>
+                  Logout
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
           </Group>
         </div>
       </Container>

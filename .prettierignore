@@ -8,3 +8,4 @@ tsconfig.*.json
 *.bundle.js
 *.min.js
 public
+/src/renderer/src/components/Editor/plugins/componentsPlugin/templates/blocks

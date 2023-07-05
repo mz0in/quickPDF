@@ -65,9 +65,9 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
-              initMenu: 'filter',
-            },
-          },
+              initMenu: 'filter'
+            }
+          }
         }
       }
     })
@@ -172,7 +172,7 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
 
     // @ts-ignore
     window.editor = editor
-    const style = document.createElement('style');
+    const style = document.createElement('style')
     style.innerHTML = `
       body, html {
         height: 100%;
@@ -180,13 +180,13 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
         padding: 0;
         overflow: hidden;
       }
-    `;
-    document.head.appendChild(style);
+    `
+    document.head.appendChild(style)
 
     return () => {
       editor.destroy()
       // Cleanup the added style when the component unmounts
-      document.head.removeChild(style);
+      document.head.removeChild(style)
     }
   }, [id, config, onSave])
 
