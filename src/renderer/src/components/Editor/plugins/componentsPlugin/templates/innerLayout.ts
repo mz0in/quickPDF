@@ -74,10 +74,7 @@ const blocks = [
     label: '1 block',
     content: `<div ${attrsRow} style="${styleRow}">
       <div ${attrsCell} style="${styleWithFlexForInner(1)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -85,10 +82,7 @@ const blocks = [
     content: `<div ${attrsRow} style="${styleRow}">
       <div ${attrsCell} style="${styleWithFlexForInner(2)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(2)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -97,10 +91,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(3)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -110,10 +101,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(4)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -124,10 +112,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(5)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -139,10 +124,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(6)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -155,10 +137,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(7)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
@@ -172,10 +151,7 @@ const blocks = [
       <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
       <div ${attrsCell} style="${styleWithFlexForInner(8)}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   }
 ]
 

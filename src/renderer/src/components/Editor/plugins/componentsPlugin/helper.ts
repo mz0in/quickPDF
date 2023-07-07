@@ -1,6 +1,7 @@
 /* blocks */
 // column
-export function styleWithFlex(percantage: number, rowHeight: number = 75) {
+export function styleWithFlex(noOfColumns: number, rowHeight: number = 75) {
+  let percantage = 100 / noOfColumns;
   return `
     min-height: ${rowHeight}px;
     flex-grow: 1;

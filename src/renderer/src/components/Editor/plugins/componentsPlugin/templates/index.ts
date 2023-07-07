@@ -15,5 +15,5 @@ export const templates = [
   block1,
   block2,
   block3,
-  spacialBlocks
+  spacialBlocks,
 ]

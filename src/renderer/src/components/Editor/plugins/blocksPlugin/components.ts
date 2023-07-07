@@ -1,7 +1,5 @@
-const category = 'components'
-
 const commonBlockProps = {
-  category,
+  category: "components",
   select: true
 }
 
@@ -29,6 +27,13 @@ const blocks = [
     content: {
       style: { color: 'black' },
       type: 'image'
+    }
+  },
+  {
+    ...commonBlockProps,
+    label: "Section",
+    content: {
+      type: 'qsection'
     }
   }
 ]

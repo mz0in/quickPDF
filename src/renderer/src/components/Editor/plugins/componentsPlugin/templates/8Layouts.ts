@@ -90,97 +90,70 @@ const blocks = [
     <div ${attrsCell} style="${styleClm}"></div>
     <div ${attrsCell} style="${styleClm}"></div>
     <div ${attrsCell} style="${styleClm}"></div>
-    </div>
-    <style>
-        ${styleRow}
-      </style>`
+    </div>`
   },
   {
     ...commonBlockProps,
     label: '7/1 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(87)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(13)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(1)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(7)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: '6/2 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(75)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(25)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(2)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(6)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: '5/3 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(62)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(38)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(3)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(5)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: '4/4 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(50)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(50)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(4)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(4)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: '3/5 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(38)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(62)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(5)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(3)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
-    label: '3/5 block',
+    label: '2/6 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(25)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(75)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(6)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(2)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: '1/7 block',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell}  style="${styleWithFlex(13)}"></div>
-    <div ${attrsCell}  style="${styleWithFlex(87)}"></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell}  style="${styleWithFlex(7)}"></div>
+    <div ${attrsCell}  style="${styleWithFlex(1)}"></div>
+  </div>`
   },
   {
     ...commonBlockProps,
     label: 'Full 8',
     content: `<div ${attrsRow} style="${styleRow}">
-    <div ${attrsCell} style="${styleWithFlex(100)}" ></div>
-  </div>
-  <style>
-      ${styleRow}
-    </style>`
+    <div ${attrsCell} style="${styleWithFlex(1)}" ></div>
+  </div>`
   }
 ]
 
