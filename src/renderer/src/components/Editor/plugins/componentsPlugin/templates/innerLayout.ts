@@ -5,8 +5,7 @@ const styleRow = `
       display: flex;
       justify-content: flex-start;
       align-items: stretch;
-      flex-wrap: nowrap;
-      padding: 5px;`
+      flex-wrap: nowrap;`
 
 const step = 1
 const minDim = 1
@@ -33,7 +32,7 @@ const resizerRight: Record<string, any> = {
 
 const rowAttr = {
   // class: clsRow,
-  // 'data-gjs-droppable': `.${clsCell}`,
+  'data-gjs-droppable': "false",
   'data-gjs-resizable': resizerBtm,
   'data-gjs-name': 'Row'
 }

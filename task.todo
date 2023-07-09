@@ -13,7 +13,7 @@ Others functions of the application [X]
 mirror of pdf [X]
 date issue [X]
 add name in edit user page [X]
-Add fonts from pendrive 
+Add fonts from pendrive [{X}]
 
 // new bugs
 page automatically cut in output.pdf but not in editior [X]
@@ -36,6 +36,11 @@ layout copy from server but not render on company page [X]
 grapesjs style remains on all pages [X]
 remove app menu [X]
 stop inspacting [X]
-fix bitecode issue
-remove layout
-word wraping problem
+fix bitecode issue [X]
+remove layout [X]
+word wraping problem [X]
+New blocks banane hai newspaper pdf as [X]
+click krne style manager open ho jaye
+Modal banana hai components ki image ke liye 
+Fonts add krne hai 
+update data storing system with grapesjs storage manager API

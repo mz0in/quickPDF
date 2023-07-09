@@ -3,10 +3,18 @@ export function onSubmit(selectedComponent, editor, details, myModal) {
   const BlockManager = editor.Blocks // `Blocks` is an alias of `BlockManager`
   const htmlCode = selectedComponent?.toHTML()
   let cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
-  setBlockInLocalStorage(details, htmlCode, cssCode)
+  console.log(`{
+    media: \`<img height=\${height} width=\${width} class="firstBlockImages" src=\${images[0]} />\`,
+    category: category,
+    content: \`${htmlCode}
+    <style>
+    ${cssCode}
+    </style>\`
+  },`)
+  // setBlockInLocalStorage(details, htmlCode, cssCode)
   // render all the blocks from localhost
-  loadAllBlocksFromLocalStorage(BlockManager)
-  myModal.close()
+  // loadAllBlocksFromLocalStorage(BlockManager)
+  // myModal.close()
 }
 
 function localStorageIniter(): number {

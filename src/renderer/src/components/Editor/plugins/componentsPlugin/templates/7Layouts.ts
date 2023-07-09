@@ -53,7 +53,7 @@ const colAttr: Record<string, any> = {
   // 'data-gjs-droppable': `.section`
   'data-gjs-resizable': resizerRight,
   'data-gjs-name': 'Cell',
-  'data-gjs-type': 'column',
+  // 'data-gjs-type': 'column',
   'data-gjs-unstylable': 'width',
   'data-gjs-stylable-require': 'flex-basis'
 }

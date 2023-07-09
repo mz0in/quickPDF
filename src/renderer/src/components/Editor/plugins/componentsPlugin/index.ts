@@ -44,7 +44,8 @@ export default (editor: Editor) => {
     // Default properties
     defaults: {
       tagName: 'div',
-      draggable: '[data-gjs-type=column]',
+      draggable: true,
+      droppable: true,
       style: {'min-height': "75px"}
     }
   }
