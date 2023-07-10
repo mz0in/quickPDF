@@ -1,15 +1,7 @@
 import { fontsDialogPlugin as _fontsDialogPlugin, cmdOpenFonts as _cmdOpenFonts } from './fonts'
 import './fonts.css'
 
-export default (editor, opts = {}) => {
-  const options = {
-    ...{
-      // default options
-      i18n: {},
-      preserveDefaultFonts: true
-    },
-    ...opts
-  }
+export default (editor) => {
 
   // adding icon for fonts
   editor.Panels.addButton('options', {
@@ -22,6 +14,3 @@ export default (editor, opts = {}) => {
 
   _fontsDialogPlugin(editor, options)
 }
-
-export const fontsDialogPlugin = _fontsDialogPlugin
-export const cmdOpenFonts = _cmdOpenFonts
