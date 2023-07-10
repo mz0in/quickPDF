@@ -22,12 +22,12 @@ import type { htmlObject } from '..'
 interface GrapesJSProps {
   id: string
   config?: any
-  onSave?: (htmlObjects: htmlObject[], pageHead: string) => void
+  onSave?: (htmlObjects: htmlObject[], pageHead: string, gjsCode: any) => void
   canvasSize: {
     height: number
     width: number
   }
-  paperCode: htmlObject[]
+  gjsCode: any
   pageHead: string
   companyName: string
 }
@@ -37,7 +37,7 @@ export function PaperEditor({
   config,
   onSave,
   canvasSize,
-  paperCode,
+  gjsCode,
   companyName
 }: GrapesJSProps) {
   const editorRef = useRef<HTMLDivElement>(null)
@@ -56,16 +56,6 @@ export function PaperEditor({
             height: `${canvasSize?.height - 1}in`
           }
         ]
-      },
-      pageManager: {
-        pages: paperCode.map((page, index) => {
-          return {
-            name: `page ${index + 1}`,
-            id: `${index + 1}`,
-            styles: page.css,
-            component: page.htmlBody
-          }
-        })
       },
       storageManager: false,
       plugins: [
@@ -102,6 +92,8 @@ export function PaperEditor({
         }
       }
     })
+
+    editor.loadProjectData(gjsCode);
 
     setTimeout(() => {
       // @ts-ignore
@@ -154,6 +146,8 @@ export function PaperEditor({
             }
           }) as htmlObject[]
 
+          const gjsCode = editor.getProjectData();
+
           /**
            * fontPropertyOfHead contains innerHTML of canvas head
            * that contains html code for linking of fonts
@@ -162,7 +156,7 @@ export function PaperEditor({
           // @ts-ignore
           let pageHead = editor.Canvas.getDocument().head.innerHTML
 
-          onSave(htmlStrings, pageHead)
+          onSave(htmlStrings, pageHead, gjsCode)
         }
       })
     }

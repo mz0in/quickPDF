@@ -25,7 +25,7 @@ import type { htmlObject } from '..'
 interface GrapesJSProps {
   id: string
   config?: any
-  onSave?: (htmlObjects: htmlObject[], pageHead: string) => void
+  onSave?: (htmlObjects: htmlObject[], pageHead: string, gjsCode: any) => void
   canvasSize: {
     height: number
     width: number
@@ -40,7 +40,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}*{text-align: justify;}`,
+      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}`,
       deviceManager: {
         devices: [
           {
@@ -61,7 +61,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
           }
         ]
       },
-      storageManager: false,
+      storageManager: true,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
@@ -157,6 +157,8 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
             }
           }) as htmlObject[]
 
+          const gjsCode = editor.getProjectData();
+
           /**
            * fontPropertyOfHead contains innerHTML of canvas head
            * that contains html code for linking of fonts
@@ -165,7 +167,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
           // @ts-ignore
           let pageHead = editor.Canvas.getDocument().head.innerHTML
 
-          onSave(htmlStrings, pageHead)
+          onSave(htmlStrings, pageHead, gjsCode);
         }
       })
     }
@@ -210,6 +212,8 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
 
     // block manager open by default
     editor.Panels.getButton('views', 'open-blocks').set('active', true)
+    let zoom = editor.Canvas.getZoom()
+    editor.Canvas.setZoom(`${zoom - 5}`)
 
     // @ts-ignore
     window.editor = editor

@@ -62,7 +62,13 @@ export default function EditPDF(): JSX.Element {
     getPaperCode()
   }, [])
 
-  const handleSave = (htmlStrings: htmlObject[], pageHead: string) => {
+   /**
+   * middleware for saving function in utils
+   * @param htmlStrings contain html version of gjs code
+   * @param pageHead contain the head of the pdf html document like fonts
+   * @param gjsCode gjs json code for importing in future
+   */
+  const handleSave = (htmlStrings: htmlObject[], pageHead: string, gjsCode: any) => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -82,7 +88,7 @@ export default function EditPDF(): JSX.Element {
     }
 
     let CodeOfPaper = {
-      code: htmlStrings,
+      code: gjsCode,
       info: paperData?.info,
       pageHead
     }
@@ -105,7 +111,7 @@ export default function EditPDF(): JSX.Element {
         height: paperData?.info.height as number,
         width: paperData?.info.width as number
       }}
-      paperCode={paperData?.code as htmlObject[]}
+      gjsCode={paperData?.code as any}
       pageHead={paperData?.pageHead as string}
       companyName={companyName as string}
       onSave={handleSave}

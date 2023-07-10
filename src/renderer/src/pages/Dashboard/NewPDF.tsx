@@ -31,7 +31,13 @@ export default function NewPage(): JSX.Element {
     }
   })
 
-  const handleSave = (htmlStrings: htmlObject[], pageHead: string) => {
+  /**
+   * middleware for saving function in utils
+   * @param htmlStrings contain html version of gjs code
+   * @param pageHead contain the head of the pdf html document like fonts
+   * @param gjsCode gjs json code for importing in future
+   */
+  const handleSave = (htmlStrings: htmlObject[], pageHead: string, gjsCode: any) => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -56,7 +62,7 @@ export default function NewPage(): JSX.Element {
     }
     // Object that contain htmlCode array and meta data of the paper.
     let CodeOfPaper = {
-      code: htmlStrings,
+      code: gjsCode,
       info,
       pageHead
     }
