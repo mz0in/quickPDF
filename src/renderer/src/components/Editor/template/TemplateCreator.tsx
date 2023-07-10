@@ -72,6 +72,11 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
       }
     })
 
+    editor.on('component:selected', () => {
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
+      openSmBtn.set('active', 1);
+    });
+
     setTimeout(() => {
       // @ts-ignore
       try {

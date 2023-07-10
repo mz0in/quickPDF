@@ -90,6 +90,11 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
       }
     })
 
+    editor.on('component:selected', () => {
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
+      openSmBtn.set('active', 1);
+    });
+
     setTimeout(() => {
       // @ts-ignore
       try {

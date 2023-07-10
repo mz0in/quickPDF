@@ -98,6 +98,11 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
       }
     })
 
+    editor.on('component:selected', () => {
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
+      openSmBtn.set('active', 1);
+    });
+
     setTimeout(() => {
       // @ts-ignore
       try {
