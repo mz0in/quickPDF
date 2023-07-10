@@ -1,33 +1,27 @@
-.grapesjs-fonts select {
-  background-color: #352d2f;
-  color: #b9a5a6;
-  padding: 5px;
-  border: none;
-}
-.grapesjs-fonts input,
-.grapesjs-fonts button {
-  background-color: #352d2f;
-  color: #b9a5a6;
-  padding: 5px;
-  border: none;
-}
-.grapesjs-fonts .silex-bar {
+.font-selector {
   display: flex;
-}
-.grapesjs-fonts .silex-bar > * {
-  margin: 5px;
+  align-items: flex-start;
 }
 
-.grapesjs-fonts button {
-  padding: 5px;
-  margin: 5px;
-  padding-top: 8px;
-}
-.grapesjs-fonts .silex-list__item__footer {
-  display: flex;
-  justify-content: flex-end;
+.form-group {
+  flex-basis: 100%;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
-.grapesjs-fonts footer {
-  margin-top: 30px;
+.label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.font-select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  /* Add any other desired styles */
+}
+
+.button {
+  margin-right: 10px;
 }
