@@ -1,7 +1,3 @@
-/**
- * Zoom in Zoom out
- */
-
 import { Editor } from 'grapesjs'
 import customSaveModal from './modal'
 import { loadAllBlocksFromLocalStorage } from './function'

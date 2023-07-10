@@ -40,7 +40,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}`,
+      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}h1{font-family: 'roboto';}`,
       deviceManager: {
         devices: [
           {
@@ -61,7 +61,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
           }
         ]
       },
-      storageManager: true,
+      storageManager: false,
       plugins: [
         // gjsBasicBlock,
         basicCustomPlugin,
