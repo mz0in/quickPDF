@@ -15,7 +15,6 @@ interface CodeOfPaperProps {
     height: number
     width: number
   }
-  pageHead: string
 }
 
 const dummayData: CodeOfPaperProps = {
@@ -31,8 +30,7 @@ const dummayData: CodeOfPaperProps = {
     date: '',
     height: 21,
     width: 15
-  },
-  pageHead: ''
+  }
 }
 
 export default function EditPDF(): JSX.Element {
@@ -65,10 +63,9 @@ export default function EditPDF(): JSX.Element {
    /**
    * middleware for saving function in utils
    * @param htmlStrings contain html version of gjs code
-   * @param pageHead contain the head of the pdf html document like fonts
    * @param gjsCode gjs json code for importing in future
    */
-  const handleSave = (htmlStrings: htmlObject[], pageHead: string, gjsCode: any) => {
+  const handleSave = (htmlStrings: htmlObject[], gjsCode: any) => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -89,11 +86,10 @@ export default function EditPDF(): JSX.Element {
 
     let CodeOfPaper = {
       code: gjsCode,
-      info: paperData?.info,
-      pageHead
+      info: paperData?.info
     }
 
-    saveAsPDF(allCss, allHtml, pageHead, paperData?.info, CodeOfPaper)
+    saveAsPDF(allCss, allHtml, paperData?.info, CodeOfPaper)
     notifications.update({
       id: 'load-data',
       color: 'teal',
@@ -112,7 +108,6 @@ export default function EditPDF(): JSX.Element {
         width: paperData?.info.width as number
       }}
       gjsCode={paperData?.code as any}
-      pageHead={paperData?.pageHead as string}
       companyName={companyName as string}
       onSave={handleSave}
     />

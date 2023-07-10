@@ -25,7 +25,7 @@ import type { htmlObject } from '..'
 interface GrapesJSProps {
   id: string
   config?: any
-  onSave?: (htmlObjects: htmlObject[], pageHead: string, gjsCode: any) => void
+  onSave?: (htmlObjects: htmlObject[], gjsCode: any) => void
   canvasSize: {
     height: number
     width: number
@@ -40,7 +40,11 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}h1{font-family: 'roboto';}`,
+      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
+      cssComposer: {
+        stylePrefix: "qpdf-",
+        rules: "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
+      },
       deviceManager: {
         devices: [
           {
@@ -76,10 +80,6 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         parserPostCSS
       ],
       pluginsOpts: {
-        [grapesjsFontPlugin]: {
-          // api_key: "AIzaSyBIbeXm8jJu47tuBj2ubDzjLlLgAmtD07s"
-          api_key: 'AIzaSyAdJTYSLPlKz4w5Iqyy-JAF2o8uQKd1FKc'
-        },
         [grapesjsPageManagerPlugin]: {
           width: `${canvasSize?.width}in`, // new page width
           height: `${canvasSize?.height}in` // new page height
@@ -170,9 +170,8 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
            * defined at: /plugins/grapesjsFonts/fonts.js#L348-L349
            */
           // @ts-ignore
-          let pageHead = editor.Canvas.getDocument().head.innerHTML
 
-          onSave(htmlStrings, pageHead, gjsCode);
+          onSave(htmlStrings, gjsCode);
         }
       })
     }

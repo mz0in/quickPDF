@@ -84,7 +84,6 @@ export default function EditDesign(): JSX.Element {
           css: paperData.css
         } as htmlObject
       }
-      //   pageHead={paperData?.pageHead as string}
       onSave={handleSave}
     />
   )

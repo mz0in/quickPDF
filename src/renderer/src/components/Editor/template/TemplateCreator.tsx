@@ -19,7 +19,7 @@ import type { htmlObject } from '..'
 interface GrapesJSProps {
   id: string
   config?: any
-  onSave?: (htmlObjects: htmlObject[], pageHead: string) => void
+  onSave?: (htmlObjects: htmlObject[]) => void
   canvasSize: {
     height: number
     width: number
@@ -57,10 +57,6 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
         customRtePlugin
       ],
       pluginsOpts: {
-        [grapesjsFontPlugin]: {
-          // api_key: "AIzaSyBIbeXm8jJu47tuBj2ubDzjLlLgAmtD07s"
-          api_key: 'AIzaSyAdJTYSLPlKz4w5Iqyy-JAF2o8uQKd1FKc'
-        },
         // @ts-ignore
         [gjsImageEditorPlugin]: {
           config: {
@@ -120,15 +116,7 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
             }
           }) as htmlObject[]
 
-          /**
-           * fontPropertyOfHead contains innerHTML of canvas head
-           * that contains html code for linking of fonts
-           * defined at: /plugins/grapesjsFonts/fonts.js#L348-L349
-           */
-          // @ts-ignore
-          let pageHead = editor.Canvas.getDocument().head.innerHTML
-
-          onSave(htmlStrings, pageHead)
+          onSave(htmlStrings)
         }
       })
     }
