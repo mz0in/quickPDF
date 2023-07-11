@@ -45,7 +45,7 @@ export function PaperEditor({
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: '',
+      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
       deviceManager: {
         devices: [
           {
@@ -91,7 +91,7 @@ export function PaperEditor({
     editor.loadProjectData(gjsCode);
     editor.on('component:selected', () => {
       const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn.set('active', 1);
+      openSmBtn?.set('active', 1);
     });
 
     setTimeout(() => {
@@ -191,7 +191,7 @@ export function PaperEditor({
     })
 
     // block manager open by default
-    editor.Panels.getButton('views', 'open-blocks').set('active', true)
+    editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
 
     // @ts-ignore
     window.editor = editor

@@ -100,7 +100,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
 
     editor.on('component:selected', () => {
       const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn.set('active', 1);
+      openSmBtn?.set('active', 1);
     });
 
     setTimeout(() => {
@@ -164,13 +164,6 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
 
           const gjsCode = editor.getProjectData();
 
-          /**
-           * fontPropertyOfHead contains innerHTML of canvas head
-           * that contains html code for linking of fonts
-           * defined at: /plugins/grapesjsFonts/fonts.js#L348-L349
-           */
-          // @ts-ignore
-
           onSave(htmlStrings, gjsCode);
         }
       })
@@ -215,7 +208,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     })
 
     // block manager open by default
-    editor.Panels.getButton('views', 'open-blocks').set('active', true)
+    editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
     let zoom = editor.Canvas.getZoom()
     editor.Canvas.setZoom(`${zoom - 5}`)
 
