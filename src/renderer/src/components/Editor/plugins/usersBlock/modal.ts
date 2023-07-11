@@ -2,7 +2,7 @@ import { Editor } from 'grapesjs'
 import html2canvas from 'html2canvas'
 import { onSubmit } from './function'
 
-export default function customSaveModal(editor: Editor) {
+export default function customSaveModal(editor: Editor): any {
   const selectedComponent = editor.getSelected()
   // Get the Modal module
   const modal = editor.Modal
@@ -49,10 +49,10 @@ export default function customSaveModal(editor: Editor) {
   // onsaving function
 
   document.getElementById('submit')?.addEventListener('click', () => {
-    let nameBlock = document.getElementById('component-name') as HTMLInputElement
-    let categoryBlock = document.getElementById('component-category') as HTMLInputElement
+    const nameBlock = document.getElementById('component-name') as HTMLInputElement
+    const categoryBlock = document.getElementById('component-category') as HTMLInputElement
 
-    let details = {
+    const details = {
       name: nameBlock.value,
       category: categoryBlock.value
     }

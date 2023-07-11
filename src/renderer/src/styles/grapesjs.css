@@ -137,12 +137,12 @@ div.gjs-blocks-c {
 
 /* Tertiary color for the background */
 .gjs-three-bg {
-  background-color: #FCCB06;
+  background-color: #fccb06;
   color: white;
 }
 
 /* Quaternary color for the text color */
 .gjs-four-color,
 .gjs-four-color-h:hover {
-  color: #FCCB06;
+  color: #fccb06;
 }

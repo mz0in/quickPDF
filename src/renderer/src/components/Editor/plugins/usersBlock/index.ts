@@ -2,7 +2,7 @@ import { Editor } from 'grapesjs'
 import customSaveModal from './modal'
 import { loadAllBlocksFromLocalStorage } from './function'
 
-export default (editor: Editor) => {
+export default (editor: Editor): void => {
   const dc = editor.DomComponents
   const BlockManager = editor.Blocks
   const id = 'block-adder'
@@ -15,11 +15,12 @@ export default (editor: Editor) => {
   loadAllBlocksFromLocalStorage(BlockManager)
 
   dc.getTypes().forEach((elType) => {
-    let { model: oldModel, view: oldView } = elType
+    const { model: oldModel, view: oldView } = elType
     dc.addType(elType.id, {
       model: oldModel.extend({
         initToolbar() {
-          //@ts-ignore
+          //@ts-ignore i don't know
+          // eslint-disable-next-line prefer-rest-params
           oldModel.prototype.initToolbar.apply(this, arguments)
           const toolbar = this.get('toolbar')
 
@@ -27,8 +28,7 @@ export default (editor: Editor) => {
             toolbar.unshift({
               id,
               command: function () {
-                // @ts-ignore
-                let modal = customSaveModal(editor)
+                customSaveModal(editor)
               },
               label: htmlLabel
             })

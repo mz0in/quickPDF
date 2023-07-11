@@ -4,7 +4,7 @@
 
 import { Editor } from 'grapesjs'
 
-const myPlugin = (editor: Editor) => {
+const myPlugin = (editor: Editor): void => {
   editor.Panels.addButton('options', {
     id: 'Zoom Out',
     className: 'fa fa-minus',
@@ -22,14 +22,14 @@ const myPlugin = (editor: Editor) => {
 
   editor.Commands.add('zoomin', {
     run: () => {
-      let zoom = editor.Canvas.getZoom()
+      const zoom = editor.Canvas.getZoom()
       editor.Canvas.setZoom(`${zoom + 5}`)
     }
   })
 
   editor.Commands.add('zoomout', {
     run: () => {
-      let zoom = editor.Canvas.getZoom()
+      const zoom = editor.Canvas.getZoom()
       editor.Canvas.setZoom(`${zoom - 5}`)
     }
   })

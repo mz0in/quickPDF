@@ -1,10 +1,10 @@
-import { Editor } from "grapesjs";
-import { fontPluginHandler } from "./fonts";
-import "./fonts.css"
+import { Editor } from 'grapesjs'
+import { fontPluginHandler } from './fonts'
+import './fonts.css'
 
-export default (editor: Editor) => {
-    const commands = editor.Commands;
-    // adding icon for fonts
+export default (editor: Editor): void => {
+  const commands = editor.Commands
+  // adding icon for fonts
   editor.Panels.addButton('options', {
     id: 'openFonts',
     className: 'fa fa-font',
@@ -15,8 +15,8 @@ export default (editor: Editor) => {
 
   // handing calling of he open-fonts command
   commands.add('open-fonts', {
-	run(editor: Editor) {
-		fontPluginHandler(editor);
-	}
-});
+    run(editor: Editor) {
+      fontPluginHandler(editor)
+    }
+  })
 }

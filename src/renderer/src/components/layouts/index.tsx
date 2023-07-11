@@ -10,7 +10,7 @@ interface props {
   isBack?: boolean
 }
 
-export function Layout({ children, size = 'xl', isBack = false }: props): JSX.Element  {
+export function Layout({ children, size = 'xl', isBack = false }: props): JSX.Element {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   console.log(colorScheme, toggleColorScheme)

@@ -1,8 +1,8 @@
-import { Editor } from "grapesjs";
-import { styleUpdater, save as fontSave } from "./function";
+import { Editor } from 'grapesjs'
+import { styleUpdater, save as fontSave } from './function'
 
-export function fontPluginHandler(editor: Editor){
-    const FontsModal = editor.Modal
+export function fontPluginHandler(editor: Editor): void {
+  const FontsModal = editor.Modal
 
   // Define the content of the modal
   const content = `<div class="font-selector">
@@ -41,21 +41,21 @@ export function fontPluginHandler(editor: Editor){
   })
 
   // updating global fonts with editor setted fonts
-  styleUpdater(editor, "global-font-select", "*")
+  styleUpdater(editor, 'global-font-select', '*')
 
   // updating heading fonts
-  styleUpdater(editor, "heading-font-select", "h1")
+  styleUpdater(editor, 'heading-font-select', 'h1')
 
-  let gloablFont = document.getElementById("global-font-select") as HTMLSelectElement;
-  let headingFont = document.getElementById("heading-font-select") as HTMLSelectElement;
+  const gloablFont = document.getElementById('global-font-select') as HTMLSelectElement
+  const headingFont = document.getElementById('heading-font-select') as HTMLSelectElement
 
-  document.getElementById("save-button")?.addEventListener('click', ()=> {
+  document.getElementById('save-button')?.addEventListener('click', () => {
     fontSave(editor, gloablFont.value, headingFont.value)
     myModal.close()
   })
 
-  document.getElementById("reset-button")?.addEventListener('click', ()=> {
-    gloablFont.value = ""
-    headingFont.value = ""
+  document.getElementById('reset-button')?.addEventListener('click', () => {
+    gloablFont.value = ''
+    headingFont.value = ''
   })
 }

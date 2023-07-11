@@ -9,3 +9,4 @@ tsconfig.*.json
 *.min.js
 public
 /src/renderer/src/components/Editor/plugins/componentsPlugin/templates/blocks
+website
