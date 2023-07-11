@@ -1,34 +1,3 @@
-:root {
-  --border-color: rgba(0, 0, 0, 0.15);
-  --background-color: #3c4a49;
-  --background-box-title: #263332;
-}
-.tm-input {
-  border-radius: 2px;
-  font-size: 16px;
-  padding: 11px 15px;
-  min-width: 300px;
-  display: inline-block;
-  box-shadow: 0 0 0 2px rgba(120, 130, 152, 0.25);
-  border: none;
-  outline: none;
-  transition: all 0.3s ease;
-  margin: 20px 0;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-.tm-input:active,
-.tm-input:focus,
-.tm-input:hover {
-  box-shadow: 0 0 0 2px #936a9b;
-}
-.tm-input.sm {
-  width: 100%;
-  min-width: 0;
-  font-size: 12px;
-  margin: 10px 0;
-  padding: 8px 10px;
-}
 .pages-wrp,
 .pages {
   display: flex;
@@ -43,8 +12,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .add-page {
-  background: #936a9b;
-  color: #fff;
+  background: #424242;
+  color: white;
   font-size: 12px;
   padding: 8px 5px;
   border-radius: 2px;
@@ -65,12 +34,12 @@
   cursor: pointer;
 }
 .page:hover {
-  color: #936a9b;
+  color: #FCCB06;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.15);
 }
 .page.selected {
-  color: #936a9b;
-  border: 1px solid #936a9b;
+  color: #FCCB06;
+  border: 1px solid #FCCB06;
   background-color: rgba(0, 0, 0, 0.1);
 }
 .page-edit,
@@ -110,7 +79,7 @@
   left: 9px;
   width: 6px;
   height: 14px;
-  border: solid #936a9b;
+  border: solid #FCCB06;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -121,7 +90,7 @@
 .group label:before {
   content: '';
   background-color: rgba(0, 0, 0, 0);
-  border: 2px solid #936a9b;
+  border: 2px solid #FCCB06;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
   padding: 10px;
   display: inline-block;

@@ -123,3 +123,26 @@ div.gjs-blocks-c {
     height: calc(100% - 20px);
   }
 }
+
+/* coloring the gjs editor */
+/* Primary color for the background */
+.gjs-one-bg {
+  background-color: #2c2c2c;
+}
+
+/* Secondary color for the text color */
+.gjs-two-color {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tertiary color for the background */
+.gjs-three-bg {
+  background-color: #FCCB06;
+  color: white;
+}
+
+/* Quaternary color for the text color */
+.gjs-four-color,
+.gjs-four-color-h:hover {
+  color: #FCCB06;
+}
