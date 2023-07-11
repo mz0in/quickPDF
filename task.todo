@@ -44,7 +44,8 @@ click krne style manager open ho jaye [X]
 update data storing system with grapesjs storage manager API [X]
 Modal banana hai components ki image ke liye [{X}]
 Fonts add krne hai [X]
-delete paper
-hindi typing {need to add a software dependency}
-style krna hai editor ko
-remove lit-html
+Font downloading system
+delete paper [{not need to do}]
+hindi typing {need to add a software dependency} ['can't be done user have to do it mannually']
+style krna hai editor ko [X]
+remove lit-html [X]
