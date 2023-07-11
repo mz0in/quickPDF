@@ -7,8 +7,7 @@
 import { Editor } from 'grapesjs'
 import { templates } from './templates'
 
-export default (editor: Editor) => {
-  
+export default (editor: Editor): void => {
   templates.forEach((element) => {
     element.map((template) => {
       editor.BlockManager.add(template.id, template)

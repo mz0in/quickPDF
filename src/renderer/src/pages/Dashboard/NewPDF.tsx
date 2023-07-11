@@ -36,7 +36,7 @@ export default function NewPage(): JSX.Element {
    * @param htmlStrings contain html version of gjs code
    * @param gjsCode gjs json code for importing in future
    */
-  const handleSave = (htmlStrings: htmlObject[], gjsCode: any) => {
+  const handleSave = (htmlStrings: htmlObject[], gjsCode: any): void => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -55,12 +55,12 @@ export default function NewPage(): JSX.Element {
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
     }
 
-    let info = {
+    const info = {
       ...modalData,
       companyName
     }
     // Object that contain htmlCode array and meta data of the paper.
-    let CodeOfPaper = {
+    const CodeOfPaper = {
       code: gjsCode,
       info
     }
@@ -76,7 +76,7 @@ export default function NewPage(): JSX.Element {
     })
   }
 
-  const handleModalSubmit = (values: defaultFormValue) => {
+  const handleModalSubmit = (values: defaultFormValue): void => {
     close() // to close opened modal
     setModalData({
       date: dateToValue(values.date as Date),
@@ -100,7 +100,7 @@ export default function NewPage(): JSX.Element {
   }
 
   return (
-    <Modal opened={opened} onClose={() => navigate(-1)} title="New Newspaper" centered>
+    <Modal opened={opened} onClose={(): void => navigate(-1)} title="New Newspaper" centered>
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <DatePickerInput
           label="Pick date"

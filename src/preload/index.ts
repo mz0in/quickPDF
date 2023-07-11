@@ -11,18 +11,20 @@ interface Info {
 }
 
 const api = {
-  save: (info: Info, html: string, codeOfPaper: any) =>
+  save: (info: Info, html: string, codeOfPaper: any): Promise<any> =>
     ipcRenderer.invoke('save', { info, html, codeOfPaper }),
-  getPapers: (companyName: string) => ipcRenderer.invoke('getPapers', { companyName }),
-  getPapersWithDate: (companyName: string, date: string) =>
+  getPapers: (companyName: string): Promise<any> =>
+    ipcRenderer.invoke('getPapers', { companyName }),
+  getPapersWithDate: (companyName: string, date: string): Promise<any> =>
     ipcRenderer.invoke('getPapersWithDate', { companyName, date })
 }
 
 // Custom DataBase Handler APIs
 const DB = {
-  setData: (storeName: string, key: string, value: any) =>
+  setData: (storeName: string, key: string, value: any): Promise<any> =>
     ipcRenderer.invoke('setDB', { storeName, key, value }),
-  getData: (storeName: string, key: string) => ipcRenderer.invoke('getDB', { storeName, key })
+  getData: (storeName: string, key: string): Promise<any> =>
+    ipcRenderer.invoke('getDB', { storeName, key })
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

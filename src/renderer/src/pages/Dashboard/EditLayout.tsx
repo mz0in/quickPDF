@@ -29,9 +29,8 @@ export default function EditDesign(): JSX.Element {
   const { companyName, componentName } = useParams()
   const navigate = useNavigate()
 
-  const getLayoutCode = async () => {
-    //@ts-ignore
-    let codeOfLayout = JSON.parse(localStorage.getItem(companyName))
+  const getLayoutCode = async (): Promise<void> => {
+    const codeOfLayout = JSON.parse(localStorage.getItem(companyName as string) as string)
     if (codeOfLayout === undefined) {
       notifications.show({
         id: 'err-loading',
@@ -44,7 +43,7 @@ export default function EditDesign(): JSX.Element {
       })
     }
     console.log('data', codeOfLayout)
-    let dataToSet: CodeOfPaperProps = codeOfLayout[componentName as string]
+    const dataToSet: CodeOfPaperProps = codeOfLayout[componentName as string]
     setPaperData(dataToSet)
   }
 
@@ -52,10 +51,10 @@ export default function EditDesign(): JSX.Element {
     getLayoutCode()
   }, [])
 
-  const handleSave = (htmlStrings: htmlObject[]) => {
+  const handleSave = (htmlStrings: htmlObject[]): void => {
     console.log('htmlStrings', htmlStrings)
 
-    let info = {
+    const info = {
       title: componentName as string,
       height: paperData.info.height,
       width: paperData.info.width

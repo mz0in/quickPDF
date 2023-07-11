@@ -1,6 +1,6 @@
 import { LazyMotion, m, domAnimation } from 'framer-motion'
 
-export default function AnimationPage({ children }) {
+export default function AnimationPage({ children }: any): JSX.Element {
   return (
     <LazyMotion features={domAnimation}>
       <m.div

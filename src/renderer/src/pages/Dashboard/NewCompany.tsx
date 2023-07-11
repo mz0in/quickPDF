@@ -31,7 +31,7 @@ interface FormValues {
   creator: string
 }
 
-export default function NewCompany() {
+export default function NewCompany(): JSX.Element {
   const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
   const [users, setUsers] = useState([{ value: 'daily', label: 'Daily' }])
@@ -48,11 +48,11 @@ export default function NewCompany() {
     }
   })
 
-  const getAllUsers = async () => {
+  const getAllUsers = async (): Promise<void> => {
     const docSnap = await getDoc(doc(fireStore, 'company', 'allUsers'))
     if (docSnap.exists()) {
       console.log('Document data:', docSnap.data().users)
-      let updatedData = docSnap.data().users.map((user) => {
+      const updatedData = docSnap.data().users.map((user) => {
         return {
           value: user.uid,
           label: user.name
@@ -70,15 +70,15 @@ export default function NewCompany() {
     getAllUsers()
   }, [])
 
-  const handleFileUpload = (file: File) => {
+  const handleFileUpload = (file: File): void => {
     const reader = new FileReader()
-    reader.onloadend = () => {
+    reader.onloadend = (): void => {
       setImage(reader.result as string)
     }
     reader.readAsDataURL(file)
   }
 
-  const save = async (values: typeof form.values) => {
+  const save = async (values: typeof form.values): Promise<void> => {
     try {
       notifications.show({
         id: 'load-data',
@@ -88,7 +88,7 @@ export default function NewCompany() {
         autoClose: false,
         withCloseButton: false
       })
-      let nameInSpaceToDash = spaceToDash(values.name)
+      const nameInSpaceToDash = spaceToDash(values.name)
 
       // save the image with company-name
       const storageRef = ref(storage, `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`)

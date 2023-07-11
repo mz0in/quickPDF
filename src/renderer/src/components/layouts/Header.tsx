@@ -31,16 +31,20 @@ const useStyles = createStyles(() => ({
   }
 }))
 
-export default function HeaderComponent({ isBack = false, dark, toggleColorScheme }) {
+export default function HeaderComponent({
+  isBack = false,
+  dark,
+  toggleColorScheme
+}: any): JSX.Element {
   const { classes } = useStyles()
   const navigate = useNavigate()
   const [isAdmin] = useAdminChecker()
 
-  const logout = () => {
+  const logout = (): void => {
     signOut(auth)
       .then(async () => {
         localStorage.removeItem('user')
-        //@ts-ignore
+        //@ts-ignore DB is defined in the preload of electronjs
         await window?.DB?.setData('company', 'companies', undefined)
         location.reload()
       })
@@ -56,7 +60,7 @@ export default function HeaderComponent({ isBack = false, dark, toggleColorSchem
           <Group>
             {isBack ? (
               <ActionIcon
-                onClick={() => navigate(-1)}
+                onClick={(): void => navigate(-1)}
                 variant={'gradient'}
                 gradient={
                   dark
@@ -72,7 +76,11 @@ export default function HeaderComponent({ isBack = false, dark, toggleColorSchem
             <Text>QuickPDF</Text>
           </Group>
           <Group>
-            <ActionIcon size="xl" onClick={() => toggleColorScheme()} title="Toggle color scheme">
+            <ActionIcon
+              size="xl"
+              onClick={(): void => toggleColorScheme()}
+              title="Toggle color scheme"
+            >
               {dark ? <IconSun /> : <IconMoon />}
             </ActionIcon>
             <Menu shadow="md" width={150}>
@@ -82,10 +90,10 @@ export default function HeaderComponent({ isBack = false, dark, toggleColorSchem
               <Menu.Dropdown>
                 {isAdmin ? (
                   <>
-                    <Menu.Item icon={<IconUserPlus />} onClick={() => navigate('/user-add')}>
+                    <Menu.Item icon={<IconUserPlus />} onClick={(): void => navigate('/user-add')}>
                       add user
                     </Menu.Item>
-                    <Menu.Item icon={<IconUserEdit />} onClick={() => navigate('/user-edit')}>
+                    <Menu.Item icon={<IconUserEdit />} onClick={(): void => navigate('/user-edit')}>
                       Edit User
                     </Menu.Item>
                   </>

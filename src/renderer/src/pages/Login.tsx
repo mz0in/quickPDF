@@ -11,11 +11,11 @@ interface props {
   loginHook: Dispatch<React.SetStateAction<string | boolean>>
 }
 
-export default function LoginPage({ loginHook }: props) {
+export default function LoginPage({ loginHook }: props): JSX.Element {
   const [emailValue, setEmailValue] = useInputState<string>('')
   const [passwordValue, setPasswordValue] = useInputState<string>('')
 
-  const submitForm = async () => {
+  const submitForm = async (): Promise<void> => {
     notifications.show({
       id: 'login-data',
       loading: true,
@@ -71,7 +71,7 @@ export default function LoginPage({ loginHook }: props) {
     <Container size={420} my={40}>
       <Title
         align="center"
-        sx={(theme) => ({
+        sx={(theme): any => ({
           fontFamily: `Greycliff CF, ${theme.fontFamily}`,
           fontWeight: 900
         })}

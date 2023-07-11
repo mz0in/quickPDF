@@ -24,7 +24,7 @@ interface LayoutProps {
   name: string
 }
 
-export function AddButton({ url, height = '110px' }: addButtonProps) {
+export function AddButton({ url, height = '110px' }: addButtonProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
@@ -43,14 +43,14 @@ export function AddButton({ url, height = '110px' }: addButtonProps) {
         cursor: 'pointer'
       }}
       component="button"
-      onClick={() => navigate(url)}
+      onClick={(): void => navigate(url)}
     >
       <IconSquareRoundedPlus />
     </Box>
   )
 }
 
-export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
+export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps): JSX.Element {
   const navigate = useNavigate()
   return (
     <Box
@@ -71,12 +71,12 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps) {
         cursor: 'pointer'
       }}
       component="button"
-      onClick={() => navigate(`/company/${id}`)}
+      onClick={(): void => navigate(`/company/${id}`)}
     ></Box>
   )
 }
 
-export function PaperCard({ url, date, month }: paperProps) {
+export function PaperCard({ url, date, month }: paperProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
@@ -96,7 +96,7 @@ export function PaperCard({ url, date, month }: paperProps) {
         cursor: 'pointer'
       }}
       component="button"
-      onClick={() => navigate(url)}
+      onClick={(): void => navigate(url)}
     >
       <Text
         variant="gradient"
@@ -115,7 +115,7 @@ export function PaperCard({ url, date, month }: paperProps) {
   )
 }
 
-export function LayoutCard({ url, name }: LayoutProps) {
+export function LayoutCard({ url, name }: LayoutProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
@@ -135,7 +135,7 @@ export function LayoutCard({ url, name }: LayoutProps) {
         cursor: 'pointer'
       }}
       component="button"
-      onClick={() => navigate(url)}
+      onClick={(): void => navigate(url)}
     >
       <Text fz="sm">{name}</Text>
     </Box>

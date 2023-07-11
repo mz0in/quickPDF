@@ -27,9 +27,10 @@ export default function NewDesign(): JSX.Element {
     }
   })
 
-  const handleSave = (html: htmlObject[]) => {
+  const handleSave = (html: htmlObject[]): void => {
     console.log('HTML saved:', html)
-    // @ts-ignore
+    // @ts-ignore modalData have the same exact type as type Info just its to
+    // complicated to import the Info that's why i directly used that
     setComponentInLocalStorage(companyName as string, modalData, html)
     notifications.show({
       id: 'load-data',
@@ -40,7 +41,7 @@ export default function NewDesign(): JSX.Element {
     })
   }
 
-  const handleModalSubmit = (values: defaultFormValue) => {
+  const handleModalSubmit = (values: defaultFormValue): void => {
     close() // to close opened modal
     setModalData({
       title: values.title,
@@ -64,7 +65,7 @@ export default function NewDesign(): JSX.Element {
   }
 
   return (
-    <Modal opened={opened} onClose={() => navigate(-1)} title="Design" centered>
+    <Modal opened={opened} onClose={(): void => navigate(-1)} title="Design" centered>
       <form onSubmit={form.onSubmit(handleModalSubmit)}>
         <TextInput
           placeholder="Design Name"

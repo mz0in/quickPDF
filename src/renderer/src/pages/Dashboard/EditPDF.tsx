@@ -38,9 +38,9 @@ export default function EditPDF(): JSX.Element {
   const { companyName, realDate } = useParams()
   const navigate = useNavigate()
 
-  const getPaperCode = async () => {
-    //@ts-ignore
-    let codeOfPaper: CodeOfPaperProps = await window.api.getPapersWithDate(companyName, realDate)
+  const getPaperCode = async (): Promise<void> => {
+    //@ts-ignore api is defined in the preload of electronjs
+    const codeOfPaper: CodeOfPaperProps = await window.api.getPapersWithDate(companyName, realDate)
     if (codeOfPaper === undefined) {
       notifications.show({
         id: 'err-loading',
@@ -60,12 +60,12 @@ export default function EditPDF(): JSX.Element {
     getPaperCode()
   }, [])
 
-   /**
+  /**
    * middleware for saving function in utils
    * @param htmlStrings contain html version of gjs code
    * @param gjsCode gjs json code for importing in future
    */
-  const handleSave = (htmlStrings: htmlObject[], gjsCode: any) => {
+  const handleSave = (htmlStrings: htmlObject[], gjsCode: any): void => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -84,7 +84,7 @@ export default function EditPDF(): JSX.Element {
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
     }
 
-    let CodeOfPaper = {
+    const CodeOfPaper = {
       code: gjsCode,
       info: paperData?.info
     }

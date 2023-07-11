@@ -1,18 +1,14 @@
 import { useEffect, useRef } from 'react'
-// @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
 import basicCustomPlugin from '../plugins/blocksPlugin'
 import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
-// import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
 import localBlocks from '../plugins/localBlocks'
-// @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
-// @ts-ignore
 import grapesjsPageManagerPlugin from '../plugins/pageManger'
 import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
@@ -38,7 +34,7 @@ export function PaperEditor({
   canvasSize,
   gjsCode,
   companyName
-}: GrapesJSProps) {
+}: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -77,7 +73,8 @@ export function PaperEditor({
         [localBlocks]: {
           companyName: companyName
         },
-        // @ts-ignore
+        // @ts-ignore gjsImage plugin is a JS plugin so can't support TS. but its working i checked
+        // every thing
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
@@ -88,14 +85,13 @@ export function PaperEditor({
       }
     })
 
-    editor.loadProjectData(gjsCode);
+    editor.loadProjectData(gjsCode)
     editor.on('component:selected', () => {
-      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn?.set('active', 1);
-    });
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm')
+      openSmBtn?.set('active', 1)
+    })
 
     setTimeout(() => {
-      // @ts-ignore
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
@@ -132,9 +128,9 @@ export function PaperEditor({
       editor.Commands.add('save', {
         run: () => {
           // saveing all pages code into array
-          let allPages = editor.Pages.getAll()
+          const allPages = editor.Pages.getAll()
           // htmlStrings contains html,css of all the pages in array format
-          let htmlStrings: htmlObject[] = allPages.map((page) => {
+          const htmlStrings: htmlObject[] = allPages.map((page) => {
             const component = page.getMainComponent()
             const body = editor.getHtml({ component })
             const css = editor.getCss({ component })
@@ -145,7 +141,7 @@ export function PaperEditor({
             }
           }) as htmlObject[]
 
-          const gjsCode = editor.getProjectData();
+          const gjsCode = editor.getProjectData()
 
           onSave(htmlStrings, gjsCode)
         }
@@ -193,7 +189,7 @@ export function PaperEditor({
     // block manager open by default
     editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
 
-    // @ts-ignore
+    // @ts-ignore settings editor in the window object its only for development purpose
     window.editor = editor
     const style = document.createElement('style')
     style.innerHTML = `

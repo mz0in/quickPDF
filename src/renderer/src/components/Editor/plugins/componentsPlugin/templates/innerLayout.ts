@@ -32,7 +32,7 @@ const resizerRight: Record<string, any> = {
 
 const rowAttr = {
   // class: clsRow,
-  'data-gjs-droppable': "false",
+  'data-gjs-droppable': 'false',
   'data-gjs-resizable': resizerBtm,
   'data-gjs-name': 'Row'
 }
@@ -46,14 +46,14 @@ const colAttr: Record<string, any> = {
   'data-gjs-stylable-require': 'flex-basis'
 }
 
-const attrsToString = (attrs: Record<string, any>) => {
+const attrsToString = (attrs: Record<string, any>): string => {
   const result = []
 
-  for (let key in attrs) {
+  for (const key in attrs) {
     let value = attrs[key]
     const toParse = value instanceof Array || value instanceof Object
     value = toParse ? JSON.stringify(value) : value
-    // @ts-ignore
+    // @ts-ignore nothing is sett to never its just a problem wih tsconfig
     result.push(`${key}=${toParse ? `'${value}'` : `'${value}'`}`)
   }
 

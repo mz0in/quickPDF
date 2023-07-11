@@ -20,8 +20,8 @@ interface paperType {
   realDate: string
 }
 
-export default function Company() {
-  let { companyName } = useParams()
+export default function Company(): JSX.Element {
+  const { companyName } = useParams()
   const [localLayouts, setLocalLayouts] = useState({})
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [newspapers, setNewspapers] = useState<paperType[]>([
@@ -32,10 +32,10 @@ export default function Company() {
   ])
 
   // getting data from backend
-  const getAllPapers = async () => {
-    //@ts-ignore
-    let papers = await window.api.getPapers(companyName)
-    let data: paperType[] = papers.map((realDate: string) => {
+  const getAllPapers = async (): Promise<void> => {
+    //@ts-ignore api defined by preload of electronjs
+    const papers = await window.api.getPapers(companyName)
+    const data: paperType[] = papers.map((realDate: string) => {
       return {
         date: convertToDate(realDate),
         realDate
@@ -44,15 +44,16 @@ export default function Company() {
 
     setNewspapers(
       data.sort((a, b) => {
-        //@ts-ignore
+        //@ts-ignore arthmatically its true in giving the expected output
+        // https://stackoverflow.com/a/10124184/14078264
         return new Date(b.date) - new Date(a.date)
       })
     )
   }
 
   //get layout components from localStorage
-  const getAllLayout = () => {
-    let localData = localStorage.getItem(companyName as string)
+  const getAllLayout = (): void => {
+    const localData = localStorage.getItem(companyName as string)
     if (localData != null) {
       setLocalLayouts(JSON.parse(localData))
     }
@@ -64,14 +65,14 @@ export default function Company() {
     return paperDate.toDateString() === selectedDate.toDateString()
   })
 
-  const loadAllData = async () => {
+  const loadAllData = async (): Promise<void> => {
     // loading layouts from firebase
     const docRef = doc(fireStore, 'papers', companyName as string)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.data()?.layouts != undefined) {
       console.log('running because its not undefind')
-      let layouts = docSnap.data()?.layouts
+      const layouts = docSnap.data()?.layouts
       localStorage.setItem(companyName as string, JSON.stringify(layouts))
       setLocalLayouts(layouts)
     } else {

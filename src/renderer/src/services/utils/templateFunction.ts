@@ -8,7 +8,11 @@ interface Info {
   width: number
 }
 
-async function setComponentInLocalStorage(companyName: string, info: Info, htmlCode: htmlObject[]) {
+async function setComponentInLocalStorage(
+  companyName: string,
+  info: Info,
+  htmlCode: htmlObject[]
+): Promise<void> {
   let companyLocalComponent = {}
   const layoutCode = {
     info: {
@@ -21,7 +25,7 @@ async function setComponentInLocalStorage(companyName: string, info: Info, htmlC
    * data strature
    * companyName: htmlObject;
    */
-  let localData = localStorage.getItem(companyName)
+  const localData = localStorage.getItem(companyName)
   if (localData != null) {
     companyLocalComponent = JSON.parse(localData)
   }

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-// @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
@@ -8,10 +7,7 @@ import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
-// @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
-// @ts-ignore
-import grapesjsPageManagerPlugin from '../plugins/pageManger'
 import '@renderer/styles/designer.css'
 import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
 import type { htmlObject } from '..'
@@ -27,7 +23,13 @@ interface GrapesJSProps {
   componentName: string
 }
 
-export function TemplateCreator({ id, config, onSave, canvasSize, componentName }: GrapesJSProps) {
+export function TemplateCreator({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  componentName
+}: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -57,7 +59,8 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
         customRtePlugin
       ],
       pluginsOpts: {
-        // @ts-ignore
+        // @ts-ignore gjsImage plugin is a JS plugin so can't support TS. but its working i checked
+        // every thing
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
@@ -69,12 +72,11 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
     })
 
     editor.on('component:selected', () => {
-      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn.set('active', 1);
-    });
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm')
+      openSmBtn?.set('active', 1)
+    })
 
     setTimeout(() => {
-      // @ts-ignore
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
@@ -101,9 +103,9 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
       editor.Commands.add('save', {
         run: () => {
           // saveing all pages code into array
-          let allPages = editor.Pages.getAll()
+          const allPages = editor.Pages.getAll()
           // htmlStrings contains html,css of all the pages in array format
-          let htmlStrings: htmlObject[] = allPages.map((page) => {
+          const htmlStrings: htmlObject[] = allPages.map((page) => {
             const component = page.getMainComponent()
             const body = editor.getHtml({ component })
             const css = editor.getCss({ component })
@@ -161,9 +163,9 @@ export function TemplateCreator({ id, config, onSave, canvasSize, componentName 
     })
 
     // block manager open by default
-    editor.Panels.getButton('views', 'open-blocks').set('active', true)
+    editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
 
-    // @ts-ignore
+    // @ts-ignore settings editor in window only for development purpose
     window.editor = editor
     const style = document.createElement('style')
     style.innerHTML = `

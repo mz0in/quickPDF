@@ -38,10 +38,10 @@ export default function UserAdd(): JSX.Element {
     }
   })
 
-  const getAllPapers = async () => {
+  const getAllPapers = async (): Promise<void> => {
     const q = query(collection(fireStore, 'papers'))
     const querySnapshot = await getDocs(q)
-    let allPapers: string[] = []
+    const allPapers: string[] = []
     querySnapshot.forEach((doc) => {
       allPapers.push(doc.id)
     })
@@ -49,15 +49,15 @@ export default function UserAdd(): JSX.Element {
     setPapers(allPapers)
   }
 
-  const handleFileUpload = (file: File) => {
+  const handleFileUpload = (file: File): void => {
     const reader = new FileReader()
-    reader.onloadend = () => {
+    reader.onloadend = (): void => {
       setImage(reader.result as string)
     }
     reader.readAsDataURL(file)
   }
 
-  const save = async (values: typeof form.values) => {
+  const save = async (values: typeof form.values): Promise<void> => {
     // saving user
     notifications.show({
       id: 'load-data',

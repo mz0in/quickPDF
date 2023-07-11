@@ -1,5 +1,5 @@
 const commonBlockProps = {
-  category: "components",
+  category: 'components',
   select: true
 }
 
@@ -31,7 +31,7 @@ const blocks = [
   },
   {
     ...commonBlockProps,
-    label: "Section",
+    label: 'Section',
     content: {
       type: 'qsection'
     }

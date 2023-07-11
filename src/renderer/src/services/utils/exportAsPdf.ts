@@ -1,4 +1,4 @@
-function createAndDownloadBlobFile(body, info) {
+function createAndDownloadBlobFile(body, info): void {
   const blob = new Blob([body])
   const fileName = `${info.companyName}-${info.date}.pdf`
   const link = document.createElement('a')
@@ -15,13 +15,8 @@ function createAndDownloadBlobFile(body, info) {
   }
 }
 
-export async function saveAsPDF(
-  allCss: string,
-  allHtml: string,
-  info,
-  codeOfPaper
-) {
-  let html = `<!DOCTYPE html>
+export async function saveAsPDF(allCss: string, allHtml: string, info, codeOfPaper): Promise<void> {
+  const html = `<!DOCTYPE html>
     <html lang="Hi">
     <head>
         <meta charset="UTF-8">
@@ -36,8 +31,8 @@ export async function saveAsPDF(
 
   console.log(info, codeOfPaper)
 
-  // @ts-ignore
-  let generatedPDFBuffer = await window.api.save(info, html, codeOfPaper)
+  // @ts-ignore api is defiend at preload.ts of electronjs
+  const generatedPDFBuffer = await window.api.save(info, html, codeOfPaper)
   console.log(generatedPDFBuffer)
   createAndDownloadBlobFile(generatedPDFBuffer, info)
 }

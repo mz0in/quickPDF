@@ -5,11 +5,11 @@ export async function generatePDF(
   width: number,
   height: number
 ): Promise<Buffer | undefined> {
-  let printableWindow = new BrowserWindow({ show: false, webPreferences: { webSecurity: false } })
+  const printableWindow = new BrowserWindow({ show: false, webPreferences: { webSecurity: false } })
   printableWindow.loadURL('data:text/html;base64,' + Buffer.from(html).toString('base64'))
-  let customPageSize = { width: width, height: height }
+  const customPageSize = { width: width, height: height }
   console.log(customPageSize)
-  let option = {
+  const option = {
     landscape: false,
     printBackground: true,
     pageSize: customPageSize,

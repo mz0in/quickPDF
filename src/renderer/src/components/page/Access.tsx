@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
   }
 }))
 
-export default function NotFoundTitle() {
+export default function NotFoundTitle(): JSX.Element {
   const { classes } = useStyles()
   const navigate = useNavigate()
 
@@ -52,7 +52,7 @@ export default function NotFoundTitle() {
         been moved to another URL.
       </Text>
       <Group position="center">
-        <Button variant="subtle" size="md" onClick={() => navigate('/')}>
+        <Button variant="subtle" size="md" onClick={(): void => navigate('/')}>
           Take me back to home page
         </Button>
       </Group>

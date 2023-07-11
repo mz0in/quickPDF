@@ -14,7 +14,7 @@ class Store {
     this.userDataPath = app.getPath('userData')
   }
 
-  get(storeName: String, key: string): any {
+  get(storeName: string, key: string): any {
     const filePath = path.join(this.userDataPath, storeName + '.json')
     try {
       this.data = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }))
@@ -68,7 +68,7 @@ class Store {
     fs.writeFileSync(jsonFilePath, JSON.stringify(html))
   }
 
-  getPDF(companyName: string) {
+  getPDF(companyName: string): any[] {
     const directoryPath = path.join(this.userDataPath, 'companies', companyName)
     const filePath = path.join(directoryPath, `${companyName}.json`)
     let data = { papers: [] }
@@ -83,7 +83,7 @@ class Store {
     return data.papers
   }
 
-  getPDFOnDate(companyName: string, date: string) {
+  getPDFOnDate(companyName: string, date: string): any {
     const directoryPath = path.join(this.userDataPath, 'companies', `${companyName}`)
     const filePath = path.join(directoryPath, `${date}.json`)
     let data = {}

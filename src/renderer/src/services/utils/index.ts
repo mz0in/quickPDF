@@ -6,7 +6,7 @@ import { setComponentInLocalStorage } from './templateFunction'
  * @param text: string
  * @returns Anshu Meena -> anshu-meena
  */
-export function spaceToDash(text: string) {
+export function spaceToDash(text: string): string {
   return text.toLowerCase().replaceAll(' ', '-')
 }
 
@@ -15,7 +15,7 @@ export function spaceToDash(text: string) {
  * @param text: string
  * @returns anshu-meena -> Anshu meena
  */
-export function DashToSpace(text: string) {
+export function DashToSpace(text: string): string {
   return text.replaceAll('-', ' ')
 }
 
@@ -25,7 +25,7 @@ export function DashToSpace(text: string) {
  * @param imageName: string
  * return https url form that {id}.jepg
  */
-export function getHttpImage(id: string) {
+export function getHttpImage(id: string): string {
   return `https://firebasestorage.googleapis.com/v0/b/quickpdf-codenanshu.appspot.com/o/${encodeURIComponent(
     `${id}`
   )}?alt=media`
@@ -72,7 +72,7 @@ const monthChecker = Intl.NumberFormat('en-US', {
  * @param inch: date object
  * @returns date: string
  */
-export const dateToValue = (date: Date) => {
+export const dateToValue = (date: Date): string => {
   console.log(date)
   return `${date.getDate()}-${monthChecker.format(date.getMonth() + 1)}-${date.getUTCFullYear()}`
 }

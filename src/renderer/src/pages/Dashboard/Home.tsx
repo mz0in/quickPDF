@@ -9,13 +9,13 @@ import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 import ReloadButton from '@renderer/components/Button/ReloadButton'
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const [allCompany, setAllCompany] = useState<any>()
   const [userInput, setUserInput] = useState('')
   const [isAdmin] = useAdminChecker()
   const [dataFetched, setDataFetched] = useState(false) // New state variable
 
-  const syncAllCompany = async () => {
+  const syncAllCompany = async (): Promise<void> => {
     try {
       // loading all companies
       console.log('fetching papers')
@@ -31,15 +31,15 @@ export default function Home() {
         address: doc.data().address
       }))
       console.log('fatched papers', companies)
-      let localData = localStorage.getItem('user') as string
-      let localUserPaper = JSON.parse(localData)
+      const localData = localStorage.getItem('user') as string
+      const localUserPaper = JSON.parse(localData)
       console.log('localUserPaper', localUserPaper)
       if (localUserPaper != undefined) {
         console.log('working')
-        let usersProject = companies.filter((item) => localUserPaper.papers.includes(item.id))
+        const usersProject = companies.filter((item) => localUserPaper.papers.includes(item.id))
         console.log('worked', usersProject)
         setAllCompany(usersProject)
-        // @ts-ignore
+        // @ts-ignore db is defined n preload of electronjs
         await window?.DB?.setData('company', 'companies', usersProject)
         setDataFetched(true)
       }
@@ -48,10 +48,10 @@ export default function Home() {
     }
   }
 
-  const getDataFromIdbStorage = async () => {
+  const getDataFromIdbStorage = async (): Promise<void> => {
     console.log('get data')
-    //@ts-ignore
-    let data: any = await window?.DB?.getData('company', 'companies')
+    // @ts-ignore db is defined n preload of electronjs
+    const data: any = await window?.DB?.getData('company', 'companies')
     if (data === undefined) {
       syncAllCompany()
     }
@@ -92,7 +92,7 @@ export default function Home() {
             rightSection={
               <IconFolderSearch size="1rem" style={{ display: 'block', opacity: 0.5 }} />
             }
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={(e): any => setUserInput(e.target.value)}
           />
           <ReloadButton onClickFunction={syncAllCompany} />
         </Group>

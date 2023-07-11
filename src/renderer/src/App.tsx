@@ -7,7 +7,7 @@ export default function App(): JSX.Element {
   const [isLogin, setIsLogin] = useState<boolean | string>(false)
 
   useEffect(() => {
-    let userFromLocalStorage = localStorage.getItem('user')
+    const userFromLocalStorage = localStorage.getItem('user')
     if (userFromLocalStorage !== null) {
       setIsLogin(true)
     }

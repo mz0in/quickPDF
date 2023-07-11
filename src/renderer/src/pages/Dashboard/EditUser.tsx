@@ -35,10 +35,10 @@ export default function UserAdd(): JSX.Element {
   })
 
   // getting all papers
-  const getAllPapers = async () => {
+  const getAllPapers = async (): Promise<void> => {
     const q = query(collection(fireStore, 'papers'))
     const querySnapshot = await getDocs(q)
-    let allPapers: string[] = []
+    const allPapers: string[] = []
     querySnapshot.forEach((doc) => {
       allPapers.push(doc.id)
     })
@@ -47,7 +47,7 @@ export default function UserAdd(): JSX.Element {
   }
 
   // searching for user
-  const searchFromNumber = async () => {
+  const searchFromNumber = async (): Promise<void> => {
     // Create a reference to the cities collection
     console.log('runned')
     const userRef = collection(fireStore, 'users')
@@ -70,7 +70,7 @@ export default function UserAdd(): JSX.Element {
     })
   }
 
-  const save = (values: typeof form.values) => {
+  const save = (values: typeof form.values): void => {
     notifications.show({
       id: 'load-data',
       loading: true,
@@ -88,7 +88,7 @@ export default function UserAdd(): JSX.Element {
     }).then(() => {
       //5. updating localData if changing for currentUser
       if (auth.currentUser?.uid === values.uid) {
-        let currentUserData = JSON.parse(localStorage.getItem('user') as string)
+        const currentUserData = JSON.parse(localStorage.getItem('user') as string)
         currentUserData.papers = values.papers
         localStorage.setItem('user', JSON.stringify(currentUserData))
       }

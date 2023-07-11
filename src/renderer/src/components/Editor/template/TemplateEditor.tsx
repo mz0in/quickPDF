@@ -1,18 +1,13 @@
 import { useEffect, useRef } from 'react'
-// @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
 import basicCustomPlugin from '../plugins/blocksPlugin'
 import zoomPlugin from '../plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
-// import basicCustomPlugin from './plugins/blocksPlugin'
 import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
-// @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
-// @ts-ignore
-import grapesjsPageManagerPlugin from '../plugins/pageManger'
 import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
 import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
@@ -29,7 +24,13 @@ interface GrapesJSProps {
   paperCode: htmlObject
 }
 
-export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: GrapesJSProps) {
+export function TemplateEditor({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  paperCode
+}: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -63,18 +64,13 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
         basicCustomPlugin,
         customComponents,
         grapesjsFontPlugin,
-        grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
         zoomPlugin,
         gjsUserBlock,
         customRtePlugin
       ],
       pluginsOpts: {
-        [grapesjsPageManagerPlugin]: {
-          width: `${canvasSize?.width}in`, // new page width
-          height: `${canvasSize?.height}in` // new page height
-        },
-        // @ts-ignore
+        // @ts-ignore it's a JS plugin can't support TS
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
@@ -86,12 +82,11 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
     })
 
     editor.on('component:selected', () => {
-      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn.set('active', 1);
-    });
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm')
+      openSmBtn?.set('active', 1)
+    })
 
     setTimeout(() => {
-      // @ts-ignore
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
@@ -128,9 +123,9 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
       editor.Commands.add('save', {
         run: () => {
           // saveing all pages code into array
-          let allPages = editor.Pages.getAll()
+          const allPages = editor.Pages.getAll()
           // htmlStrings contains html,css of all the pages in array format
-          let htmlStrings: htmlObject[] = allPages.map((page) => {
+          const htmlStrings: htmlObject[] = allPages.map((page) => {
             const component = page.getMainComponent()
             const body = editor.getHtml({ component })
             const css = editor.getCss({ component })
@@ -185,9 +180,9 @@ export function TemplateEditor({ id, config, onSave, canvasSize, paperCode }: Gr
     })
 
     // block manager open by default
-    editor.Panels.getButton('views', 'open-blocks').set('active', true)
+    editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
 
-    // @ts-ignore
+    // @ts-ignore setting editor in window only for development
     window.editor = editor
     const style = document.createElement('style')
     style.innerHTML = `

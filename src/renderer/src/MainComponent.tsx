@@ -8,14 +8,14 @@ import App from './App'
 import { Notifications } from '@mantine/notifications'
 import { useLocalStorage } from '@mantine/hooks'
 
-export default function MainComponent() {
+export default function MainComponent(): JSX.Element {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',
     getInitialValueInEffect: true
   })
 
-  const toggleColorScheme = (value?: ColorScheme) =>
+  const toggleColorScheme = (value?: ColorScheme): void =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
 
   const theme: MantineThemeOverride = {

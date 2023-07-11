@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-// @ts-ignore
 import grapesjs from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
@@ -13,9 +12,7 @@ import customComponents from '../plugins/componentsPlugin'
 import customRtePlugin from '../plugins/customRte'
 import localBlocks from '../plugins/localBlocks'
 // import './plugins/tinymceEditor.js'
-// @ts-ignore
 import grapesjsFontPlugin from '../plugins/grapesjsFonts'
-// @ts-ignore
 import grapesjsPageManagerPlugin from '../plugins/pageManger'
 import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
@@ -33,7 +30,13 @@ interface GrapesJSProps {
   companyName: string
 }
 
-export function PaperCreator({ id, config, onSave, canvasSize, companyName }: GrapesJSProps) {
+export function PaperCreator({
+  id,
+  config,
+  onSave,
+  canvasSize,
+  companyName
+}: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
       ...config,
       protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
       cssComposer: {
-        stylePrefix: "qpdf-",
+        stylePrefix: 'qpdf-',
         rules: "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
       },
       deviceManager: {
@@ -87,7 +90,8 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
         [localBlocks]: {
           companyName: companyName
         },
-        // @ts-ignore
+        // @ts-ignore gjsImage plugin is a JS plugin so can't support TS. but its working i checked
+        // every thing
         [gjsImageEditorPlugin]: {
           config: {
             includeUI: {
@@ -99,12 +103,11 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     })
 
     editor.on('component:selected', () => {
-      const openSmBtn = editor.Panels.getButton('views', 'open-sm');
-      openSmBtn?.set('active', 1);
-    });
+      const openSmBtn = editor.Panels.getButton('views', 'open-sm')
+      openSmBtn?.set('active', 1)
+    })
 
     setTimeout(() => {
-      // @ts-ignore
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
       } catch (e) {
@@ -149,9 +152,9 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
       editor.Commands.add('save', {
         run: () => {
           // saveing all pages code into array
-          let allPages = editor.Pages.getAll()
+          const allPages = editor.Pages.getAll()
           // htmlStrings contains html,css of all the pages in array format
-          let htmlStrings: htmlObject[] = allPages.map((page) => {
+          const htmlStrings: htmlObject[] = allPages.map((page) => {
             const component = page.getMainComponent()
             const body = editor.getHtml({ component })
             const css = editor.getCss({ component })
@@ -162,9 +165,9 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
             }
           }) as htmlObject[]
 
-          const gjsCode = editor.getProjectData();
+          const gjsCode = editor.getProjectData()
 
-          onSave(htmlStrings, gjsCode);
+          onSave(htmlStrings, gjsCode)
         }
       })
     }
@@ -209,10 +212,10 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
 
     // block manager open by default
     editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
-    let zoom = editor.Canvas.getZoom()
+    const zoom = editor.Canvas.getZoom()
     editor.Canvas.setZoom(`${zoom - 5}`)
 
-    // @ts-ignore
+    // @ts-ignore settings editor in the window object its only for development purpose
     window.editor = editor
 
     const style = document.createElement('style')
@@ -233,7 +236,5 @@ export function PaperCreator({ id, config, onSave, canvasSize, companyName }: Gr
     }
   }, [id, config, onSave])
 
-  return (
-    <div ref={editorRef} id={id}/>
-    )
+  return <div ref={editorRef} id={id} />
 }
