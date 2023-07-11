@@ -140,14 +140,6 @@ export function PaperCreator({
       togglable: false
     })
 
-    editor.Panels.addButton('options', {
-      id: 'open-code',
-      className: 'fa fa-code',
-      command: 'open-code',
-      attributes: { title: 'Code editor' },
-      category: 'Custom Category' // add a new category for the custom icon
-    })
-
     if (onSave) {
       editor.Commands.add('save', {
         run: () => {
