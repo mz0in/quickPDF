@@ -12,7 +12,7 @@ export async function generatePDF(
   const option = {
     landscape: false,
     printBackground: true,
-    pageSize: customPageSize,
+    // pageSize: customPageSize,
     preferCSSPageSize: true
   }
   let pdfBuffer: Buffer | undefined

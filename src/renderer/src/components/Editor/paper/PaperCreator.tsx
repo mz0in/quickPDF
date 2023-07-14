@@ -43,7 +43,7 @@ export function PaperCreator({
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: `@page {margin: 15px; height: ${canvasSize?.height}in; width: ${canvasSize?.width}in}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
+      protectedCss: `@page {margin: 15px; size: ${canvasSize?.width}cm ${canvasSize?.height}cm;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
       cssComposer: {
         stylePrefix: 'qpdf-',
         rules: "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
@@ -53,8 +53,8 @@ export function PaperCreator({
           {
             id: 'paper',
             name: 'paper',
-            width: `${canvasSize?.width}in`,
-            height: `${canvasSize?.height - 1}in`
+            width: `${canvasSize?.width}cm`,
+            height: `${canvasSize?.height}cm`
           }
         ]
       },

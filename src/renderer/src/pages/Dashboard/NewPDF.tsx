@@ -26,8 +26,8 @@ export default function NewPage(): JSX.Element {
   const form = useForm<defaultFormValue>({
     initialValues: {
       date: new Date(),
-      height: 21,
-      width: 15
+      height: 52,
+      width: 32
     }
   })
 
@@ -80,8 +80,8 @@ export default function NewPage(): JSX.Element {
     close() // to close opened modal
     setModalData({
       date: dateToValue(values.date as Date),
-      height: values.height,
-      width: values.width
+      height: values.height + 2,
+      width: values.width + 2
     })
   }
 
