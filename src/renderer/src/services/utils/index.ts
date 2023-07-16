@@ -1,5 +1,7 @@
 import { saveAsPDF } from './exportAsPdf'
 import { setComponentInLocalStorage } from './templateFunction'
+import { fontNames } from './fonts'
+import { convertUnicodeToChanakya } from './convertUnicodeToChanakya'
 
 /**
  * function to convert Text with sapce to text with dashes
@@ -103,4 +105,44 @@ export function capitalizeFirstLetters(str: string): string {
   return capitalizedWords.join(' ')
 }
 
-export { saveAsPDF, setComponentInLocalStorage }
+/**
+ * listen to paste event in the DOM and take the text from clipboard and convert that text
+ * into chanakya encoding and also set that encoded text to the current active input boxs
+ * @param event paste event
+ */
+const handlePasteForChanakyaConvert = async (
+  event: ClipboardEvent,
+  document: Document
+): Promise<void> => {
+  event.preventDefault() // Prevent default paste behavior
+  console.log('pasting')
+
+  try {
+    const plainText = await navigator.clipboard.readText()
+    console.log(plainText)
+    const chanakyaText = convertUnicodeToChanakya(plainText)
+    console.log(chanakyaText)
+
+    const activeElement = document.activeElement as HTMLInputElement | HTMLTextAreaElement
+    // if (activeElement.nodeName === 'INPUT' || activeElement.nodeName === 'TEXTAREA') {
+      const start = activeElement.selectionStart as number
+      const end = activeElement.selectionEnd as number
+      const value = activeElement.innerText as string
+
+      const newValue = value.substring(0, start) + chanakyaText + value.substring(end)
+      activeElement.innerText = newValue
+
+      activeElement.selectionStart = activeElement.selectionEnd = start + chanakyaText.length
+    // }
+  } catch (error) {
+    console.error('Failed to read clipboard text:', error)
+  }
+}
+
+export {
+  saveAsPDF,
+  setComponentInLocalStorage,
+  fontNames,
+  convertUnicodeToChanakya,
+  handlePasteForChanakyaConvert
+}

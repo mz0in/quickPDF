@@ -45,6 +45,6 @@ export function save(editor: Editor, globalFont: string, headingFont: string): v
 
   // set heading font from h1-h6
   ;['h1', 'h2', 'h3', 'h4'].forEach((heading) => {
-    css.setRule(heading, { 'font-family': headingFont })
+    css.setRule(heading, { 'font-family': `${headingFont} !important` })
   })
 }

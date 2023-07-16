@@ -18,6 +18,7 @@ import gjsUserBlock from '../plugins/usersBlock'
 import '@renderer/styles/designer.css'
 import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
 import type { htmlObject } from '..'
+import { handlePasteForChanakyaConvert } from '@renderer/services/utils'
 
 interface GrapesJSProps {
   id: string
@@ -220,6 +221,10 @@ export function PaperCreator({
       }
     `
     document.head.appendChild(style)
+    // Add the event listener for handling converting in chanakya for onPaste
+    editor.Canvas.getDocument().addEventListener('paste', (event): void => {
+      handlePasteForChanakyaConvert(event, editor.Canvas.getDocument())
+    })
 
     return () => {
       editor.destroy()

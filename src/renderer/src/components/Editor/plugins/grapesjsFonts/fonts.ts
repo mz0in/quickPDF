@@ -1,5 +1,14 @@
 import { Editor } from 'grapesjs'
 import { styleUpdater, save as fontSave } from './function'
+import { fontNames } from '@renderer/services/utils'
+
+function fontsToHtml(): string {
+  const fontsHtmlArr = fontNames.map((font) => {
+    return `<option value="'${font}'">${font}</option>`
+  })
+
+  return fontsHtmlArr.toString()
+}
 
 export function fontPluginHandler(editor: Editor): void {
   const FontsModal = editor.Modal
@@ -9,18 +18,14 @@ export function fontPluginHandler(editor: Editor): void {
   <div class="form-group">
     <label for="global-font-select">Global Font:</label>
     <select id="global-font-select" class="font-select">
-      <option value="'roboto'">Roboto</option>
-      <option value="'chanakya'">Chanakya</option>
-      <option value="'sf-mono'">SF Mono</option>
+      ${fontsToHtml()}
     </select>
   </div>
 
   <div class="form-group">
     <label for="heading-font-select">Heading Font:</label>
     <select id="heading-font-select" class="font-select">
-      <option value="'roboto'">Roboto</option>
-      <option value="'chanakya'">Chanakya</option>
-      <option value="'sf-mono'">SF Mono</option>
+      ${fontsToHtml()}
     </select>
   </div>
 </div>  
