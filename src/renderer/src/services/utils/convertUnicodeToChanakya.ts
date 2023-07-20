@@ -144,5 +144,5 @@ export function convert_Unicode_to_Chanakya(unicodeText: string): string {
     //****************************************************************************************
     //  processed_text = processed_text.replace( /mangal/g , "Chanakya" ) ;
   }
-  return processed_text //converted text
+  return processed_text
 } // end of Convert_Unicode_to_Chanakya function
