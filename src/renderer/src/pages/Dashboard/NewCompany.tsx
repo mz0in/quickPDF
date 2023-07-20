@@ -34,7 +34,7 @@ interface FormValues {
 export default function NewCompany(): JSX.Element {
   const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
-  const [users, setUsers] = useState([{ value: 'daily', label: 'Daily' }])
+  const [users, setUsers] = useState<{ value: string; label: string }[]>([{ value: '', label: '' }])
   const navigate = useNavigate()
 
   const form = useForm<FormValues>({
@@ -49,23 +49,24 @@ export default function NewCompany(): JSX.Element {
   })
 
   const getAllUsers = async (): Promise<void> => {
-    const docSnap = await getDoc(doc(fireStore, 'company', 'allUsers'))
-    if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data().users)
-      const updatedData = docSnap.data().users.map((user) => {
-        return {
+    try {
+      const docSnap = await getDoc(doc(fireStore, 'company', 'allUsers'))
+      if (docSnap.exists()) {
+        console.log('Document data:', docSnap.data()?.users)
+        const updatedData = docSnap.data()?.users.map((user: { uid: string; name: string }) => ({
           value: user.uid,
           label: user.name
-        }
-      })
-      setUsers(updatedData)
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log('No such document!')
+        }))
+        setUsers(updatedData)
+      } else {
+        console.log('No such document!')
+      }
+    } catch (error) {
+      console.error('Failed to fetch users:', error)
     }
   }
 
-  // fetrching all users
+  // Fetching all users
   useEffect(() => {
     getAllUsers()
   }, [])
@@ -78,25 +79,26 @@ export default function NewCompany(): JSX.Element {
     reader.readAsDataURL(file)
   }
 
-  const save = async (values: typeof form.values): Promise<void> => {
+  const save = async (values: FormValues): Promise<void> => {
     try {
       notifications.show({
         id: 'load-data',
         loading: true,
         title: 'Saving Company',
-        message: 'Data is saving on the server please wait.',
+        message: 'Data is saving on the server, please wait.',
         autoClose: false,
         withCloseButton: false
       })
+
       const nameInSpaceToDash = spaceToDash(values.name)
 
-      // save the image with company-name
+      // Save the image with company-name
       const storageRef = ref(storage, `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`)
 
-      //1. uploading image
+      // 1. Uploading image
       await uploadString(storageRef, image, 'data_url')
 
-      //2. saving paper
+      // 2. Saving paper
       await setDoc(doc(fireStore, `papers`, `${nameInSpaceToDash}`), {
         name: values.name,
         type: values.type,
@@ -106,7 +108,7 @@ export default function NewCompany(): JSX.Element {
         logo: `images/${nameInSpaceToDash}/${nameInSpaceToDash}.jpeg`
       })
 
-      //3. assing paper to user
+      // 3. Assign paper to user
       await updateDoc(doc(fireStore, 'users', values.creator), {
         papers: arrayUnion(nameInSpaceToDash)
       })
@@ -115,20 +117,20 @@ export default function NewCompany(): JSX.Element {
         id: 'load-data',
         color: 'teal',
         title: 'Saved',
-        message: 'data now saved on the server.',
+        message: 'Data now saved on the server.',
         icon: <IconCheck size="1rem" />,
         autoClose: 2000
       })
 
       navigate('/')
-      console.log('saved')
+      console.log('Saved')
     } catch (error: any) {
       const errorCode = error.code
       const errorMessage = error.message
       notifications.update({
         id: 'load-data',
         color: 'red',
-        title: 'Error ' + errorCode,
+        title: `Error ${errorCode}`,
         message: errorMessage,
         icon: <IconCross size="1rem" />,
         autoClose: 2000
@@ -144,7 +146,7 @@ export default function NewCompany(): JSX.Element {
     return (
       <Layout size="sm" isBack>
         <FormLayout title="New Company!">
-          <form onSubmit={form.onSubmit((values) => save(values))}>
+          <form onSubmit={(): any => form.onSubmit((values) => save(values))}>
             <Center>
               <Avatar size={100} radius="lg" src={image} />
             </Center>
@@ -153,6 +155,7 @@ export default function NewCompany(): JSX.Element {
                 placeholder="Name"
                 label="Full name"
                 withAsterisk
+                required
                 {...form.getInputProps('name')}
               />
               <FileInput
@@ -167,14 +170,16 @@ export default function NewCompany(): JSX.Element {
                 data={[
                   { value: 'daily', label: 'Daily' },
                   { value: 'weekly', label: 'Weekly' },
-                  { value: 'monthly', label: 'monthly' }
+                  { value: 'monthly', label: 'Monthly' }
                 ]}
                 {...form.getInputProps('type')}
+                required
               />
               <TextInput
                 placeholder="Owner"
                 label="Owner name"
                 withAsterisk
+                required
                 {...form.getInputProps('owner')}
               />
               <NumberInput
@@ -182,12 +187,14 @@ export default function NewCompany(): JSX.Element {
                 label="Number"
                 withAsterisk
                 hideControls
+                required
                 {...form.getInputProps('mobileNumber')}
               />
               <TextInput
                 placeholder="Address"
                 label="Full Address"
                 withAsterisk
+                required
                 {...form.getInputProps('address')}
               />
               <Select
@@ -195,6 +202,7 @@ export default function NewCompany(): JSX.Element {
                 placeholder="Pick one"
                 label="Creator"
                 withAsterisk
+                required
                 {...form.getInputProps('creator')}
                 maxDropdownHeight={160}
               />

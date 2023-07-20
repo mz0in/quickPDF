@@ -1,6 +1,17 @@
 /* eslint-disable prettier/prettier */
+/**
+ * Converts Unicode text to Chanakya encoding.
+ *
+ * @param text The Unicode text to be converted to Chanakya encoding.
+ * @returns The text converted to Chanakya encoding.
+ */
 export function convertUnicodeToChanakya(text: string): string {
-    const unicodeSymbols = [
+  /**
+   * An array containing Unicode symbols to be replaced.
+   * Add the Unicode symbols that need to be converted to Chanakya encoding.
+   * Each element in this array corresponds to the Unicode symbol at the same index in `chanakyaSymbols`.
+   */
+    const unicodeSymbols: string[] = [
       '‘', '’', '“', '”', 'ं', 'ऑ',
       'क्ष्', 'क्ष', 'त्र', 'ज्ञ', '् ',
       'क़', 'ख़', 'ग़', 'ज़्', 'ज़', 'ड़', 'ढ़', 'फ़्', 'फ़', 'य़', 'ऱ', 'ऩ',
@@ -29,7 +40,12 @@ export function convertUnicodeToChanakya(text: string): string {
       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
     ];
   
-    const chanakyaSymbols = [
+    /**
+   * An array containing the corresponding Chanakya symbols.
+   * Add the corresponding Chanakya symbols for the Unicode symbols in `unicodeSymbols`.
+   * Each element in this array corresponds to the Chanakya symbol at the same index in `unicodeSymbols`.
+   */
+    const chanakyaSymbols: string[] = [
       'Ò', 'Ó', '"', '"', '´', '¥æò',
       'ÿ', 'ÿæ', '˜æ', '™æ', '÷ ',
       '·¸¤', '¹¸', '»¸', 'Ê', 'Á¸', 'Ç¸', 'É¸', '�¸U', 'È¸¤', 'Ø¸', 'Ú¸', 'Ù¸',
@@ -58,23 +74,32 @@ export function convertUnicodeToChanakya(text: string): string {
       '®', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~'
     ];
   
+    // Calculate the length of the arrays for iteration
     const arrayLength = unicodeSymbols.length;
   
+    // Create a copy of the input text to modify
     let modifiedText = text;
   
     // Eliminating "र्" and putting reph (ü) at the proper position.
     let positionOfHalfR = modifiedText.indexOf("र्");
     while (positionOfHalfR > 0) {
+      // Find the probable position of "्" after "र्"
       let probablePositionOfZ = positionOfHalfR + 2;
       let characterRightToProbablePositionOfZ = modifiedText.charAt(probablePositionOfZ + 1);
-  
+      
+      // Traverse through consecutive occurrences of "्"
       while (characterRightToProbablePositionOfZ === "्") {
         probablePositionOfZ += 2;
         characterRightToProbablePositionOfZ = modifiedText.charAt(probablePositionOfZ + 1);
       }
   
+      // Extract the string to be replaced with reph (ü)
       const stringToBeReplaced = modifiedText.substr(positionOfHalfR + 2, probablePositionOfZ - positionOfHalfR - 1);
+
+      // Replace "र्" and the string with reph (ü)
       modifiedText = modifiedText.replace("र्" + stringToBeReplaced, stringToBeReplaced + "ü");
+      
+      // Find the next occurrence of "र्"
       positionOfHalfR = modifiedText.indexOf("र्");
     }
   
@@ -82,6 +107,7 @@ export function convertUnicodeToChanakya(text: string): string {
     for (let i = 0; i < arrayLength; i++) {
       let index = 0;
       while (index !== -1) {
+        // Replace the Unicode symbol with the corresponding Chanakya symbol
         modifiedText = modifiedText.replace(new RegExp(unicodeSymbols[i], 'g'), chanakyaSymbols[i]);
         index = modifiedText.indexOf(unicodeSymbols[i]);
       }

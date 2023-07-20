@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Layout } from '@renderer/components/layouts'
 import { Flex, Input, SimpleGrid, Group } from '@mantine/core'
 import { IconFolderSearch } from '@renderer/components/icons'
@@ -5,23 +6,32 @@ import { AddButton, PdfCompanyCard } from '@renderer/components/Button/ActionBut
 import { getHttpImage } from '@renderer/services/utils'
 import { query, collection, getDocs } from 'firebase/firestore'
 import { fireStore } from '@renderer/services/firebase'
-import { useEffect, useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 import ReloadButton from '@renderer/components/Button/ReloadButton'
 
-export default function Home(): JSX.Element {
-  const [allCompany, setAllCompany] = useState<any>()
-  const [userInput, setUserInput] = useState('')
-  const [isAdmin] = useAdminChecker()
-  const [dataFetched, setDataFetched] = useState(false) // New state variable
+interface Company {
+  id: string
+  name: string
+  logo: string
+  mobileNumber: string
+  owner: string
+  type: string
+  address: string
+}
 
-  const syncAllCompany = async (): Promise<void> => {
+export default function Home(): JSX.Element {
+  const [allCompanies, setAllCompanies] = useState<Company[] | undefined>(undefined)
+  const [userInput, setUserInput] = useState<string>('')
+  const [isAdmin] = useAdminChecker()
+  const [dataFetched, setDataFetched] = useState<boolean>(false)
+
+  // Fetches all companies from Firebase Firestore
+  const syncAllCompanies = async (): Promise<void> => {
     try {
-      // loading all companies
-      console.log('fetching papers')
+      console.log('Fetching papers')
       const companiesCollection = query(collection(fireStore, 'papers'))
       const snapshot = await getDocs(companiesCollection)
-      const companies = snapshot.docs.map((doc) => ({
+      const companies: Company[] = snapshot.docs.map((doc) => ({
         id: doc.id,
         name: doc.data().name,
         logo: doc.data().logo,
@@ -30,16 +40,18 @@ export default function Home(): JSX.Element {
         type: doc.data().type,
         address: doc.data().address
       }))
-      console.log('fatched papers', companies)
-      const localData = localStorage.getItem('user') as string
-      const localUserPaper = JSON.parse(localData)
-      console.log('localUserPaper', localUserPaper)
-      if (localUserPaper != undefined) {
-        console.log('working')
+      console.log('Fetched papers', companies)
+
+      // Get local user data from localStorage
+      const localData = localStorage.getItem('user')
+      const localUserPaper = localData ? JSON.parse(localData) : null
+
+      if (localUserPaper) {
+        console.log('Working')
         const usersProject = companies.filter((item) => localUserPaper.papers.includes(item.id))
-        console.log('worked', usersProject)
-        setAllCompany(usersProject)
-        // @ts-ignore db is defined n preload of electronjs
+        console.log('Worked', usersProject)
+        setAllCompanies(usersProject)
+        // @ts-ignore db is defined in the preload of ElectronJS
         await window?.DB?.setData('company', 'companies', usersProject)
         setDataFetched(true)
       }
@@ -48,69 +60,67 @@ export default function Home(): JSX.Element {
     }
   }
 
-  const getDataFromIdbStorage = async (): Promise<void> => {
-    console.log('get data')
-    // @ts-ignore db is defined n preload of electronjs
-    const data: any = await window?.DB?.getData('company', 'companies')
-    if (data === undefined) {
-      syncAllCompany()
+  // Fetch data from Electron Storage
+  const getDataFromBackend = async (): Promise<void> => {
+    console.log('Get data')
+    // @ts-ignore db is defined in the preload of ElectronJS
+    const data: Company[] | undefined = await window?.DB?.getData('company', 'companies')
+    if (!data) {
+      syncAllCompanies()
     }
-    if (data !== null) {
-      setAllCompany(data)
-      setDataFetched(true) // Set dataFetched to true after data is fetched
+    if (data) {
+      setAllCompanies(data)
+      setDataFetched(true)
     }
   }
 
-  function filterCompanies(allCompanies: any[], userInput: string): any[] {
-    if (allCompanies === undefined) {
-      return [] // Return an empty array if allCompanies is undefined
+  // Filter companies based on user input
+  function filterCompanies(allCompanies: Company[] | undefined, userInput: string): Company[] {
+    if (!allCompanies) {
+      return []
     }
     const searchTerm = userInput.toLowerCase()
     return allCompanies.filter((company) => company.name.toLowerCase().includes(searchTerm))
   }
 
-  const filteredCompanies = filterCompanies(allCompany, userInput)
-  console.log('home page mount', allCompany)
+  const filteredCompanies = filterCompanies(allCompanies, userInput)
+  console.log('Home page mount', allCompanies)
 
   useEffect(() => {
-    getDataFromIdbStorage()
-    //checking for admin user;
+    getDataFromBackend()
+    // Checking for admin user;
   }, [])
 
+  // If data is not fetched yet, return null or loading component
   if (!dataFetched) {
-    return <></>
+    return <p>loading</p>
   }
 
   return (
     <Layout>
       <Flex justify="center" align="center" direction="column">
         <p>Newspapers</p>
-        <Group w={'100%'}>
+        <Group w="100%">
           <Input
-            w={'95%'}
-            placeholder="enter newspaper name"
+            w="95%"
+            placeholder="Enter newspaper name"
             rightSection={
               <IconFolderSearch size="1rem" style={{ display: 'block', opacity: 0.5 }} />
             }
             onChange={(e): any => setUserInput(e.target.value)}
           />
-          <ReloadButton onClickFunction={syncAllCompany} />
+          <ReloadButton onClickFunction={syncAllCompanies} />
         </Group>
       </Flex>
-      <SimpleGrid cols={8} w="100%" spacing={'lg'} mt={60}>
-        {isAdmin ? <AddButton url="/company" /> : null}
+      <SimpleGrid cols={8} w="100%" spacing="lg" mt={60}>
+        {/* Use the logical AND (&&) to conditionally render the AddButton */}
+        {isAdmin && <AddButton url="/company" />}
 
-        {allCompany !== undefined
-          ? filteredCompanies.map((company: any) => {
-              return (
-                <PdfCompanyCard
-                  key={company.id}
-                  id={company.id}
-                  logo={getHttpImage(company.logo)}
-                />
-              )
-            })
-          : null}
+        {/* Check if allCompanies is defined before mapping */}
+        {allCompanies &&
+          filteredCompanies.map((company) => (
+            <PdfCompanyCard key={company.id} id={company.id} logo={getHttpImage(company.logo)} />
+          ))}
       </SimpleGrid>
     </Layout>
   )

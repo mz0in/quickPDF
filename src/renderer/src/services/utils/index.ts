@@ -4,28 +4,30 @@ import { fontNames } from './fonts'
 import { convertUnicodeToChanakya } from './convertUnicodeToChanakya'
 
 /**
- * function to convert Text with sapce to text with dashes
- * @param text: string
- * @returns Anshu Meena -> anshu-meena
+ * Function to convert text with spaces to text with dashes.
+ * @param text The input text with spaces.
+ * @returns The converted text with dashes.
+ * Anshu Meena -> anshu-meena
  */
 export function spaceToDash(text: string): string {
   return text.toLowerCase().replaceAll(' ', '-')
 }
 
 /**
- * function to convert Text with sapce to text with dashes
- * @param text: string
- * @returns anshu-meena -> Anshu meena
+ * Function to convert text with dashes to text with spaces.
+ * @param text The input text with dashes.
+ * @returns The converted text with spaces.
+ * anshu-meena -> anshu meena
  */
 export function DashToSpace(text: string): string {
   return text.replaceAll('-', ' ')
 }
 
 /**
- * function to get image from firebase storage bucket
- * @param id: string
- * @param imageName: string
- * return https url form that {id}.jepg
+ * Function to get the HTTPS URL for an image from Firebase storage bucket.
+ * @param id The ID of the image.
+ * @returns The HTTPS URL for the image.
+ * return https url form that {id}.jpeg
  */
 export function getHttpImage(id: string): string {
   return `https://firebasestorage.googleapis.com/v0/b/quickpdf-codenanshu.appspot.com/o/${encodeURIComponent(
@@ -34,15 +36,20 @@ export function getHttpImage(id: string): string {
 }
 
 /**
- * function to convert cm values to Pixels
- * @param inch: number
- * @returns pixels: number
+ * Function to convert inches to pixels.
+ * @param inch The value in inches.
+ * @returns The converted value in pixels.
  */
 export function inToPx(inch: number): number {
   const pxPerIn = 96
   return Math.round(inch * pxPerIn)
 }
 
+/**
+ * Function to convert inches to points.
+ * @param inch The value in inches.
+ * @returns The converted value in points.
+ */
 export function inToPt(inch: number): number {
   const ptPrIn = 72
   return Math.round(inch * ptPrIn)
@@ -106,9 +113,10 @@ export function capitalizeFirstLetters(str: string): string {
 }
 
 /**
- * listen to paste event in the DOM and take the text from clipboard and convert that text
- * into chanakya encoding and also set that encoded text to the current active input boxs
- * @param event paste event
+ * Function to listen to the paste event in the DOM and convert the pasted text into Chanakya encoding.
+ * It also sets the encoded text to the current active input box.
+ * @param event The paste event.
+ * @param document The grapesjs canvas DOM document.
  */
 const handlePasteForChanakyaConvert = async (
   event: ClipboardEvent,
@@ -125,14 +133,14 @@ const handlePasteForChanakyaConvert = async (
 
     const activeElement = document.activeElement as HTMLInputElement | HTMLTextAreaElement
     // if (activeElement.nodeName === 'INPUT' || activeElement.nodeName === 'TEXTAREA') {
-      const start = activeElement.selectionStart as number
-      const end = activeElement.selectionEnd as number
-      const value = activeElement.innerText as string
+    const start = activeElement.selectionStart as number
+    const end = activeElement.selectionEnd as number
+    const value = activeElement.innerText as string
 
-      const newValue = value.substring(0, start) + chanakyaText + value.substring(end)
-      activeElement.innerText = newValue
+    const newValue = value.substring(0, start) + chanakyaText + value.substring(end)
+    activeElement.innerText = newValue
 
-      activeElement.selectionStart = activeElement.selectionEnd = start + chanakyaText.length
+    activeElement.selectionStart = activeElement.selectionEnd = start + chanakyaText.length
     // }
   } catch (error) {
     console.error('Failed to read clipboard text:', error)

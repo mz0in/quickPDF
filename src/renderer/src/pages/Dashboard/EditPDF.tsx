@@ -1,8 +1,7 @@
-import { PaperEditor } from '@renderer/components/Editor'
+import { PaperEditor, htmlObject } from '@renderer/components/Editor'
 import { saveAsPDF } from '@renderer/services/utils'
 import { IconCheck } from '@renderer/components/icons'
 import { notifications } from '@mantine/notifications'
-import type { htmlObject } from '@renderer/components/Editor'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +19,6 @@ interface CodeOfPaperProps {
 const dummayData: CodeOfPaperProps = {
   code: [
     {
-      head: '',
       css: '',
       htmlBody: ''
     }
@@ -35,7 +33,7 @@ const dummayData: CodeOfPaperProps = {
 
 export default function EditPDF(): JSX.Element {
   const [paperData, setPaperData] = useState<CodeOfPaperProps>(dummayData)
-  const { companyName, realDate } = useParams()
+  const { companyName, realDate } = useParams<{ companyName: string; realDate: string }>()
   const navigate = useNavigate()
 
   const getPaperCode = async (): Promise<void> => {
@@ -45,15 +43,16 @@ export default function EditPDF(): JSX.Element {
       notifications.show({
         id: 'err-loading',
         loading: false,
-        title: 'error',
-        message: "can't find paper in system.",
+        title: 'Error',
+        message: "Can't find paper in the system.",
         autoClose: false,
         withCloseButton: true,
         onClose: () => navigate(-1)
       })
+    } else {
+      console.log('data', codeOfPaper)
+      setPaperData(codeOfPaper)
     }
-    console.log('data', codeOfPaper)
-    setPaperData(codeOfPaper)
   }
 
   useEffect(() => {
@@ -61,24 +60,26 @@ export default function EditPDF(): JSX.Element {
   }, [])
 
   /**
-   * middleware for saving function in utils
-   * @param htmlStrings contain html version of gjs code
-   * @param gjsCode gjs json code for importing in future
+   * Middleware for saving function in utils
+   * @param htmlStrings Contain HTML version of GJS code
+   * @param gjsCode GJS JSON code for importing in the future
    */
   const handleSave = (htmlStrings: htmlObject[], gjsCode: any): void => {
     notifications.show({
       id: 'load-data',
       loading: true,
       title: 'Saving Company',
-      message: 'Data is saving on the server please wait.',
+      message: 'Data is saving on the server, please wait.',
       autoClose: false,
       withCloseButton: false
     })
+
     console.log('htmlStrings', htmlStrings)
+
     let allCss = ''
     let allHtml = ''
 
-    // saving all strings in one
+    // Saving all strings in one
     for (let i = 0; i < htmlStrings.length; i++) {
       allCss = allCss.concat(htmlStrings[i].css)
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
@@ -90,11 +91,12 @@ export default function EditPDF(): JSX.Element {
     }
 
     saveAsPDF(allCss, allHtml, paperData?.info, CodeOfPaper)
+
     notifications.update({
       id: 'load-data',
       color: 'teal',
       title: 'Saved',
-      message: 'data now saved on the server.',
+      message: 'Data now saved on the server.',
       icon: <IconCheck size="1rem" />,
       autoClose: 2000
     })
@@ -104,8 +106,8 @@ export default function EditPDF(): JSX.Element {
     <PaperEditor
       id="editor"
       canvasSize={{
-        height: paperData?.info.height as number,
-        width: paperData?.info.width as number
+        height: paperData?.info.height ?? 0,
+        width: paperData?.info.width ?? 0
       }}
       gjsCode={paperData?.code as any}
       companyName={companyName as string}

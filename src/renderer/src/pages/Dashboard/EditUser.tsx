@@ -18,10 +18,10 @@ import { useState } from 'react'
 import { useAdminChecker } from '@renderer/services/hooks'
 import NotFoundTitle from '@renderer/components/page/Access'
 
-export default function UserAdd(): JSX.Element {
+export default function EditUser(): JSX.Element {
   const [user, setUser] = useState(false)
   const [number, setNumber] = useState<number | ''>()
-  const [papers, setPapers] = useState(['test'])
+  const [papers, setPapers] = useState<string[]>(['test'])
   const [isAdmin] = useAdminChecker()
 
   const form = useForm({
@@ -34,7 +34,7 @@ export default function UserAdd(): JSX.Element {
     }
   })
 
-  // getting all papers
+  // Getting all papers
   const getAllPapers = async (): Promise<void> => {
     const q = query(collection(fireStore, 'papers'))
     const querySnapshot = await getDocs(q)
@@ -46,17 +46,13 @@ export default function UserAdd(): JSX.Element {
     setPapers(allPapers)
   }
 
-  // searching for user
+  // Searching for user
   const searchFromNumber = async (): Promise<void> => {
-    // Create a reference to the cities collection
     console.log('runned')
     const userRef = collection(fireStore, 'users')
-
-    // Create a query against the collection.
     const q = query(userRef, where('number', '==', number))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       form.setValues({
         uid: doc.id,
         name: doc.data().name,
@@ -75,7 +71,7 @@ export default function UserAdd(): JSX.Element {
       id: 'load-data',
       loading: true,
       title: 'Saving user',
-      message: 'Data is saving on the server please wait.',
+      message: 'Data is saving on the server, please wait.',
       autoClose: false,
       withCloseButton: false
     })
@@ -86,7 +82,7 @@ export default function UserAdd(): JSX.Element {
       number: values.number,
       papers: values.papers
     }).then(() => {
-      //5. updating localData if changing for currentUser
+      // Updating localData if changing for currentUser
       if (auth.currentUser?.uid === values.uid) {
         const currentUserData = JSON.parse(localStorage.getItem('user') as string)
         currentUserData.papers = values.papers
@@ -95,8 +91,8 @@ export default function UserAdd(): JSX.Element {
       notifications.update({
         id: 'load-data',
         color: 'teal',
-        title: 'Saved ' + values.number,
-        message: 'user is saved on the server',
+        title: `Saved ${values.number}`,
+        message: 'User is saved on the server',
         icon: <IconCross size="1rem" />,
         autoClose: 2000
       })
@@ -112,12 +108,7 @@ export default function UserAdd(): JSX.Element {
   if (isAdmin === true) {
     return (
       <Layout size="sm" isBack>
-        <Title
-          align="center"
-          sx={{
-            fontWeight: 900
-          }}
-        >
+        <Title align="center" sx={{ fontWeight: 900 }}>
           Edit user
         </Title>
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">

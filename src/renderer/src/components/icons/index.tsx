@@ -1,4 +1,4 @@
-export const IconSquareRoundedPlus = (props) => (
+export const IconSquareRoundedPlus = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -15,7 +15,7 @@ export const IconSquareRoundedPlus = (props) => (
   </svg>
 )
 
-export const IconArrowLeft = (props) => (
+export const IconArrowLeft = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -32,7 +32,7 @@ export const IconArrowLeft = (props) => (
   </svg>
 )
 
-export const IconUserPlus = (props) => (
+export const IconUserPlus = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -49,7 +49,7 @@ export const IconUserPlus = (props) => (
   </svg>
 )
 
-export const IconUserEdit = (props) => (
+export const IconUserEdit = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -66,7 +66,7 @@ export const IconUserEdit = (props) => (
   </svg>
 )
 
-export const IconCross = (props) => (
+export const IconCross = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -83,7 +83,7 @@ export const IconCross = (props) => (
   </svg>
 )
 
-export const IconDiscountCheckFilled = (props) => (
+export const IconDiscountCheckFilled = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -104,7 +104,7 @@ export const IconDiscountCheckFilled = (props) => (
   </svg>
 )
 
-export const IconReload = (props) => (
+export const IconReload = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -121,7 +121,7 @@ export const IconReload = (props) => (
   </svg>
 )
 
-export const IconCalendar = (props) => (
+export const IconCalendar = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -138,7 +138,7 @@ export const IconCalendar = (props) => (
   </svg>
 )
 
-export const IconCheck = (props) => (
+export const IconCheck = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -155,7 +155,7 @@ export const IconCheck = (props) => (
   </svg>
 )
 
-export const IconFolderSearch = (props) => (
+export const IconFolderSearch = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -172,7 +172,7 @@ export const IconFolderSearch = (props) => (
   </svg>
 )
 
-export const IconLogout = (props) => (
+export const IconLogout = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -190,7 +190,7 @@ export const IconLogout = (props) => (
   </svg>
 )
 
-export const IconSun = (props) => (
+export const IconSun = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -207,7 +207,7 @@ export const IconSun = (props) => (
   </svg>
 )
 
-export const IconMoon = (props) => (
+export const IconMoon = (props: any): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}

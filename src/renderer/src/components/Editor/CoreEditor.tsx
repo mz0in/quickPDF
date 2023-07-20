@@ -1,48 +1,112 @@
 import { useEffect, useRef } from 'react'
-import grapesjs from 'grapesjs'
+import grapesjs, { Plugin } from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
-import basicCustomPlugin from '../plugins/blocksPlugin'
-import zoomPlugin from '../plugins/zoomPlugin'
+import basicCustomPlugin from './plugins/blocksPlugin'
+import zoomPlugin from './plugins/zoomPlugin'
 import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
-import customComponents from '../plugins/componentsPlugin'
-import customRtePlugin from '../plugins/customRte'
-import localBlocks from '../plugins/localBlocks'
-import grapesjsFontPlugin from '../plugins/grapesjsFonts'
-import grapesjsPageManagerPlugin from '../plugins/pageManger'
-import gjsUserBlock from '../plugins/usersBlock'
+import parserPostCSS from 'grapesjs-parser-postcss'
+import customComponents from './plugins/componentsPlugin'
+import customRtePlugin from './plugins/customRte'
+import localBlocks from './plugins/localBlocks'
+import grapesjsFontPlugin from './plugins/grapesjsFonts'
+import grapesjsPageManagerPlugin from './plugins/pageManger'
+import gjsUserBlock from './plugins/usersBlock'
 import '@renderer/styles/designer.css'
-import '../plugins/pageManger/css/grapesjs-project-manager.min.css'
-import type { htmlObject } from '..'
-import { CoreEditor } from '../CoreEditor'
+import './plugins/pageManger/css/grapesjs-project-manager.min.css'
+import type { HtmlObject } from '.'
+import { handlePasteForChanakyaConvert } from '@renderer/services/utils'
 
 interface GrapesJSProps {
+  /** Unique ID of the editor container. */
   id: string
+  /** Additional configuration options for GrapesJS. */
   config?: any
-  onSave?: (htmlObjects: htmlObject[], gjsCode: any) => void
+  /**
+   * Callback function triggered when the editor content is saved.
+   *
+   * @param htmlObjects - An array of HTML objects representing each page's content and CSS.
+   * @param gjsCode - The full GrapesJS project data, including components and styles.
+   */
+  onSave?: (htmlObjects: HtmlObject[], gjsCode: any) => void
+  /**
+   * Dimensions of the canvas in centimeters.
+   * Used to set the size of the paper in GrapesJS.
+   */
   canvasSize: {
+    /** Height of the canvas in centimeters. */
     height: number
+    /** Width of the canvas in centimeters. */
     width: number
   }
-  gjsCode: any
+  /** Company name used for local blocks. */
   companyName: string
+
+  /** using for Editor? customize the behavior of GrapesJS for paper editors */
+  isEditor?: boolean
+
+  /**
+   * page manager config for GrapesJS editor
+   * default: false for templateEditors
+   * empty {} for paperEditors
+   * leave empty for paperCreators
+   */
+  pageManager?:
+    | {
+        pages: any[] // {name: string, id: string, styles: string, component: string}
+      }
+    | boolean
+
+  /** array of plugins that are going to use in different editors */
+  customPlugins?: Plugin[]
+
+  /**plugin options for customPlugins
+   * default {}
+   */
+  customPluginOpts?: any
 }
 
-export function PaperEditor({
+/**
+ * GrapesJS Paper Creator Component.
+ * This component allows users to create and edit papers using the GrapesJS editor.
+ * It provides options to customize the paper size, content, and more.
+ */
+export function CoreEditor({
   id,
   config,
   onSave,
   canvasSize,
-  gjsCode,
-  companyName
+  companyName,
+  isEditor,
+  pageManager = {
+    pages: [
+      {
+        name: 'page 1',
+        id: '1',
+        styles: ``,
+        component: ``
+      }
+    ]
+  },
+  customPlugins = [],
+  customPluginOpts = {}
 }: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Initialize GrapesJS editor with provided configuration
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: `@page {margin: 15px; size: ${canvasSize?.width}cm ${canvasSize?.height}cm;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
+      protectedCss: isEditor
+        ? ''
+        : `@page {margin: 15px; size: ${canvasSize?.width}cm ${canvasSize?.height}cm;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
+
+      cssComposer: {
+        stylePrefix: 'qpdf-',
+        rules: isEditor ? '' : "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
+      },
+
       deviceManager: {
         devices: [
           {
@@ -53,24 +117,21 @@ export function PaperEditor({
           }
         ]
       },
+      pageManager: pageManager,
       storageManager: false,
       plugins: [
-        // gjsBasicBlock,
         basicCustomPlugin,
         customComponents,
         grapesjsFontPlugin,
-        grapesjsPageManagerPlugin,
         gjsImageEditorPlugin,
         zoomPlugin,
         gjsUserBlock,
         customRtePlugin,
-        localBlocks
+        localBlocks,
+        parserPostCSS,
+        ...customPlugins
       ],
       pluginsOpts: {
-        [grapesjsPageManagerPlugin]: {
-          width: `${canvasSize?.width}in`, // new page width
-          height: `${canvasSize?.height}in` // new page height
-        },
         [localBlocks]: {
           companyName: companyName
         },
@@ -82,16 +143,18 @@ export function PaperEditor({
               initMenu: 'filter'
             }
           }
-        }
+        },
+        ...customPluginOpts
       }
     })
 
-    editor.loadProjectData(gjsCode)
+    // set block manager default open
     editor.on('component:selected', () => {
       const openSmBtn = editor.Panels.getButton('views', 'open-sm')
       openSmBtn?.set('active', 1)
     })
 
+    // expanding list after 3 seconds of init
     setTimeout(() => {
       try {
         editor.BlockManager.getCategories().each((ctg) => ctg.set('open', false))
@@ -100,6 +163,7 @@ export function PaperEditor({
       }
     }, 3000)
 
+    // save button
     editor.Panels.addButton('options', {
       id: 'save',
       className: 'fa fa-floppy-o',
@@ -108,6 +172,7 @@ export function PaperEditor({
       category: 'Custom Category' // add a new category for the custom icon
     })
 
+    // back button
     editor.Panels.addButton('options', {
       id: 'back',
       className: 'fa fa-arrow-left',
@@ -115,23 +180,27 @@ export function PaperEditor({
       attributes: { title: 'Back' }
     })
 
-    editor.Panels.addButton('views', {
-      id: 'open-pages',
-      className: 'fa fa-file-o',
-      attributes: {
-        title: 'pages'
-      },
-      command: 'open-pages',
-      togglable: false
-    })
+    if (pageManager) {
+      // page manager button
+      editor.Panels.addButton('views', {
+        id: 'open-pages',
+        className: 'fa fa-file-o',
+        attributes: {
+          title: 'pages'
+        },
+        command: 'open-pages',
+        togglable: false
+      })
+    }
 
+    // onsave functionality
     if (onSave) {
       editor.Commands.add('save', {
         run: () => {
           // saveing all pages code into array
           const allPages = editor.Pages.getAll()
           // htmlStrings contains html,css of all the pages in array format
-          const htmlStrings: htmlObject[] = allPages.map((page) => {
+          const htmlStrings: HtmlObject[] = allPages.map((page) => {
             const component = page.getMainComponent()
             const body = editor.getHtml({ component })
             const css = editor.getCss({ component })
@@ -140,7 +209,7 @@ export function PaperEditor({
               htmlBody: body,
               css: css
             }
-          }) as htmlObject[]
+          }) as HtmlObject[]
 
           const gjsCode = editor.getProjectData()
 
@@ -189,9 +258,12 @@ export function PaperEditor({
 
     // block manager open by default
     editor.Panels.getButton('views', 'open-blocks')?.set('active', true)
+    const zoom = editor.Canvas.getZoom()
+    editor.Canvas.setZoom(`${zoom - 5}`)
 
     // @ts-ignore settings editor in the window object its only for development purpose
     window.editor = editor
+
     const style = document.createElement('style')
     style.innerHTML = `
       body, html {
@@ -202,6 +274,10 @@ export function PaperEditor({
       }
     `
     document.head.appendChild(style)
+    // Add the event listener for handling converting in chanakya for onPaste
+    editor.Canvas.getDocument().addEventListener('paste', (event): void => {
+      handlePasteForChanakyaConvert(event, editor.Canvas.getDocument())
+    })
 
     return () => {
       editor.destroy()
@@ -210,21 +286,5 @@ export function PaperEditor({
     }
   }, [id, config, onSave])
 
-  return (
-    <CoreEditor
-      id={id}
-      config={config}
-      onSave={onSave}
-      canvasSize={canvasSize}
-      companyName={companyName}
-      isEditor={false}
-      customPlugins={[grapesjsPageManagerPlugin]}
-      customPluginOpts={{
-        [grapesjsPageManagerPlugin]: {
-          width: `${canvasSize?.width}in`, // new page width
-          height: `${canvasSize?.height}in` // new page height
-        }
-      }}
-    />
-  )
+  return <div ref={editorRef} id={id} />
 }

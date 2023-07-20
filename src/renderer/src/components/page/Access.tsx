@@ -39,6 +39,10 @@ const useStyles = createStyles((theme) => ({
   }
 }))
 
+/**
+ * Component for rendering the Not Found (404) page title with description and a button to go back to the home page.
+ * @returns {JSX.Element} The NotFoundTitle component.
+ */
 export default function NotFoundTitle(): JSX.Element {
   const { classes } = useStyles()
   const navigate = useNavigate()
@@ -53,7 +57,7 @@ export default function NotFoundTitle(): JSX.Element {
       </Text>
       <Group position="center">
         <Button variant="subtle" size="md" onClick={(): void => navigate('/')}>
-          Take me back to home page
+          Take me back to the home page
         </Button>
       </Group>
     </Container>

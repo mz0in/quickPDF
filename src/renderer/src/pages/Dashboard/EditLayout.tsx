@@ -1,7 +1,6 @@
-import { TemplateEditor } from '@renderer/components/Editor'
+import { TemplateEditor, htmlObject } from '@renderer/components/Editor'
 import { setComponentInLocalStorage } from '@renderer/services/utils'
 import { notifications } from '@mantine/notifications'
-import type { htmlObject } from '@renderer/components/Editor'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +25,7 @@ const dummayData: CodeOfPaperProps = {
 
 export default function EditDesign(): JSX.Element {
   const [paperData, setPaperData] = useState<CodeOfPaperProps>(dummayData)
-  const { companyName, componentName } = useParams()
+  const { companyName, componentName } = useParams<{ companyName: string; componentName: string }>()
   const navigate = useNavigate()
 
   const getLayoutCode = async (): Promise<void> => {
@@ -35,16 +34,17 @@ export default function EditDesign(): JSX.Element {
       notifications.show({
         id: 'err-loading',
         loading: false,
-        title: 'error',
-        message: "can't find layout in system.",
+        title: 'Error',
+        message: "Can't find layout in the system.",
         autoClose: false,
         withCloseButton: true,
         onClose: () => navigate(-1)
       })
+    } else {
+      console.log('data', codeOfLayout)
+      const dataToSet: CodeOfPaperProps = codeOfLayout[componentName as string]
+      setPaperData(dataToSet)
     }
-    console.log('data', codeOfLayout)
-    const dataToSet: CodeOfPaperProps = codeOfLayout[componentName as string]
-    setPaperData(dataToSet)
   }
 
   useEffect(() => {
@@ -63,8 +63,8 @@ export default function EditDesign(): JSX.Element {
     setComponentInLocalStorage(companyName as string, info, htmlStrings)
     notifications.show({
       id: 'load-data',
-      title: `saved ${componentName}`,
-      message: 'saved on server.',
+      title: `Saved ${componentName}`,
+      message: 'Saved on server.',
       autoClose: 1000,
       withCloseButton: false
     })
@@ -74,15 +74,13 @@ export default function EditDesign(): JSX.Element {
     <TemplateEditor
       id="editor"
       canvasSize={{
-        height: paperData?.info.height as number,
-        width: paperData?.info.width as number
+        height: paperData?.info.height ?? 0,
+        width: paperData?.info.width ?? 0
       }}
-      paperCode={
-        {
-          htmlBody: paperData.htmlBody,
-          css: paperData.css
-        } as htmlObject
-      }
+      paperCode={{
+        htmlBody: paperData.htmlBody,
+        css: paperData.css
+      }}
       onSave={handleSave}
     />
   )

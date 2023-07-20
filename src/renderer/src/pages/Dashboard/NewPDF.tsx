@@ -11,7 +11,7 @@ import type { htmlObject } from '@renderer/components/Editor'
 import { dateToValue } from '@renderer/services/utils'
 import { useParams, useNavigate } from 'react-router-dom'
 
-interface defaultFormValue {
+interface DefaultFormValue {
   date: Date | string
   height: number
   width: number
@@ -19,11 +19,11 @@ interface defaultFormValue {
 
 export default function NewPage(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
-  const [modalData, setModalData] = useState<defaultFormValue>()
+  const [modalData, setModalData] = useState<DefaultFormValue | undefined>()
   const { companyName } = useParams()
   const navigate = useNavigate()
 
-  const form = useForm<defaultFormValue>({
+  const form = useForm<DefaultFormValue>({
     initialValues: {
       date: new Date(),
       height: 52,
@@ -32,9 +32,9 @@ export default function NewPage(): JSX.Element {
   })
 
   /**
-   * middleware for saving function in utils
-   * @param htmlStrings contain html version of gjs code
-   * @param gjsCode gjs json code for importing in future
+   * Middleware for saving function in utils
+   * @param htmlStrings - Contains html version of gjs code
+   * @param gjsCode - gjs json code for importing in the future
    */
   const handleSave = (htmlStrings: htmlObject[], gjsCode: any): void => {
     notifications.show({
@@ -45,21 +45,22 @@ export default function NewPage(): JSX.Element {
       autoClose: false,
       withCloseButton: false
     })
-    console.log('htmlStrings', htmlStrings)
+
     let allCss = ''
     let allHtml = ''
 
-    // saving all strings in one
+    // Saving all strings in one
     for (let i = 0; i < htmlStrings.length; i++) {
       allCss = allCss.concat(htmlStrings[i].css)
       allHtml = allHtml.concat(htmlStrings[i].htmlBody)
     }
 
     const info = {
-      ...modalData,
-      companyName
+      ...modalData!,
+      companyName: companyName as string
     }
-    // Object that contain htmlCode array and meta data of the paper.
+
+    // Object that contains htmlCode array and meta data of the paper.
     const CodeOfPaper = {
       code: gjsCode,
       info
@@ -70,14 +71,14 @@ export default function NewPage(): JSX.Element {
       id: 'load-data',
       color: 'teal',
       title: 'Saved',
-      message: 'data now saved on the server.',
+      message: 'Data now saved on the server.',
       icon: <IconCheck size="1rem" />,
       autoClose: 2000
     })
   }
 
-  const handleModalSubmit = (values: defaultFormValue): void => {
-    close() // to close opened modal
+  const handleModalSubmit = (values: DefaultFormValue): void => {
+    close() // Close opened modal
     setModalData({
       date: dateToValue(values.date as Date),
       height: values.height + 2,
@@ -111,7 +112,7 @@ export default function NewPage(): JSX.Element {
           maw={400}
           {...form.getInputProps('date')}
         />
-        <Flex mt={10} gap={15} justify="space-betweeen" align="center" direction="row">
+        <Flex mt={10} gap={15} justify="space-between" align="center" direction="row">
           <NumberInput
             label="Height"
             placeholder="in inch"
@@ -128,7 +129,7 @@ export default function NewPage(): JSX.Element {
           />
         </Flex>
         <Button type="submit" fullWidth mt={20}>
-          save
+          Save
         </Button>
       </form>
     </Modal>

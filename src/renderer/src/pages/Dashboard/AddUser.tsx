@@ -23,12 +23,20 @@ import { useAdminChecker } from '@renderer/services/hooks'
 import NotFoundTitle from '@renderer/components/page/Access'
 import { getHttpImage } from '@renderer/services/utils'
 
+interface FormValues {
+  name: string
+  emailAddress: string
+  number: number
+  password: string
+  papers: string[]
+}
+
 export default function UserAdd(): JSX.Element {
-  const [papers, setPapers] = useState(['test'])
+  const [papers, setPapers] = useState<string[]>(['test'])
   const [image, setImage] = useState<string>('')
   const [isAdmin] = useAdminChecker()
   const navigate = useNavigate()
-  const form = useForm({
+  const form = useForm<FormValues>({
     initialValues: {
       name: '',
       emailAddress: '',
@@ -39,14 +47,18 @@ export default function UserAdd(): JSX.Element {
   })
 
   const getAllPapers = async (): Promise<void> => {
-    const q = query(collection(fireStore, 'papers'))
-    const querySnapshot = await getDocs(q)
-    const allPapers: string[] = []
-    querySnapshot.forEach((doc) => {
-      allPapers.push(doc.id)
-    })
-    console.log(allPapers)
-    setPapers(allPapers)
+    try {
+      const q = query(collection(fireStore, 'papers'))
+      const querySnapshot = await getDocs(q)
+      const allPapers: string[] = []
+      querySnapshot.forEach((doc) => {
+        allPapers.push(doc.id)
+      })
+      console.log(allPapers)
+      setPapers(allPapers)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleFileUpload = (file: File): void => {

@@ -7,19 +7,19 @@ import { setComponentInLocalStorage } from '@renderer/services/utils'
 import { useParams, useNavigate } from 'react-router-dom'
 import { notifications } from '@mantine/notifications'
 
-interface defaultFormValue {
+interface DefaultFormValue {
   title: string
   height: number
   width: number
-} // defalutFormValue = Info type in services/templateFunction.ts
+}
 
 export default function NewDesign(): JSX.Element {
   const [opened, { close }] = useDisclosure(true)
-  const [modalData, setModalData] = useState<defaultFormValue>()
+  const [modalData, setModalData] = useState<DefaultFormValue | undefined>()
   const { companyName } = useParams()
   const navigate = useNavigate()
 
-  const form = useForm<defaultFormValue>({
+  const form = useForm<DefaultFormValue>({
     initialValues: {
       title: '',
       height: 0,
@@ -29,20 +29,18 @@ export default function NewDesign(): JSX.Element {
 
   const handleSave = (html: htmlObject[]): void => {
     console.log('HTML saved:', html)
-    // @ts-ignore modalData have the same exact type as type Info just its to
-    // complicated to import the Info that's why i directly used that
-    setComponentInLocalStorage(companyName as string, modalData, html)
+    setComponentInLocalStorage(companyName as string, modalData!, html)
     notifications.show({
       id: 'load-data',
       title: `Saved ${modalData?.title}`,
-      message: 'saved data on server.',
+      message: 'Saved data on the server.',
       autoClose: 1000,
       withCloseButton: false
     })
   }
 
-  const handleModalSubmit = (values: defaultFormValue): void => {
-    close() // to close opened modal
+  const handleModalSubmit = (values: DefaultFormValue): void => {
+    close() // Close opened modal
     setModalData({
       title: values.title,
       height: values.height,
@@ -73,7 +71,7 @@ export default function NewDesign(): JSX.Element {
           {...form.getInputProps('title')}
           withAsterisk
         />
-        <Flex mt={10} gap={15} justify="space-betweeen" align="center" direction="row">
+        <Flex mt={10} gap={15} justify="space-between" align="center" direction="row">
           <NumberInput
             label="Height"
             placeholder="in inch"
@@ -90,7 +88,7 @@ export default function NewDesign(): JSX.Element {
           />
         </Flex>
         <Button type="submit" fullWidth mt={20}>
-          save
+          Save
         </Button>
       </form>
     </Modal>

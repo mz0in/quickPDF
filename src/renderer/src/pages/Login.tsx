@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import { TextInput, PasswordInput, Paper, Title, Container, Button } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { signInWithEmailAndPassword } from 'firebase/auth'
@@ -5,13 +6,12 @@ import { auth, fireStore } from '@renderer/services/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import { notifications } from '@mantine/notifications'
 import { IconCross, IconDiscountCheckFilled } from '@renderer/components/icons'
-import { Dispatch } from 'react'
 
-interface props {
-  loginHook: Dispatch<React.SetStateAction<string | boolean>>
+interface Props {
+  loginHook: Dispatch<SetStateAction<boolean | null>>
 }
 
-export default function LoginPage({ loginHook }: props): JSX.Element {
+export default function LoginPage({ loginHook }: Props): JSX.Element {
   const [emailValue, setEmailValue] = useInputState<string>('')
   const [passwordValue, setPasswordValue] = useInputState<string>('')
 
@@ -19,8 +19,8 @@ export default function LoginPage({ loginHook }: props): JSX.Element {
     notifications.show({
       id: 'login-data',
       loading: true,
-      title: 'Logining',
-      message: 'retriving data from server please wait.',
+      title: 'Logging in',
+      message: 'Retrieving data from the server, please wait.',
       autoClose: false,
       withCloseButton: false
     })
@@ -48,7 +48,7 @@ export default function LoginPage({ loginHook }: props): JSX.Element {
         id: 'login-data',
         color: 'green',
         title: `Welcome ${user.displayName}`,
-        message: 'login successful',
+        message: 'Login successful',
         icon: <IconDiscountCheckFilled size="1rem" />,
         autoClose: 4000
       })
@@ -69,13 +69,7 @@ export default function LoginPage({ loginHook }: props): JSX.Element {
 
   return (
     <Container size={420} my={40}>
-      <Title
-        align="center"
-        sx={(theme): any => ({
-          fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-          fontWeight: 900
-        })}
-      >
+      <Title align="center" sx={{ fontWeight: 900 }}>
         Welcome back!
       </Title>
 

@@ -13,7 +13,7 @@ async function setComponentInLocalStorage(
   info: Info,
   htmlCode: htmlObject[]
 ): Promise<void> {
-  let companyLocalComponent = {}
+  let companyLocalComponent: Record<string, htmlObject> = {}
   const layoutCode = {
     info: {
       height: info.height,
@@ -21,8 +21,9 @@ async function setComponentInLocalStorage(
     },
     ...htmlCode[0]
   }
+
   /**
-   * data strature
+   * data structure
    * companyName: htmlObject;
    */
   const localData = localStorage.getItem(companyName)

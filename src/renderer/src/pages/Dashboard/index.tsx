@@ -8,7 +8,6 @@ import Company from './Company'
 import AddUser from './AddUser'
 import EditUser from './EditUser'
 import EditLayout from './EditLayout'
-import PageNoteFound from './404'
 import { AnimatePresence } from 'framer-motion'
 
 export default function Dashboard(): JSX.Element {
@@ -25,7 +24,6 @@ export default function Dashboard(): JSX.Element {
           <Route path="/user-add" element={<AddUser />} />
           <Route path="/user-edit" element={<EditUser />} />
           <Route path="/edit-layout/:companyName/:componentName" element={<EditLayout />} />
-          <Route path="*" element={<PageNoteFound />} />
         </Routes>
       </AnimatePresence>
     </HashRouter>

@@ -22,6 +22,21 @@ import { useNavigate } from 'react-router-dom'
 import { auth } from '@renderer/services/firebase'
 import { signOut } from 'firebase/auth'
 
+interface HeaderComponentProps {
+  /**
+   * Flag to determine if a back button should be displayed in the header.
+   */
+  isBack?: boolean
+  /**
+   * Flag to determine if the dark color scheme is enabled.
+   */
+  dark: boolean
+  /**
+   * Function to toggle the color scheme.
+   */
+  toggleColorScheme: () => void
+}
+
 const useStyles = createStyles(() => ({
   inner: {
     height: rem(56),
@@ -31,15 +46,23 @@ const useStyles = createStyles(() => ({
   }
 }))
 
+/**
+ * Component for rendering the header with navigation options and user menu.
+ * @param {HeaderComponentProps} props - The props for the HeaderComponent component.
+ * @returns {JSX.Element} The HeaderComponent component.
+ */
 export default function HeaderComponent({
   isBack = false,
   dark,
   toggleColorScheme
-}: any): JSX.Element {
+}: HeaderComponentProps): JSX.Element {
   const { classes } = useStyles()
   const navigate = useNavigate()
   const [isAdmin] = useAdminChecker()
 
+  /**
+   * Function to handle user logout.
+   */
   const logout = (): void => {
     signOut(auth)
       .then(async () => {

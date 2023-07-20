@@ -2,29 +2,34 @@ import { Box, Text, useMantineColorScheme } from '@mantine/core'
 import { IconSquareRoundedPlus } from '../icons'
 import { useNavigate } from 'react-router-dom'
 
-interface pdfCompneyCardProps {
+interface AddButtonProps {
+  url: string
+  height?: string
+}
+
+interface PdfCompanyCardProps {
   logo: string
   id: string
 }
 
-interface addButtonProps {
+interface PaperCardProps {
   url: string
-  height?: string
-}
-
-interface paperProps {
-  url: string
-  height?: string
   date: number
   month: string
 }
 
-interface LayoutProps {
+interface LayoutCardProps {
   url: string
   name: string
 }
 
-export function AddButton({ url, height = '110px' }: addButtonProps): JSX.Element {
+/**
+ * Button to add a new item.
+ * @param {string} url - The URL to navigate when the button is clicked.
+ * @param {string} height - The height of the button (optional).
+ * @returns {JSX.Element} The AddButton component.
+ */
+export function AddButton({ url, height = '110px' }: AddButtonProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
@@ -50,7 +55,13 @@ export function AddButton({ url, height = '110px' }: addButtonProps): JSX.Elemen
   )
 }
 
-export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps): JSX.Element {
+/**
+ * Card component for displaying a PDF company.
+ * @param {string} logo - The URL of the company's logo.
+ * @param {string} id - The ID of the company.
+ * @returns {JSX.Element} The PdfCompanyCard component.
+ */
+export function PdfCompanyCard({ logo, id }: PdfCompanyCardProps): JSX.Element {
   const navigate = useNavigate()
   return (
     <Box
@@ -76,7 +87,14 @@ export function PdfCompanyCard({ logo, id }: pdfCompneyCardProps): JSX.Element {
   )
 }
 
-export function PaperCard({ url, date, month }: paperProps): JSX.Element {
+/**
+ * Card component for displaying a paper.
+ * @param {string} url - The URL to navigate when the card is clicked.
+ * @param {number} date - The date to be displayed on the card.
+ * @param {string} month - The month to be displayed on the card.
+ * @returns {JSX.Element} The PaperCard component.
+ */
+export function PaperCard({ url, date, month }: PaperCardProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
@@ -115,7 +133,13 @@ export function PaperCard({ url, date, month }: paperProps): JSX.Element {
   )
 }
 
-export function LayoutCard({ url, name }: LayoutProps): JSX.Element {
+/**
+ * Card component for displaying a layout.
+ * @param {string} url - The URL to navigate when the card is clicked.
+ * @param {string} name - The name of the layout to be displayed on the card.
+ * @returns {JSX.Element} The LayoutCard component.
+ */
+export function LayoutCard({ url, name }: LayoutCardProps): JSX.Element {
   const { colorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const navigate = useNavigate()
