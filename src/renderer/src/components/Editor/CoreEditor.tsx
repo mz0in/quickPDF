@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import grapesjs, { Plugin } from 'grapesjs'
+import grapesjs, { Editor, Plugin } from 'grapesjs'
 import 'grapesjs/dist/css/grapes.min.css'
 import '@renderer/styles/grapesjs.css'
 import basicCustomPlugin from './plugins/blocksPlugin'
@@ -8,27 +8,25 @@ import gjsImageEditorPlugin from 'grapesjs-tui-image-editor'
 import parserPostCSS from 'grapesjs-parser-postcss'
 import customComponents from './plugins/componentsPlugin'
 import customRtePlugin from './plugins/customRte'
-import localBlocks from './plugins/localBlocks'
 import grapesjsFontPlugin from './plugins/grapesjsFonts'
-import grapesjsPageManagerPlugin from './plugins/pageManger'
 import gjsUserBlock from './plugins/usersBlock'
 import '@renderer/styles/designer.css'
 import './plugins/pageManger/css/grapesjs-project-manager.min.css'
-import type { HtmlObject } from '.'
 import { handlePasteForChanakyaConvert } from '@renderer/services/utils'
 
+/**
+ * Props for the GrapesJS CoreEditor component.
+ */
 interface GrapesJSProps {
   /** Unique ID of the editor container. */
   id: string
   /** Additional configuration options for GrapesJS. */
   config?: any
   /**
-   * Callback function triggered when the editor content is saved.
-   *
-   * @param htmlObjects - An array of HTML objects representing each page's content and CSS.
-   * @param gjsCode - The full GrapesJS project data, including components and styles.
+   * Function to save the editor data. Process the data from the editor and pass it to the `onSave` callback.
+   * @param editor GrapesJS editor instance.
    */
-  onSave?: (htmlObjects: HtmlObject[], gjsCode: any) => void
+  onSaveFunction: (editor: Editor) => void
   /**
    * Dimensions of the canvas in centimeters.
    * Used to set the size of the paper in GrapesJS.
@@ -39,45 +37,45 @@ interface GrapesJSProps {
     /** Width of the canvas in centimeters. */
     width: number
   }
-  /** Company name used for local blocks. */
-  companyName: string
 
-  /** using for Editor? customize the behavior of GrapesJS for paper editors */
-  isEditor?: boolean
+  /** Flag to indicate if the editor is used for the Template Editor. there are two types of PDF and template. template are reusable component creator. if yes then you must have to set `pageManager` to `false`.
+   * and if the component going to behave like a template editor you must have to provide pageManager
+   * like `{pages: [{name: 'page 1',id: '1',styles:paperCode.css,component: paperCode.htmlBody}]}`
+   * here paperCode is the raw code of the template to  edit
+   */
+
+  isTemplateEditor?: boolean
 
   /**
-   * page manager config for GrapesJS editor
-   * default: false for templateEditors
-   * empty {} for paperEditors
-   * leave empty for paperCreators
+   * Page manager config for GrapesJS editor.
+   * Default: `false` for template editors, empty object `{}` for paper editors, and leave empty for paper creators.
    */
   pageManager?:
     | {
-        pages: any[] // {name: string, id: string, styles: string, component: string}
+        pages: Array<{ name: string; id: string; styles: string; component: string }>
       }
     | boolean
 
-  /** array of plugins that are going to use in different editors */
+  /** Array of plugins to use in the editor. */
   customPlugins?: Plugin[]
 
-  /**plugin options for customPlugins
-   * default {}
-   */
-  customPluginOpts?: any
+  /** Plugin options for customPlugins. Default: `{}`. */
+  customPluginOpts?: Record<string, any>
+  /** GrapesJS project data to load in the editor. */
+  gjsCode?: any
 }
 
 /**
- * GrapesJS Paper Creator Component.
+ * GrapesJS Paper Core Component.
  * This component allows users to create and edit papers using the GrapesJS editor.
  * It provides options to customize the paper size, content, and more.
  */
 export function CoreEditor({
   id,
   config,
-  onSave,
+  onSaveFunction,
   canvasSize,
-  companyName,
-  isEditor,
+  isTemplateEditor,
   pageManager = {
     pages: [
       {
@@ -89,7 +87,8 @@ export function CoreEditor({
     ]
   },
   customPlugins = [],
-  customPluginOpts = {}
+  customPluginOpts = {},
+  gjsCode
 }: GrapesJSProps): JSX.Element {
   const editorRef = useRef<HTMLDivElement>(null)
 
@@ -98,13 +97,13 @@ export function CoreEditor({
     const editor = grapesjs.init({
       container: `#${id}`,
       ...config,
-      protectedCss: isEditor
+      protectedCss: isTemplateEditor
         ? ''
         : `@page {margin: 15px; size: ${canvasSize?.width}cm ${canvasSize?.height}cm;}body{margin:0px !important;padding:0px;}p{margin: 0px !important; padding-top: 5px !important; padding-bottom: 5px !important;}h1,h2,h3,h4,h5,h6{margin:0px;}`,
 
       cssComposer: {
         stylePrefix: 'qpdf-',
-        rules: isEditor ? '' : "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
+        rules: "*{font-family: 'chanakya';}h1{font-family: 'roboto';}"
       },
 
       deviceManager: {
@@ -127,14 +126,10 @@ export function CoreEditor({
         zoomPlugin,
         gjsUserBlock,
         customRtePlugin,
-        localBlocks,
         parserPostCSS,
         ...customPlugins
       ],
       pluginsOpts: {
-        [localBlocks]: {
-          companyName: companyName
-        },
         // @ts-ignore gjsImage plugin is a JS plugin so can't support TS. but its working i checked
         // every thing
         [gjsImageEditorPlugin]: {
@@ -147,6 +142,12 @@ export function CoreEditor({
         ...customPluginOpts
       }
     })
+
+    // load gjsCode if there any passed to editor
+    if (gjsCode) {
+      console.log('find gjsCode', gjsCode)
+      editor.loadProjectData(gjsCode)
+    }
 
     // set block manager default open
     editor.on('component:selected', () => {
@@ -194,27 +195,9 @@ export function CoreEditor({
     }
 
     // onsave functionality
-    if (onSave) {
+    if (onSaveFunction) {
       editor.Commands.add('save', {
-        run: () => {
-          // saveing all pages code into array
-          const allPages = editor.Pages.getAll()
-          // htmlStrings contains html,css of all the pages in array format
-          const htmlStrings: HtmlObject[] = allPages.map((page) => {
-            const component = page.getMainComponent()
-            const body = editor.getHtml({ component })
-            const css = editor.getCss({ component })
-
-            return {
-              htmlBody: body,
-              css: css
-            }
-          }) as HtmlObject[]
-
-          const gjsCode = editor.getProjectData()
-
-          onSave(htmlStrings, gjsCode)
-        }
+        run: (editor) => onSaveFunction(editor)
       })
     }
 
@@ -284,7 +267,7 @@ export function CoreEditor({
       // Cleanup the added style when the component unmounts
       document.head.removeChild(style)
     }
-  }, [id, config, onSave])
+  }, [id, config, onSaveFunction])
 
   return <div ref={editorRef} id={id} />
 }
