@@ -1,22 +1,40 @@
-export function onSubmit(selectedComponent, editor, details, myModal) {
+import { Editor } from 'grapesjs'
+
+/**
+ * Submits the selected component to be saved as a custom block.
+ * @param selectedComponent - The selected component to be saved as a block.
+ * @param editor - GrapesJS editor instance.
+ * @param details - Details of the block to be saved, including name and category.
+ * @param myModal - The modal object to close after submission.
+ */
+export function onSubmit(
+  selectedComponent: any,
+  editor: Editor,
+  details: { name: string; category: string },
+  myModal: any
+): void {
   // Get the BlockManager module first
   const BlockManager = editor.Blocks // `Blocks` is an alias of `BlockManager`
   const htmlCode = selectedComponent?.toHTML()
-  let cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
-  console.log(`{
-    media: \`<img height=\${height} width=\${width} class="firstBlockImages" src=\${images[0]} />\`,
-    category: category,
-    content: \`${htmlCode}
-    <style>
-    ${cssCode}
-    </style>\`
-  },`)
-  // setBlockInLocalStorage(details, htmlCode, cssCode)
+  const cssCode = editor.CodeManager.getCode(selectedComponent, 'css', { cssc: editor.CssComposer })
+  // console.log(`{
+  //   media: \`<img height=\${height} width=\${width} class="firstBlockImages" src=\${images[0]} />\`,
+  //   category: category,
+  //   content: \`${htmlCode}
+  //   <style>
+  //   ${cssCode}
+  //   </style>\`
+  // },`)
+  setBlockInLocalStorage(details, htmlCode, cssCode)
   // render all the blocks from localhost
-  // loadAllBlocksFromLocalStorage(BlockManager)
-  // myModal.close()
+  loadAllBlocksFromLocalStorage(BlockManager)
+  myModal.close()
 }
 
+/**
+ * Initializes the localStorage key for total block count.
+ * @returns The current total block count.
+ */
 function localStorageIniter(): number {
   let blockValue = localStorage.getItem('totalBlocks')
   if (blockValue) {
@@ -28,21 +46,39 @@ function localStorageIniter(): number {
   return parseInt(blockValue, 10)
 }
 
-export function getBlocksFromLocalStorage() {
-  let initalValue = {}
+/**
+ * Gets all the user blocks from localStorage.
+ * @returns An object containing all the user blocks.
+ */
+export function getBlocksFromLocalStorage(): {
+  [category: string]: { [blockName: string]: { htmlCode: string; cssCode: string } }
+} {
+  const initialValue: {
+    [category: string]: { [blockName: string]: { htmlCode: string; cssCode: string } }
+  } = {}
 
-  let blocks = localStorage.getItem('userBlocks')
+  const blocks = localStorage.getItem('userBlocks')
   if (blocks == null) {
-    return initalValue
+    return initialValue
   } else {
     return JSON.parse(blocks)
   }
 }
 
-export function setBlockInLocalStorage(details, htmlCode, cssCode) {
+/**
+ * Sets a block in localStorage with the provided details, HTML code, and CSS code.
+ * @param details - Details of the block, including name and category.
+ * @param htmlCode - The HTML code of the block.
+ * @param cssCode - The CSS code of the block.
+ */
+export function setBlockInLocalStorage(
+  details: { name: string; category: string },
+  htmlCode: string,
+  cssCode: string
+): void {
   let blockNumber = localStorageIniter()
   const newName = `${details.name}-${blockNumber}`
-  let allBlocks = getBlocksFromLocalStorage()
+  const allBlocks = getBlocksFromLocalStorage()
   if (!allBlocks[details.category]) {
     allBlocks[details.category] = {}
   }
@@ -52,13 +88,25 @@ export function setBlockInLocalStorage(details, htmlCode, cssCode) {
     cssCode
   }
 
-  //updating blockNumbr
+  // updating blockNumber
   blockNumber = blockNumber + 1
   localStorage.setItem('totalBlocks', JSON.stringify(blockNumber))
   localStorage.setItem('userBlocks', JSON.stringify(allBlocks))
 }
 
-export function addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode) {
+/**
+ * Adds a block to the BlockManager with the provided details, HTML code, and CSS code.
+ * @param BlockManager - GrapesJS BlockManager instance.
+ * @param details - Details of the block, including name and category.
+ * @param htmlCode - The HTML code of the block.
+ * @param cssCode - The CSS code of the block.
+ */
+export function addBlocksToBlockManager(
+  BlockManager: any,
+  details: { id: string; category: string },
+  htmlCode: string,
+  cssCode: string
+): void {
   // Add a new Block
   BlockManager.add(details.id, {
     // Your block properties...
@@ -71,20 +119,24 @@ export function addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode
   })
 }
 
-export function loadAllBlocksFromLocalStorage(BlockManager) {
+/**
+ * Loads all blocks from localStorage and adds them to the BlockManager.
+ * @param BlockManager - GrapesJS BlockManager instance.
+ */
+export function loadAllBlocksFromLocalStorage(BlockManager: any): void {
   // updating BlockManager
-  let allBlocks = getBlocksFromLocalStorage()
+  const allBlocks = getBlocksFromLocalStorage()
   // Iterate over the allBlocks object
-  for (let category in allBlocks) {
-    let blocks = allBlocks[category]
-    for (let blockID in blocks) {
-      let block = blocks[blockID]
-      let details = {
+  for (const category in allBlocks) {
+    const blocks = allBlocks[category]
+    for (const blockID in blocks) {
+      const block = blocks[blockID]
+      const details = {
         id: blockID,
         category: category
       }
-      let htmlCode = block.htmlCode
-      let cssCode = block.cssCode
+      const htmlCode = block.htmlCode
+      const cssCode = block.cssCode
       addBlocksToBlockManager(BlockManager, details, htmlCode, cssCode)
     }
   }

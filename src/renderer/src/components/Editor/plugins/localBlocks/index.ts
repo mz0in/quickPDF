@@ -1,4 +1,15 @@
-export default (editor, opts = {}) => {
+import { Editor } from 'grapesjs'
+
+interface LocalBlocksOptions {
+  companyName: string
+}
+
+/**
+ * Load blocks from the localStorage and add them to the GrapesJS block manager.
+ * @param editor - GrapesJS editor instance.
+ * @param opts - Local Blocks plugin options.
+ */
+export default function localBlocksPlugin(editor: Editor, opts: LocalBlocksOptions): void {
   const { companyName } = opts
   const category = 'templates'
 
@@ -27,7 +38,7 @@ export default (editor, opts = {}) => {
     }
   })
 
-  blocks.map((template) => {
+  blocks.forEach((template) => {
     editor.BlockManager.add(template.category, template)
   })
 }

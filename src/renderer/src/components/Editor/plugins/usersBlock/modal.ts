@@ -1,34 +1,39 @@
-import { Editor } from 'grapesjs'
+import { Editor, Component } from 'grapesjs'
 import html2canvas from 'html2canvas'
 import { onSubmit } from './function'
 
+/**
+ * Custom save modal for GrapesJS editor.
+ * This function opens a modal that allows the user to save a selected component.
+ * @param editor - GrapesJS editor instance.
+ * @returns The modal object.
+ */
 export default function customSaveModal(editor: Editor): any {
-  const selectedComponent = editor.getSelected()
+  const selectedComponent = editor.getSelected() as Component
   // Get the Modal module
   const modal = editor.Modal
 
   // Define the content of the modal
-  // Define the content of the modal
   const content = `
-                <div class="modal">
-                <div class="modal-content">
-                  <div>
-                    <p>Details</p>
-                    <div class="container form-row">
-                      <input class="form-column" type="text" id="component-name" name="component-name" placeholder="name">
-                      <input class="form-column" type="text" id="component-category" name="component-category" placeholder="category">
-                    </div>
-                    <div class="container image-container">
-                      <div id="screenShotCanvas"/>
-                    </div>
-                    <div class="container button-container">
-                      <button id="submit" class="button save-button">Save</button>
-                      <button id="reset" class="button reset-button">Reset</button>
-                    </div>
-                  </div>
-                </div>
-              </div>                       
-`
+    <div class="modal">
+      <div class="modal-content">
+        <div>
+          <p>Details</p>
+          <div class="container form-row">
+            <input class="form-column" type="text" id="component-name" name="component-name" placeholder="name">
+            <input class="form-column" type="text" id="component-category" name="component-category" placeholder="category">
+          </div>
+          <div class="container image-container">
+            <div id="screenShotCanvas"/>
+          </div>
+          <div class="container button-container">
+            <button id="submit" class="button save-button">Save</button>
+            <button id="reset" class="button reset-button">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
 
   // Create the modal
   const myModal = modal.open({
@@ -46,8 +51,7 @@ export default function customSaveModal(editor: Editor): any {
     document.getElementById('screenShotCanvas')?.appendChild(canvas)
   })
 
-  // onsaving function
-
+  // on-saving function
   document.getElementById('submit')?.addEventListener('click', () => {
     const nameBlock = document.getElementById('component-name') as HTMLInputElement
     const categoryBlock = document.getElementById('component-category') as HTMLInputElement

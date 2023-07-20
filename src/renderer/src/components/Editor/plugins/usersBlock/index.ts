@@ -2,7 +2,13 @@ import { Editor } from 'grapesjs'
 import customSaveModal from './modal'
 import { loadAllBlocksFromLocalStorage } from './function'
 
-export default (editor: Editor): void => {
+/**
+ * User Blocks plugin for GrapesJS editor.
+ * This plugin adds a custom button to each user-defined block type's toolbar.
+ * Clicking the button opens a custom save modal for the block.
+ * @param editor - GrapesJS editor instance.
+ */
+export default function userBlocksPlugin(editor: Editor): void {
   const dc = editor.DomComponents
   const BlockManager = editor.Blocks
   const id = 'block-adder'
@@ -11,7 +17,7 @@ export default (editor: Editor): void => {
   </svg>
   `
 
-  // load all the blocks from blockmanager as soon as editor init
+  // Load all the blocks from block manager as soon as the editor initializes
   loadAllBlocksFromLocalStorage(BlockManager)
 
   dc.getTypes().forEach((elType) => {
@@ -19,7 +25,7 @@ export default (editor: Editor): void => {
     dc.addType(elType.id, {
       model: oldModel.extend({
         initToolbar() {
-          //@ts-ignore i don't know
+          //@ts-ignore Ignore type errors for oldModel.prototype.initToolbar.apply
           // eslint-disable-next-line prefer-rest-params
           oldModel.prototype.initToolbar.apply(this, arguments)
           const toolbar = this.get('toolbar')

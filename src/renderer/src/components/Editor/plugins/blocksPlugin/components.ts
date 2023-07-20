@@ -3,6 +3,10 @@ const commonBlockProps = {
   select: true
 }
 
+/**
+ * Block components for GrapesJS.
+ * Each block represents a different element that can be added to the editor canvas.
+ */
 const blocks = [
   {
     ...commonBlockProps,

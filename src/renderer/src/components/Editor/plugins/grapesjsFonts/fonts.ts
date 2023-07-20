@@ -2,6 +2,10 @@ import { Editor } from 'grapesjs'
 import { styleUpdater, save as fontSave } from './function'
 import { fontNames } from '@renderer/services/utils'
 
+/**
+ * Generate the HTML options for font selection.
+ * @returns HTML string with font options.
+ */
 function fontsToHtml(): string {
   const fontsHtmlArr = fontNames.map((font) => {
     return `<option value="'${font}'">${font}</option>`
@@ -10,6 +14,11 @@ function fontsToHtml(): string {
   return fontsHtmlArr.toString()
 }
 
+/**
+ * Handle the GrapesJS font plugin.
+ * This function opens a modal to select global and heading fonts for the editor.
+ * @param editor The GrapesJS editor instance.
+ */
 export function fontPluginHandler(editor: Editor): void {
   const FontsModal = editor.Modal
 
@@ -45,22 +54,22 @@ export function fontPluginHandler(editor: Editor): void {
     closedOnClickOutside: true
   })
 
-  // updating global fonts with editor setted fonts
+  // Updating global fonts with editor-set fonts
   styleUpdater(editor, 'global-font-select', '*')
 
-  // updating heading fonts
+  // Updating heading fonts
   styleUpdater(editor, 'heading-font-select', 'h1')
 
-  const gloablFont = document.getElementById('global-font-select') as HTMLSelectElement
+  const globalFont = document.getElementById('global-font-select') as HTMLSelectElement
   const headingFont = document.getElementById('heading-font-select') as HTMLSelectElement
 
   document.getElementById('save-button')?.addEventListener('click', () => {
-    fontSave(editor, gloablFont.value, headingFont.value)
+    fontSave(editor, globalFont.value, headingFont.value)
     myModal.close()
   })
 
   document.getElementById('reset-button')?.addEventListener('click', () => {
-    gloablFont.value = ''
+    globalFont.value = ''
     headingFont.value = ''
   })
 }
