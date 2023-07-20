@@ -1,4 +1,4 @@
-import { TemplateCreator, htmlObject } from '@renderer/components/Editor'
+import { TemplateCreator, HtmlObject } from '@renderer/components/Editor'
 import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, TextInput, Flex, NumberInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
@@ -27,7 +27,7 @@ export default function NewDesign(): JSX.Element {
     }
   })
 
-  const handleSave = (html: htmlObject[]): void => {
+  const handleSave = (html: HtmlObject[]): void => {
     console.log('HTML saved:', html)
     setComponentInLocalStorage(companyName as string, modalData!, html)
     notifications.show({

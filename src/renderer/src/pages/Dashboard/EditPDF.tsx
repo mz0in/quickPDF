@@ -1,4 +1,4 @@
-import { PaperEditor, htmlObject } from '@renderer/components/Editor'
+import { PaperEditor, HtmlObject } from '@renderer/components/Editor'
 import { saveAsPDF } from '@renderer/services/utils'
 import { IconCheck } from '@renderer/components/icons'
 import { notifications } from '@mantine/notifications'
@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface CodeOfPaperProps {
-  code: htmlObject[]
+  code: any // gjsCode JSON data of grapesJS editor
   info: {
     companyName: string
     date: Date | string
@@ -17,12 +17,7 @@ interface CodeOfPaperProps {
 }
 
 const dummayData: CodeOfPaperProps = {
-  code: [
-    {
-      css: '',
-      htmlBody: ''
-    }
-  ],
+  code: {}, // must be a object
   info: {
     companyName: 'test',
     date: '',
@@ -64,7 +59,7 @@ export default function EditPDF(): JSX.Element {
    * @param htmlStrings Contain HTML version of GJS code
    * @param gjsCode GJS JSON code for importing in the future
    */
-  const handleSave = (htmlStrings: htmlObject[], gjsCode: any): void => {
+  const handleSave = (htmlStrings: HtmlObject[], gjsCode: any): void => {
     notifications.show({
       id: 'load-data',
       loading: true,

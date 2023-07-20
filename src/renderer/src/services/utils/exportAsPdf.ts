@@ -1,6 +1,6 @@
 interface PaperInfo {
   companyName: string
-  date: string
+  date: string | Date
 }
 
 function createAndDownloadBlobFile(body: BlobPart, info: PaperInfo): void {
