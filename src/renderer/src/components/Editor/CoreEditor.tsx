@@ -13,7 +13,6 @@ import gjsUserBlock from './plugins/usersBlock'
 import '@renderer/styles/designer.css'
 import './plugins/pageManger/css/grapesjs-project-manager.min.css'
 import { handlePasteForChanakyaConvert } from '@renderer/services/utils'
-
 /**
  * Props for the GrapesJS CoreEditor component.
  */

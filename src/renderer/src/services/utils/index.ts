@@ -1,7 +1,7 @@
 import { saveAsPDF } from './exportAsPdf'
 import { setComponentInLocalStorage } from './templateFunction'
 import { fontNames } from './fonts'
-import { convertUnicodeToChanakya } from './convertUnicodeToChanakya'
+import {convert_Unicode_to_Chanakya as convertUnicodeToChanakya} from "./convertUnicodeToChanakya"
 
 /**
  * Function to convert text with spaces to text with dashes.
@@ -131,17 +131,17 @@ const handlePasteForChanakyaConvert = async (
     const chanakyaText = convertUnicodeToChanakya(plainText)
     console.log(chanakyaText)
 
-    const activeElement = document.activeElement as HTMLInputElement | HTMLTextAreaElement
-    // if (activeElement.nodeName === 'INPUT' || activeElement.nodeName === 'TEXTAREA') {
-    const start = activeElement.selectionStart as number
-    const end = activeElement.selectionEnd as number
-    const value = activeElement.innerText as string
+    const activeElement = document.activeElement as HTMLDivElement
+    if (activeElement.nodeName === 'DIV' || activeElement.nodeName === 'B') {
+      const start = activeElement.selectionStart as number
+      const end = activeElement.selectionEnd as number
+      const value = activeElement.innerText as string
 
-    const newValue = value.substring(0, start) + chanakyaText + value.substring(end)
-    activeElement.innerText = newValue
+      const newValue = value.substring(0, start) + chanakyaText + value.substring(end)
+      activeElement.innerHTML = chanakyaText
 
-    activeElement.selectionStart = activeElement.selectionEnd = start + chanakyaText.length
-    // }
+      activeElement.selectionStart = activeElement.selectionEnd = start + chanakyaText.length
+    }
   } catch (error) {
     console.error('Failed to read clipboard text:', error)
   }

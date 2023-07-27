@@ -69,6 +69,7 @@ export function PaperCreator({
           width: `${canvasSize?.width}cm`, // new page width
           height: `${canvasSize?.height}cm` // new page height
         },
+        //@ts-ignore its the syntex, there is no issue here
         [localBlocks]: {
           companyName: companyName
         }
